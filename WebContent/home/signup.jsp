@@ -124,7 +124,6 @@
                                 <option value="31">31</option>
                               </select>
                         </div>
-                        </div>
 
                         <button type="submit" class="btn btn-lg btn-primary w-100">가입하기</button>
                     </form>
