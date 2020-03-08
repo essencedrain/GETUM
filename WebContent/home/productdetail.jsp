@@ -26,7 +26,7 @@
 
         <div class="row mt-5">
             <div class="img col-lg-6 mb-5">
-                <img class="img-fluid" src="./img/product/1.png" alt="">
+                <img class="img-fluid" src="../img/product/1.png" alt="">
             </div>
 
             <div class="content col-lg-6 my-auto">
@@ -74,13 +74,13 @@
 
 
 <!--  Jquery js file  -->
-<script src="./js/jquery.3.4.1.js"></script>
+<script src="../js/jquery.3.4.1.js"></script>
 
 <!--  Bootstrap js file  -->
-<script src="./js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <!--  Bootstrap input js file  -->
-<script src="./js/bootstrap-input-spinner.js"></script>
+<script src="../js/bootstrap-input-spinner.js"></script>
 <script>
     $("input[type='number']").inputSpinner();
 </script>
@@ -93,7 +93,7 @@ $changedInput.on("change", function (event) {
 </script>
 
 <!--  custom js file  -->
-<script src="./js/main.js"></script>
+<script src="../js/main.js"></script>
 
 </body>
 </html>

@@ -43,7 +43,7 @@
 <section class="new container overflow-hidden my-5 py-5">
     <div class="row mt-5">
         <div class="col-md-6 my-5">
-            <img class="wow animated fadeInLeft img-fluid" alt="" src="./img/main/1.png">
+            <img class="wow animated fadeInLeft img-fluid" alt="" src="../img/main/1.png">
         </div>
         <div class="col-md-6 my-auto">
             <div class="row">
@@ -117,7 +117,7 @@
             </div>
         </div>
         <div class="col-md-6 mt-5">
-            <img class="wow animated fadeInRight img-fluid" alt="" src="./img/main/3.png">
+            <img class="wow animated fadeInRight img-fluid" alt="" src="../img/main/3.png">
         </div>
     </div>
 </section>

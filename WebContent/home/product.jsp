@@ -34,7 +34,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 latest stainless">
                 <div class="our-product">
                     <div class="img">
-                        <a class="test-popup-link" href="productdetail.html">
+                        <a class="test-popup-link" href="productdetail.jsp">
                             <img src="../img/product/1.png" alt="product-1" class="img-fluid">
                         </a>
                     </div>
@@ -172,16 +172,16 @@
 
 
 <!--  Jquery js file  -->
-<script src="./js/jquery.3.4.1.js"></script>
+<script src="../js/jquery.3.4.1.js"></script>
 
 <!--  Bootstrap js file  -->
-<script src="./js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <!--  isotope js library  -->
-<script src="./js/isotope.min.js"></script>
+<script src="../js/isotope.min.js"></script>
 
 <!--  custom js file  -->
-<script src="./js/main.js"></script>
+<script src="../js/main.js"></script>
 
 </body>
 </html>
