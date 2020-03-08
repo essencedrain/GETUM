@@ -1,0 +1,361 @@
+/* 
+색깔
+primary: #0b421a
+black : #001627
+white : #fffcfc
+dark : #362415
+lightdark : #604c4c
+yellow : #eac784
+
+아이보리 : #f6f5ef
+초록색 : #007042
+글자 : #333333
+*/
+
+/* ==========================폰트============================== */
+body{
+    font-family: 'Noto Sans KR';
+    font-weight: 500;
+}
+
+h1,h2,h3{
+    font-weight: 900;
+}
+
+h4,h5,h6{
+    font-weight: 700;
+}
+/* ==========================폰트============================== */
+
+/* ==========================버튼============================== */
+.btn-outline-secondary{
+    background-color: transparent !important;
+    border-color: #011627 !important;
+    color: #011627 !important;
+    border-radius: 0;
+    position: relative;
+}
+/* .btn-outline-secondary:before{
+    content:'';
+    position: absolute;
+    background-color: #007041b7;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 0%;
+    z-index: -1;
+    transition: 0.5s;
+} */
+
+/* .btn-outline-secondary:hover:before{
+    width: 100%;
+} */
+
+.btn-secondary{
+    background: #604c4c !important;
+    border-radius: 0;
+    border-color: #604c4c !important;
+}
+
+/* .btn-secondary:hover{
+    color: #00bd6e !important;
+} */
+
+.btn-primary{
+    background-color: #007042 !important;
+    border-radius: 0;
+    border-color: #007042 !important;
+    color: #f6f5ef !important;
+}
+
+/* .btn-primary:hover{
+    background: #604c4c !important;
+    color: #00bd6e !important;
+} */
+/* ==========================버튼============================== */
+
+/* ==========================header============================== */
+/* 
+Navbar
+*/
+
+.navbar{
+    background: #f6f5ef;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-link{
+    color: #333333;
+}
+.navbar-brand{
+    
+    color: #007042;
+}
+
+.nav-link:hover{
+    color: #007042;
+}
+.navbar-brand:hover{
+    color: #777;
+}
+
+.navbar-brand{
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+/* ==========================header============================== */
+
+
+/* ==========================main============================== */
+
+/* ==========================home============================== */
+.home-inner {
+    background-image: url(../img/main/0.jpg); 
+  }
+  .caption{
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 28%;
+    z-index: 1;
+    color: #f6f5ef;
+    text-transform: uppercase;
+  }
+  .caption h1 {
+    font-size: 12.5rem;
+    /* letter-spacing: .3rem; */
+    /* text-shadow: .1rem .1rem .8rem #777; */
+    /* padding-bottom: 1rem; */
+  }
+
+  .caption h3 {
+    font-size: 3rem;
+    /* text-shadow: .1rem .1rem .5rem #777; */
+    padding-bottom: 1.6rem;
+  }
+
+/* ==========================home============================== */
+
+
+/* ==========================new============================== */
+.new h1{
+    font-size: 3.8rem;
+}
+.new p{
+    font-size: 1.3rem;
+}
+.new span{
+    color: #aaa;
+}
+/* ==========================new============================== */
+
+
+/* ==========================join============================== */
+.join{
+    background: #272727;
+    color: #ffffff;
+}
+
+.join i{
+    font-size: 2rem;
+    color: #f6ce8a;
+}
+
+
+.heading-line{
+    height: 3px;
+    width: 10%;
+    background: #007042;
+}
+/* ==========================join============================== */
+
+
+/* ==========================feature============================== */
+.feature-area .fixed {
+    background-image: url(../img/main/2.jpg);
+    z-index: -1;
+  }
+.feature-area .dark{
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 7rem 2rem;
+}
+.feature-area .fixed-background h3{
+    margin-bottom: 2rem;
+}
+.feature-area .fixed-background p{
+    margin-top: 1.5rem;
+}
+.feature i{
+    color: #00bd6e;
+}
+/* ==========================feature============================== */
+
+
+/* ==========================best============================== */
+.best h1{
+    font-size: 3.8rem;
+}
+.best p{
+    font-size: 1.3rem;
+}
+.best span{
+    color: crimson;
+}
+/* ==========================best============================== */
+
+
+/* ==========================contact us============================== */
+.noresize{
+    resize: none;
+}
+/* ==========================contact us============================== */
+
+/* ==========================main============================== */
+
+
+/* *********************************************** product ********************************************************* */
+/* product Area */
+
+.site-main .product-area{
+    padding: 4rem 0;
+}
+
+.site-main .product-area .button-group button{
+    background: transparent;
+    border: none;
+    text-transform: uppercase;
+}
+
+.site-main .product-area .button-group button + button{
+    padding-left: 3rem;
+}
+
+.site-main .product-area .button-group h5{
+    font-weight: 500;
+}
+
+.site-main .product-area .grid .our-product .img a:hover img{
+    filter: brightness(1.1) drop-shadow(1px 8px 30px #b1afaf);
+}
+
+/* End product Area */
+/* *********************************************** product ********************************************************* */
+
+
+
+/* *********************************************** product Detail ********************************************************* */
+
+/* productDetail Area */
+
+.site-main .productDetail-area{
+    padding: 4rem 0;
+}
+#price{
+    color: #007042;
+}
+/* productDetail Area */
+
+/* *********************************************** product Detail ********************************************************* */
+
+
+/* *********************************************** login ********************************************************* */
+
+/* login area */
+
+.site-main .login-area{
+    padding: 4rem 0;
+}
+
+/* login area */
+
+/* *********************************************** login ********************************************************* */
+
+
+
+/* *********************************************** signup ********************************************************* */
+
+/* signUp area */
+
+.site-main .signUp-area{
+    padding: 4rem 0;
+}
+
+/* signUp area */
+
+/* *********************************************** signup ********************************************************* */
+
+
+
+
+@media only screen and (max-width: 1042px){
+    .caption{
+        top: 38%;
+    }
+    .caption h1 {
+        font-size: 8rem;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .navbar .nav-item{
+        display: block;
+        width: 100%;
+        padding: 10px 0px;
+        text-align: center;
+    }
+}
+
+
+@media only screen and (max-width: 630px){
+    .caption h1 {
+        font-size:5rem;
+    }
+    .navbar .nav-item{
+        display: block;
+        width: 100%;
+        padding: 10px 0px;
+        text-align: center;
+    }
+    
+}
+@media only screen and (max-width: 536px){
+    .site-main .product-area .button-group button + button{
+        padding-left: 2rem;
+    }
+}
+@media only screen and (max-width: 472px){
+    #btn1,
+    .site-main .product-area .button-group button + button{
+        padding-left: 1rem;
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 435px){
+    #btn1,
+    .site-main .product-area .button-group button + button{
+        padding-left: 0rem;
+        font-size: 1rem;
+    }
+}
+
+
+@media only screen and (max-width: 400px){
+    .caption h1 {
+        font-size:4rem;
+    }
+    .navbar .nav-item{
+        display: block;
+        width: 100%;
+        padding: 10px 0px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 357px){
+    #btn1,
+    .site-main .product-area .button-group button + button{
+        padding-left: 0rem;
+        font-size: .9rem;
+    }
+}
