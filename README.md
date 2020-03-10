@@ -1,5 +1,9 @@
 # GETUM
-GETUM project (no spring)
+
+### 내용
+#### 텀블러 쇼핑몰
+#### use jsp/servlet
+#### no Spring
 
 ### 개발기간
 2020년 3월 2일 ~
