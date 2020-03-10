@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.time.LocalDate" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-/*
-생일 from을 위한 변수들
-*/
-LocalDate today = LocalDate.now();
-int thisYear = today.getYear();
-int beginYear = thisYear-120;
-int targetYear = thisYear-30;
-request.setAttribute("thisYear", thisYear);
-request.setAttribute("beginYear", beginYear);
-request.setAttribute("targetYear", targetYear);
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -85,68 +74,13 @@ request.setAttribute("targetYear", targetYear);
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
                             </div>
-                            <select name="year" class="form-control">
-                            	<option value="" selected>생년</option>
-                            	<!-- 생년 처리, 30살 기준 연도표시 -->
-                            	<c:forEach var="i" begin="<%=beginYear %>" end="<%=thisYear %>">
-                            		<c:choose>
-                            			<c:when test="${requestScope.targetYear == i}">
-                            				<option value="${i}" selected>${i}</option>
-                            			</c:when>
-                            			<c:otherwise>
-                            				<option value="${i}">${i}</option>
-                            			</c:otherwise>
-                            		</c:choose>
-                            	</c:forEach>
+                            <select name="year" class="form-control" id="select_year" onchange="javascript:lastday();">
                             </select>
-                            <select class="form-control" name="month">
+                            <select class="form-control" name="month" id="select_month" onchange="javascript:lastday();">
                                 <option value="" selected>월</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
                               </select>
-                              <select class="form-control" name="day">
+                              <select class="form-control" name="day" id="select_day">
                                 <option value="" selected>일</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
                               </select>
                         </div>
 						
@@ -170,14 +104,81 @@ request.setAttribute("targetYear", targetYear);
 <!--  ======================= END footer Area ================================ -->
 
 
+<!-- 선택한 년과 월에 따라 마지막 일 구하기 -->
+<script>
+var today = new Date();
+var today_year= today.getFullYear();
+var start_year= today_year-120;// 시작할 년도
+var target_year = today_year-30;
+var index=0;
+for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도
+	
+	if(y==target_year){
+		document.getElementById('select_year').options[index] = new Option(y, y, false, true);
+		index++;
+	}else{
+		document.getElementById('select_year').options[index] = new Option(y, y);
+		index++;
+	}
+}
+index=1;
+for(var m=1; m<=12; m++){
+	document.getElementById('select_month').options[index] = new Option(m, m);
+	index++;
+}
+
+lastday();
+
+function lastday(){ //년과 월에 따라 마지막 일 구하기 
+	var Year=document.getElementById('select_year').value;
+	var Month=document.getElementById('select_month').value;
+	/*
+	86400000ms는 1day를 의미한다.
+	1s = 1,000ms
+	1m = 60s * 1,000ms = 60,000ms
+	1h = 60m * 60,000ms = 3,600,000ms
+	1d = 24h * 3,600,000ms = 86,400,000ms
+	
+	new Date(year, month[, day, hour, minute, second, millisecond])
+	new Date(2019, 4) ---> Wed May 01 2019 00:00:00 GMT+0900 (한국 표준시)
+	
+	아래는 코드는
+	month가 0~11이다 보니 선택한 month는 실제 month+1이다
+	선택한 월 1일에서 1day(86400000)를 빼주면
+	실제 month의 말일 date를 가져올 수 있다.
+	*/
+	var day=new Date(new Date(Year,Month,1)-86400000).getDate();
+	
+	var dayindex_len=document.getElementById('select_day').length;
+	
+	// 월과 일 selectbox에 기본적으로 '월', '일'이 있음
+	// 이거 생각해서 계산 
+	if(dayindex_len!=1){
+		if(day>=dayindex_len){//바뀐 year, month의 말일이 지금 셀렉트사이즈보다 같거나 크면
+			for(var i=(dayindex_len); i<=day; i++){
+				document.getElementById('select_day').options[i] = new Option(i, i);
+			}
+		}
+		else if(day<dayindex_len){//바뀐 year, month의 말일이 지금 셀렉트사이즈보다 작으면
+			for(var i=dayindex_len-1; i>=day; i--){
+				document.getElementById('select_day').options[i+1]=null;
+			}
+		}
+	}else{
+		for(var i=1; i<=day; i++){//최초 실행
+			document.getElementById('select_day').options[i] = new Option(i, i);
+		}
+	}
+}
+</script>
+<!-- 선택한 년과 월에 따라 마지막 일 구하기 -->
+
+
 <!--  Jquery js file  -->
-<script src="./js/jquery.3.4.1.js"></script>
+<script src="../js/jquery.3.4.1.js"></script>
 
 <!--  Bootstrap js file  -->
-<script src="./js/bootstrap.min.js"></script>
-
-<!--  custom js file  -->
-<script src="./js/main.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>
