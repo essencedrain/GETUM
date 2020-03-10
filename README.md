@@ -2,6 +2,7 @@
 GETUM project (no spring)
 
 ### 사용 기술
-* JAVA8
-* MySQL5.5
+* JAVA 8
+* MySQL 5.5
+* TOMCAT 8.0
 * HTML5, CSS3, JS, JQuery, Bootstrap4
