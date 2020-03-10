@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8" import="java.time.LocalDate" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+/*
+생일 from을 위한 변수들
+*/
+LocalDate today = LocalDate.now();
+int thisYear = today.getYear();
+int beginYear = thisYear-120;
+int targetYear = thisYear-30;
+request.setAttribute("thisYear", thisYear);
+request.setAttribute("beginYear", beginYear);
+request.setAttribute("targetYear", targetYear);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -73,7 +85,20 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="생년" name="year">
+                            <select name="year" class="form-control">
+                            	<option value="" selected>생년</option>
+                            	<!-- 생년 처리, 30살 기준 연도표시 -->
+                            	<c:forEach var="i" begin="<%=beginYear %>" end="<%=thisYear %>">
+                            		<c:choose>
+                            			<c:when test="${requestScope.targetYear == i}">
+                            				<option value="${i}" selected>${i}</option>
+                            			</c:when>
+                            			<c:otherwise>
+                            				<option value="${i}">${i}</option>
+                            			</c:otherwise>
+                            		</c:choose>
+                            	</c:forEach>
+                            </select>
                             <select class="form-control" name="month">
                                 <option value="" selected>월</option>
                                 <option value="1">1</option>
@@ -124,7 +149,7 @@
                                 <option value="31">31</option>
                               </select>
                         </div>
-
+						
                         <button type="submit" class="btn btn-lg btn-primary w-100">가입하기</button>
                     </form>
                 </div>
