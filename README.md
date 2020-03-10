@@ -1,10 +1,7 @@
 # GETUM
 GETUM project (no spring)
 
-```
-public class BootSpringBootApplication {
-  public static void main(String[] args) {
-    System.out.println("Hello, Honeymon");
-  }
-}
-```
+### 사용 기술
+* JAVA8
+* MySQL5.5
+* HTML5
