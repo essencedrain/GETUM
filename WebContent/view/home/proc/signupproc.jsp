@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="java.sql.Date" %>
-<%@ page import="com.getum.member.*" %>
+<%@ page import="com.getum.member.model.MemberDTO" %>
 <%
 request.setCharacterEncoding("utf-8");
 MemberDTO memberDTO = new MemberDTO();

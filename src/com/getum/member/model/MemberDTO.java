@@ -1,4 +1,5 @@
-package com.getum.member;
+package com.getum.member.model;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -16,9 +17,40 @@ public class MemberDTO {
 	private byte m_withdraw_flag;
 	
 	//constructor
-	public MemberDTO(){}
+	public MemberDTO(
+					String m_id,
+					String m_pwd,
+					String m_name,
+					String m_email,
+					String m_hp,
+					long m_point,
+					Timestamp m_join_date,
+					Date m_birthday,
+					short m_grade,
+					byte m_withdraw_flag
+										){
+		this.m_id = m_id;
+		this.m_pwd = m_pwd;
+		this.m_name = m_name;
+		this.m_email = m_email;
+		this.m_hp = m_hp;
+		this.m_point = m_point;
+		this.m_join_date = m_join_date;
+		this.m_birthday = m_birthday;
+		this.m_grade = m_grade;
+		this.m_withdraw_flag = m_withdraw_flag;
+				
+	}
 	
 	//method
+	
+	//비번확인
+	public boolean matchPassword(String pwd) {
+		return m_pwd.equals(pwd);
+	}
+	
+	
+	//아래는 게터세터
 	public String getM_id() {
 		return m_id;
 	}
@@ -98,5 +130,6 @@ public class MemberDTO {
 	public void setM_withdraw_flag(byte m_withdraw_flag) {
 		this.m_withdraw_flag = m_withdraw_flag;
 	}
+	
 	
 }//class
