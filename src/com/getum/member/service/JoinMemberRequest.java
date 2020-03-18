@@ -3,6 +3,10 @@ package com.getum.member.service;
 import java.sql.Date;
 import java.util.Map;
 
+
+//==================================================================================================
+// JoinMemberRequest : 폼으로부터 회원가입에 필요한 데이터를 담는 객체
+//==================================================================================================
 public class JoinMemberRequest {
 	
 	private String m_id;
@@ -90,6 +94,12 @@ public class JoinMemberRequest {
 	}
 	public void setM_pwd(String m_pwd) {
 		this.m_pwd = m_pwd;
+	}
+	public String getM_pwd2() {
+		return m_pwd;
+	}
+	public void setM_pwd2(String m_pwd2) {
+		this.m_pwd = m_pwd2;
 	}
 	public String getM_name() {
 		return m_name;

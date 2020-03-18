@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.getum.member.service.JoinMemberRequest;
+
 public class MemberDAO {
 	//field
 		// 싱글톤
@@ -74,7 +76,7 @@ public class MemberDAO {
 	    //==================================================================================================
 	    // insert() : 회원정보 삽입
 	    //==================================================================================================
-	    public void insert(Connection conn, MemberDTO mem) throws SQLException{
+	    public void insert(Connection conn, JoinMemberRequest mem) throws SQLException{
 	    	PreparedStatement pstmt = null;
 	    	try {
 				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,0,NOW(),?,0,0)");
