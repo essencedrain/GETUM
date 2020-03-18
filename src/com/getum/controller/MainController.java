@@ -109,6 +109,7 @@ public class MainController extends HttpServlet{
     	 
     	 //경로 확인해보자
     	 System.out.println("request.getRequestURI() : " + request.getRequestURI());
+    	 System.out.println("request.getContextPath() : " + request.getContextPath());
     	 System.out.println("command.substring(request.getContextPath().length()); : " + command.substring( request.getContextPath().length() ));
     	 //확인 후 삭제
     	 

@@ -25,7 +25,7 @@ public class JoinMemberHandler implements CommandHandler{
 
 	
 	//==================================================================================================
-    // process() : 
+    // process() : 핸들러 공통
     //==================================================================================================
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res){
@@ -66,23 +66,22 @@ public class JoinMemberHandler implements CommandHandler{
 		joinReq.setM_pwd2(req.getParameter("m_pwd2"));
 		joinReq.setM_name(req.getParameter("m_name"));
 		joinReq.setM_email(req.getParameter("m_email"));
-		joinReq.setM_hp(req.getParameter("m_hp"));
+		
+		String temp = req.getParameter("m_hp");
+		String hp = temp.substring(0, 3) + temp.substring(4, 8) + temp.substring(9); 
+		joinReq.setM_hp(hp);
 		
 		String now = req.getParameter("year") + "-" + req.getParameter("month") + "-" + req.getParameter("day");
 		java.sql.Date d = java.sql.Date.valueOf(now);
 		joinReq.setM_birthday(d);
 		
-		//에러 모으는 맵 선언
-		Map<String, Boolean> errors = new HashMap<>();
-		req.setAttribute("errors", errors);
-		
-		joinReq.validate(errors);
-		
-		if(!errors.isEmpty()) {
+		try {
+			joinService.join(joinReq);
+			return "/view/home/signupSuccess.jsp";			
+		} catch (Exception e) {
+			System.out.println("JoinMemberHandler.processSubmit() 에러 : " + e);
 			return form_view;
-		}
-		
-		
+		}//try
 	}
     //==================================================================================================
     

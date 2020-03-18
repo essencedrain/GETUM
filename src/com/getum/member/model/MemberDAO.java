@@ -29,8 +29,7 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // selectById() : 회원 정보 가져오기
-	    // return : MemberDTO
+	    // selectById(Connection, String) : 회원 정보 가져오기
 	    //==================================================================================================
 	    public MemberDTO selectById(Connection conn, String id) throws SQLException{
 	    	PreparedStatement pstmt = null;
@@ -74,7 +73,7 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // insert() : 회원정보 삽입
+	    // insert(Connection, JoinMemberRequest) : 회원정보 삽입
 	    //==================================================================================================
 	    public void insert(Connection conn, JoinMemberRequest mem) throws SQLException{
 	    	PreparedStatement pstmt = null;
@@ -102,8 +101,35 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // 
+	    // confirmId(Connection, String) : 아이디 중복확인 (1 = 중복 / -1 = 사용가능)
 	    //==================================================================================================
+	    public int confirmId(Connection conn, String id) throws SQLException{
+	    	int result = 0;
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
+	    	
+	    	try {
+	    		
+	    		pstmt = conn.prepareStatement("select m_id from member where m_id=?");
+	    		pstmt.setString(1, id);
+	            rs = pstmt.executeQuery();
+	            
+	            if(rs.next()){
+	                result = 1; //사용중인 id
+	            }else{
+	                result = -1; //사용가능한 id
+	            }
+	    		
+			} catch (Exception e) {
+				System.out.println("confirmId() 예외 :"+e);
+			}finally {
+				try{
+					if(pstmt!=null){pstmt.close();}
+				}catch(Exception ex2){}
+			}//try
+	    	
+	    	return result;
+	    }
 	    //==================================================================================================
 	    
 	    

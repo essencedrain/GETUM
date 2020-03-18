@@ -1,10 +1,8 @@
 package com.getum.member.service;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import com.getum.member.model.MemberDAO;
-import com.getum.member.model.MemberDTO;
 import com.getum.util.DBConnection;
 
 
@@ -16,8 +14,7 @@ public class JoinMemberService {
 	
 	
 	//==================================================================================================
-    // join() : 회원가입처리
-	// 파라미터 : JoinMemberRequest
+    // join(JoinMemberRequest) : 회원가입처리
     //==================================================================================================
 	public void join(JoinMemberRequest joinReq) {
 		
@@ -26,12 +23,6 @@ public class JoinMemberService {
 		
 		try {
 			conn = DBConnection.getCon();
-			
-			MemberDTO dto = dao.selectById(conn, joinReq.getM_id());
-			
-			if(dto != null) {
-				throw new DuplicateIdException();
-			}//if
 			
 			dao.insert(conn, joinReq);
 			

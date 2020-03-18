@@ -1,7 +1,6 @@
 package com.getum.member.service;
 
 import java.sql.Date;
-import java.util.Map;
 
 
 //==================================================================================================
@@ -16,70 +15,6 @@ public class JoinMemberRequest {
 	private String m_email;
 	private String m_hp;
 	private Date m_birthday;
-	
-	
-	//method
-	
-	//==================================================================================================
-    // isPasswordEqualToConfirm() : 비번확인
-	// return 불린
-    //==================================================================================================
-	public boolean isPasswordEqualToConfirm() {
-		return m_pwd != null && m_pwd.equals(m_pwd2);
-	}//isPasswordEqualToConfirm()
-    //==================================================================================================
-	
-	
-	
-	//==================================================================================================
-    // validate() : 유효성확인
-    //==================================================================================================
-	public void validate(Map<String, Boolean> errors) {
-		
-		checkEmpty(errors, m_id, "m_id");
-		checkEmpty(errors, m_pwd, "m_pwd");
-		checkEmpty(errors, m_pwd2, "m_pwd2");
-		checkEmpty(errors, m_name, "m_name");
-		checkEmpty(errors, m_email, "m_email");
-		checkEmpty(errors, m_hp, "m_hp");
-		checkEmpty2(errors, m_birthday, "m_birthday");
-		
-		if(errors.containsKey("m_pwd2")) {
-			
-		}//if
-		
-	}//validate()
-    //==================================================================================================	
-	
-
-	
-	//==================================================================================================
-    // checkEmpty() : 이 JoinMemberRequest 클래스의 필드(파라미터론 value)가 비어있는지 확인함
-	// 				  비어있으면 같이 넘어온 errors MAP에 해당 변수를 키로 TRUE 추가
-    //==================================================================================================
-	private void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
-		
-		if( value == null || value.isEmpty() ) {
-			errors.put(fieldName, Boolean.TRUE);
-		}//if
-		
-	}//checkEmpty()
-    //==================================================================================================
-	
-	
-	
-	//==================================================================================================
-	// checkEmpty2() : checkEmpty의 DATE 버전
-	//==================================================================================================
-	private void checkEmpty2(Map<String, Boolean> errors, Date value, String fieldName) {
-		
-		if( value == null ) {
-			errors.put(fieldName, Boolean.TRUE);
-		}//if
-		
-	}//checkEmpty()
-	//==================================================================================================
-	
 	
 	
 	//g&s
