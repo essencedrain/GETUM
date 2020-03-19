@@ -1,31 +1,32 @@
-package com.getum.member.command;
+package com.getum.auth.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.getum.auth.service.LoginService;
+import com.getum.auth.service.User;
 import com.getum.command.CommandHandler;
-import com.getum.member.service.JoinMemberRequest;
-import com.getum.member.service.JoinMemberService;
 
 //==================================================================================================
-// JoinMemberHandler : 회원가입 핸들러
-// GET 요청 : signup.jsp 리턴
-// POST 요청 : 회원가입처리
-// 	-> 성공시 : signupSuccess.jsp 리턴 
-// 	-> 실패시 : signup.jsp 리턴
+//LoginHandler : 로그인 핸들러
+//GET 요청 : login.jsp 리턴
+//POST 요청 : 로그인 처리
+//	-> 성공시 : index.jsp 리턴 
+//	-> 실패시 : login.jsp 리턴
 //==================================================================================================
-public class JoinMemberHandler implements CommandHandler{
-	
+public class LoginHandler implements CommandHandler{
+
 	//field
-		private String form_view = "/view/home/signup.jsp";
-		private JoinMemberService joinService = new JoinMemberService();
-
+	private String form_view = "/view/home/login.jsp";
+	private LoginService loginService = new LoginService();
+	
+	//method
 	
 	//==================================================================================================
     // process() : 핸들러 공통
     //==================================================================================================
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res){
+	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
 		if( req.getMethod().equalsIgnoreCase("GET") ) {
 			return processForm(req,res);
@@ -38,10 +39,10 @@ public class JoinMemberHandler implements CommandHandler{
 		
 	}
     //==================================================================================================
-    
-    
-    
-    //==================================================================================================
+	
+	
+	
+	//==================================================================================================
     // processForm() : GET 처리
     //==================================================================================================
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
@@ -54,38 +55,46 @@ public class JoinMemberHandler implements CommandHandler{
 	//==================================================================================================
     // processSubmit() : POST 처리
     //==================================================================================================
-	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception{
 		
-		//form에서 넘어온 자료 처리
-		JoinMemberRequest joinReq = new JoinMemberRequest();
-		joinReq.setM_id(req.getParameter("m_id"));
-		joinReq.setM_pwd(req.getParameter("m_pwd"));
-		joinReq.setM_name(req.getParameter("m_name"));
-		joinReq.setM_email(req.getParameter("m_email"));
-		
-		String temp = req.getParameter("m_hp");
-		String hp = temp.substring(0, 3) + temp.substring(4, 8) + temp.substring(9); 
-		joinReq.setM_hp(hp);
-		
-		String now = req.getParameter("year") + "-" + req.getParameter("month") + "-" + req.getParameter("day");
-		java.sql.Date d = java.sql.Date.valueOf(now);
-		joinReq.setM_birthday(d);
+		String id = trim(req.getParameter("m_id"));
+		String password = trim(req.getParameter("m_pwd"));
 		
 		try {
-			joinService.join(joinReq);
-			return "/view/home/signupSuccess.jsp";			
+			
+			User user = loginService.login(id, password);
+			
+			//id가 존재하고 비밀번호가 일치하는 경우
+			//세션에 user 담아 index로 보냄
+			if(user!=null) {
+				req.getSession().setAttribute("authUser", user);
+				res.sendRedirect("/GETUM/view/home/index.jsp");
+				return null;
+				
+			}else {
+				//그렇지 않으면 리퀘스트에 로그인에러 셋어트리뷰트
+				req.getSession().setAttribute("loginError", new Boolean(true));
+				return form_view;
+			}//if
+			
 		} catch (Exception e) {
-			System.out.println("JoinMemberHandler.processSubmit() 에러 : " + e);
+			System.out.println("LoginHandler.processSubmit() 에러 : " + e);
+			req.getSession().setAttribute("loginError", new Boolean(true));
 			return form_view;
 		}//try
+		
+		
 	}
     //==================================================================================================
-    
-    
-    
+	
+	
+	
+	//==================================================================================================
+    // trim(String str) : null이면 null 리턴 / 문자면 트림처리 
     //==================================================================================================
-    // 
-    //==================================================================================================
+	private String trim(String str) {
+		return str == null ? null : str.trim();
+	}
     //==================================================================================================
 	
 }//class

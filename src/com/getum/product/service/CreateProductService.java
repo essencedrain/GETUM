@@ -1,40 +1,37 @@
-package com.getum.member.service;
+package com.getum.product.service;
 
 import java.sql.Connection;
 
-import com.getum.member.model.MemberDAO;
+import com.getum.product.model.ProductDAO;
 import com.getum.util.DBConnection;
 
-
 //==================================================================================================
-//JoinMemberService : 회원가입 기능
+// CreateProductService : 상품등록 기능
 //==================================================================================================
-public class JoinMemberService {
+public class CreateProductService {
 
-	
-	
 	//==================================================================================================
-    // join(JoinMemberRequest) : 회원가입처리
+    // create(JoinMemberRequest) : 상품등록 처리
     //==================================================================================================
-	public void join(JoinMemberRequest joinReq) {
-		
-		MemberDAO dao = MemberDAO.getInstance();
+	public void create(CreateProductRequest proReq) {
+		ProductDAO dao = ProductDAO.getInstance();
 		Connection conn = null;
 		
 		try {
+			
 			conn = DBConnection.getCon();
 			
-			dao.insert(conn, joinReq);
+			dao.insert(conn, proReq);
 			
 		} catch (Exception e1) {
-			System.out.println("JoinMemberService.join() 에러"+e1);
+			System.out.println("CreateProductService.create() 에러"+e1);
 		} finally {
 			try{
                 if(conn!=null){conn.close();}
-          }catch(Exception e2){}
+			}catch(Exception e2){}
 		}//try
+		
 	}
     //==================================================================================================
-	
 	
 }//class

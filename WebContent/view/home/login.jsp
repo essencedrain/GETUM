@@ -11,6 +11,9 @@
     <!--  font awesome icons  -->
     <link rel="stylesheet" href="../css/all.min.css">
     
+    <!--  sweetalert2  -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
+    
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -30,19 +33,19 @@
                     <h1>로그인</h1>
                 </div>
                 <div class="loginForm">
-                    <form>
+                    <form name="loginForm" method="post" action="login.get">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="uid" placeholder="아이디">
+                            <input type="text" class="form-control" name="m_id" id="m_id" placeholder="아이디">
                         </div>
                         
                         <div class="input-group mb-4">
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
-                            <input type="password" class="form-control" id="pwd" placeholder="비밀번호">
+                            <input type="password" class="form-control" name="m_pwd" id="m_pwd" placeholder="비밀번호">
                         </div>
 
                         <button type="submit" class="btn btn-lg btn-outline-secondary w-100">로그인</button>
@@ -73,8 +76,34 @@
 <!--  Bootstrap js file  -->
 <script src="./js/bootstrap.min.js"></script>
 
-<!--  custom js file  -->
-<script src="./js/main.js"></script>
+<!--  sweetalert2 js file  -->
+<script src="../js/sweetalert2.min.js"></script>
+
+<% 
+//==================================================================================================
+// 로그인 실패시 경고창 띄움 -> 세션어트리뷰트 삭제
+//==================================================================================================
+
+if(session.getAttribute("loginError") != null){
+	if( (boolean)session.getAttribute("loginError") == true ){
+%>
+		<script>
+			window.onload = function(){
+				Swal.fire({
+			  		  position: 'center',
+			  		  icon: 'error',
+			  		  title: "아이디 또는 비밀번호가 일치하지 않습니다.",
+			  		  showConfirmButton: false,
+			  		  timer: 1500
+					});
+			}
+		</script>
+<%
+		session.removeAttribute("loginError");
+	}//if
+}//if
+//==================================================================================================
+%>
 
 </body>
 </html>

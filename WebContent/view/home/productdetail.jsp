@@ -7,6 +7,10 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
+    
+    <!--  font awesome icons  -->
+    <link rel="stylesheet" href="../css/all.min.css">
+    
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->

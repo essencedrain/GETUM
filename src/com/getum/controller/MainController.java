@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.getum.command.CommandHandler;
 
+//======================================================================================================
+// 메인컨트롤러
+//======================================================================================================
 public class MainController extends HttpServlet{
 	
 	//<커맨드, 핸들러인스턴스> Map
@@ -52,7 +55,7 @@ public class MainController extends HttpServlet{
         }//try
         
         // 3. 2에서 읽은 프로퍼티 pr에다가 박은걸 이터레이터로 
-        Iterator keyItor=pr.keySet().iterator();
+        Iterator keyItor = pr.keySet().iterator();
 
         while(keyItor.hasNext()){
 
@@ -105,17 +108,21 @@ public class MainController extends HttpServlet{
      private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     	 
     	 //URI로부터 프로퍼티 key값 정제해서 넣을 변수
-    	 String command = request.getRequestURI(); //  ex: /getum/join.get
+    	 String command = request.getRequestURI(); //  ex: /getum/view/home/join.get
     	 
-    	 //경로 확인해보자
-    	 System.out.println("request.getRequestURI() : " + request.getRequestURI());
-    	 System.out.println("request.getContextPath() : " + request.getContextPath());
-    	 System.out.println("command.substring(request.getContextPath().length()); : " + command.substring( request.getContextPath().length() ));
-    	 //확인 후 삭제
     	 
     	 if( command.indexOf(request.getContextPath()) == 0 ){
-    		 command = command.substring( request.getContextPath().length() ); // ex: /join.get
+    		 command = command.substring( request.getContextPath().length() ); // ex: /view/home/join.get
+    		 //command = command.substring( request.getContextPath().length() + 10); // ex: join.get
     	 }//if
+    	 
+    	 /*
+		 request.getRequestURI() :									/getum/view/home/join.get
+		 request.getContextPath() :									/getum
+    	 command.substring(request.getContextPath().length())	:	/view/home/join.get
+    	 command = command.substring( request.getContextPath().length() + 10); // ex: join.get
+    	 */
+    	 
     	 
     	 CommandHandler handler = map.get(command);
     	 //map.get(command) 결과가 인스턴스다. 이 인스턴스는 CommandHandler를 implements하고 있음

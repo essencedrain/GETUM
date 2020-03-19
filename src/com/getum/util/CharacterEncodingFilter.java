@@ -9,6 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+//==================================================================================================
+// CharacterEncodingFilter : utf-8 페이지 인코딩 필터
+//==================================================================================================
 public class CharacterEncodingFilter implements Filter{
 	
 	private String encoding;

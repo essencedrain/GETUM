@@ -7,11 +7,11 @@
     <title>GETUM</title>
 
     <!--  bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:500,700,900&display=swap&subset=korean" rel="stylesheet">
 
 	<!--  custom CSS  -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../css/fixed.css">

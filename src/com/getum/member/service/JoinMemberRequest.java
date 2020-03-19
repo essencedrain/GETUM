@@ -10,7 +10,6 @@ public class JoinMemberRequest {
 	
 	private String m_id;
 	private String m_pwd;
-	private String m_pwd2;
 	private String m_name;
 	private String m_email;
 	private String m_hp;
@@ -29,12 +28,6 @@ public class JoinMemberRequest {
 	}
 	public void setM_pwd(String m_pwd) {
 		this.m_pwd = m_pwd;
-	}
-	public String getM_pwd2() {
-		return m_pwd;
-	}
-	public void setM_pwd2(String m_pwd2) {
-		this.m_pwd = m_pwd2;
 	}
 	public String getM_name() {
 		return m_name;

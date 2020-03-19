@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<footer class="footer">
+    <div class="text-center pt-4">
+        <ul class="nav justify-content-center border-top">
+            <li class="nav-item">
+                <a href="#" class="nav-link">회사소개</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">제휴문의</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">공지사항</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">고객의 소리</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">이용약관</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">개인정보 처리방침</a>
+            </li>
+        </ul>
+    </div>
+    <div class="copyright text-center border-top text-muted py-2">
+        <p class="mb-0">Made by Goo &copy; 2020</p>
+    </div>
+</footer>

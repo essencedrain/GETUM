@@ -7,6 +7,10 @@ import java.sql.SQLException;
 
 import com.getum.member.service.JoinMemberRequest;
 
+
+//======================================================================================================
+//회원 DAO
+//======================================================================================================
 public class MemberDAO {
 	//field
 		// 싱글톤
@@ -34,7 +38,7 @@ public class MemberDAO {
 	    public MemberDTO selectById(Connection conn, String id) throws SQLException{
 	    	PreparedStatement pstmt = null;
 	    	ResultSet rs = null;
-	    	MemberDTO memberDTO = null;
+	    	MemberDTO memberDTO = new MemberDTO();
 	    	
 	    	try {
 				pstmt = conn.prepareStatement("select * from member where m_id=?");
@@ -43,22 +47,22 @@ public class MemberDAO {
 				
 				
 				if(rs.next()) {
-					memberDTO = new MemberDTO(
-											rs.getString("m_id"),
-											rs.getString("m_pwd"),
-											rs.getString("m_name"),
-											rs.getString("m_email"),
-											rs.getString("m_hp"),
-											rs.getLong("m_point"),
-											rs.getTimestamp("m_join_date"),
-											rs.getDate("m_birthday"),
-											rs.getShort("m_grade"),
-											rs.getByte("m_withdraw_flag")
-											);
+					
+					memberDTO.setM_id(rs.getString("m_id"));
+					memberDTO.setM_pwd(rs.getString("m_pwd"));
+					memberDTO.setM_name(rs.getString("m_name"));
+					memberDTO.setM_email(rs.getString("m_email"));
+					memberDTO.setM_point(rs.getLong("m_point"));
+					memberDTO.setM_join_date(rs.getTimestamp("m_join_date"));
+					memberDTO.setM_birthday(rs.getDate("m_birthday"));
+					memberDTO.setM_grade(rs.getShort("m_grade"));
+					memberDTO.setM_withdraw_flag(rs.getByte("m_withdraw_flag"));
+					
 				}//if
 				
 			} catch (Exception e) {
-				System.out.println("selectById() 예외 :"+e);
+				System.out.println("MemberDAO.selectById() 예외 :"+e);
+				return null;
 			} finally {
 				try{
 					if(rs!=null){rs.close();}
@@ -89,7 +93,7 @@ public class MemberDAO {
 				
 				pstmt.executeUpdate();
 			} catch (Exception e) {
-				System.out.println("insert() 예외 :"+e);
+				System.out.println("MemberDAO.insert() 예외 :"+e);
 			}finally {
 				try{
 					if(pstmt!=null){pstmt.close();}
