@@ -20,7 +20,7 @@
                 <a href="#" class="nav-link">이용약관</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">개인정보 처리방침</a>
+                <a href="productCreate.jsp" class="nav-link">개인정보 처리방침</a>
             </li>
         </ul>
     </div>

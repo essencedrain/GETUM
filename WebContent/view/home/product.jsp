@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,7 +37,9 @@
         </div>
 
         <div class="row grid mt-5">
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 latest stainless">
+        <!-- ============================================productList============================================ -->
+        <c:if test="${empty productList}">
+		    <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 latest stainless">
                 <div class="our-product">
                     <div class="img">
                         <a class="test-popup-link" href="productdetail.jsp">
@@ -43,124 +47,46 @@
                         </a>
                     </div>
                     <div class="title py-4 text-center">
-                        <h3 class="">502 스댕</h3>
-                        <h5 class="text-secondary">신제품, 스테인리스</h5>
-                        <h5 class="">19,800원</h5>
+                        <h3 class="">등록된 상품 없음</h3>
+                        <h5 class="text-secondary">더미상품</h5>
+                        <h5 class="">999,999원</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 popular plastic">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/2.png" alt="product-2" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>502 RED</h3>
-                        <h5 class="text-secondary">인기상품, 플라스틱</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 popular stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/3.png" alt="product-3" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>마그나</h3>
-                        <h5 class="text-secondary">인기상품, 스테인리스</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 popular plastic">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/4.png" alt="product-4" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3 class="text-uppercase">매드캡</h3>
-                        <h5 class="text-secondary">인기상품, 플라스틱</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/5.png" alt="product-5" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3 class="text-uppercase">크림슨</h3>
-                        <h5 class="text-secondary">스테인리스</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 latest stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/6.png" alt="product-6" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>늑대소년</h3>
-                        <h5 class="text-secondary">신제품, 스테인리스</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/7.png" alt="product-7" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>핑크V</h3>
-                        <h5 class="text-secondary">스테인리스</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/8.png" alt="product-8" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>들러리</h3>
-                        <h5 class="text-secondary">스테인리스</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 element-item p-5 plastic stainless">
-                <div class="our-product">
-                    <div class="img">
-                        <a class="test-popup-link" href="#">
-                            <img src="../img/product/9.png" alt="product-9" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="title py-4 text-center">
-                        <h3>리프카페</h3>
-                        <h5 class="text-secondary">스테인리스, 플라스틱</h5>
-                        <h5 class="">13,800원</h5>
-                    </div>
-                </div>
-            </div>
+		</c:if>
+		
+		<c:if test="${productList!=null}">
+			<c:forEach var="product" items="${productList}">
+				<div class='col-lg-4 col-md-6 col-sm-12 element-item p-5 <c:forEach var="productClass" items="${product.p_category_en}"><c:out value="${productClass} "/></c:forEach>'>
+	                <div class="our-product">
+	                    <div class="img">
+	                        <a class="test-popup-link" href="productdetail.jsp">
+	                            <img src='../img/thumb/<c:out value="${product.p_imgName}"/>' alt='<c:out value="${product.p_uuid}"/>' class="img-fluid">
+	                        </a>
+	                    </div>
+	                    <div class="title py-4 text-center">
+	                        <h3 class="">${product.p_name}</h3>
+	                        <h5 class="text-secondary">
+	                        	<c:forEach var="category" items="${product.p_category}" varStatus="status">
+	                        	
+	                        		<c:if test="${status.last}">
+	                        		<c:out value="${category}"/>
+	                        		</c:if>
+	                        		
+	                        		<c:if test="${!status.last}">
+	                        		<c:out value="${category}, "/>
+	                        		</c:if>
+	                        		
+	                        	</c:forEach>
+	                        </h5>
+	                        <h5 class="">${product.p_price}</h5>
+	                    </div>
+	                </div>
+	            </div>	
+			</c:forEach>
+		</c:if>
+		<!-- ============================================productList============================================ -->
+           
         </div>
     </div>
 </section>

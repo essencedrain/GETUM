@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.getum.product.service.CreateProductRequest;
+import com.getum.product.service.ReadProductList;
 
 //======================================================================================================
 //제품 DAO
@@ -110,5 +115,100 @@ public class ProductDAO {
 	    }
 	    //==================================================================================================
 	    
+	    
+	    
+	    //==================================================================================================
+	    // getList(Connection) : 상품목록 가져오기
+	    // 리턴값 : List<ReadProductList>
+	    //==================================================================================================
+	    public List<ReadProductList> getList(Connection conn) throws SQLException{
+	    	
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
+	    	List<ReadProductList> list = null;
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("select p_uuid, p_name, p_price, p_category from product where p_delete_flag = ?");
+	    		pstmt.setInt(1, 0);
+	    		rs = pstmt.executeQuery();
+	    		
+	    		
+    			list = new ArrayList<ReadProductList>();
+    			String[] krTemp;
+    			String[] enTemp;
+    			
+    			while(rs.next()) {
+    				
+    				ReadProductList readProductList = new ReadProductList(); 
+    				
+    				readProductList.setP_uuid(rs.getString("p_uuid"));
+    				readProductList.setP_name(rs.getString("p_name"));
+    				
+    				//가격 콤마찍기
+    				DecimalFormat formatter = new DecimalFormat("###,###");
+    				readProductList.setP_price( formatter.format(rs.getLong("p_price")) + "원" );
+    				
+    				//카테고리 -> ","콤마 구분자로 쪼개서 -> 배열 변환
+    				krTemp = rs.getString("p_category").split(",");
+    				
+    				//trim()
+    				for(int i=0;i<krTemp.length;i++){
+    					krTemp[i] = krTemp[i].trim();
+    				}//for
+    				
+    				//위 한글카테고리를 영어로 변환
+    				enTemp = Arrays.copyOf(krTemp, krTemp.length); //한글판 복사
+    				
+    				for(int i=0;i<enTemp.length;i++){
+    					switch (enTemp[i]) {
+						case "신제품":
+							enTemp[i] = "latest";
+							break;
+						case "인기상품":
+							enTemp[i] = "popular";
+							break;
+						case "스테인리스":
+							enTemp[i] = "stainless";
+							break;
+						case "플라스틱":
+							enTemp[i] = "plastic";
+							break;
+						}//switch/case
+    				}//for
+    				
+    				readProductList.setP_category(krTemp); //한글 카테고리
+    				readProductList.setP_category_en(enTemp); //영어 카테고리
+    				
+    				
+    				//imgName
+	    				String imgTemp = readProductList.getP_uuid();
+	    				String imgChar = imgTemp.substring(0,1);
+	    				
+	    				//uuid첫글자에따라 확장자 설정 
+		    		    	if(imgChar.equals("j")){
+		    		    		readProductList.setP_imgName(imgTemp+".jpg");
+		    		    	}else if(imgChar.equals("p")){
+		    		    		readProductList.setP_imgName(imgTemp+".png");
+		    		    	}else if(imgChar.equals("g")){
+		    		    		readProductList.setP_imgName(imgTemp+".gif");
+		    		    	}//if
+    				
+	    			list.add(readProductList);
+	    			
+    			}//while
+	    			
+			} catch (Exception e) {
+				System.out.println("ProductDAO.selectByUuid() 예외 :"+e);
+				return null;
+			} finally {
+				try{
+					if(rs!=null){rs.close();}
+					if(pstmt!=null){pstmt.close();}
+				}catch(Exception ex2){}
+			}//try
+	    	
+	    	return list;
+	    }
+	    //==================================================================================================
 	    
 }//class

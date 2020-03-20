@@ -64,7 +64,7 @@
 	<!-- ============================================================ -->
 	<!-- filter 필터 : LoginCheckFilter -->
 	<!-- ============================================================ -->
-	<!--
+	<!-- 
 	<filter>
 		<filter-name>LoginCheck</filter-name>
 		<filter-class>com.getum.util.LoginCheckFilter</filter-class>
@@ -72,9 +72,9 @@
 	
 	<filter-mapping>
 		<filter-name>LoginCheck</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/view/home/productCreate.jsp</url-pattern>
 	</filter-mapping>
-	-->
+	 -->
 	<!-- ============================================================ -->
 	 
 	

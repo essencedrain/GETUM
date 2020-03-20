@@ -11,7 +11,7 @@ import com.getum.util.DBConnection;
 public class CreateProductService {
 
 	//==================================================================================================
-    // create(JoinMemberRequest) : 상품등록 처리
+    // create(CreateProductRequest) : 상품등록 처리
     //==================================================================================================
 	public void create(CreateProductRequest proReq) {
 		ProductDAO dao = ProductDAO.getInstance();
