@@ -7,9 +7,6 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-
-    <!--  font awesome icons  -->
-    <link rel="stylesheet" href="../css/all.min.css">
     
     <!--  sweetalert2  -->
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
@@ -70,11 +67,7 @@
 <!--  ======================= END footer Area ================================ -->
 
 
-<!--  Jquery js file  -->
-<script src="./js/jquery.3.4.1.js"></script>
-
-<!--  Bootstrap js file  -->
-<script src="./js/bootstrap.min.js"></script>
+<%@ include file="./jspf/_essentialFoot.jspf" %>
 
 <!--  sweetalert2 js file  -->
 <script src="../js/sweetalert2.min.js"></script>

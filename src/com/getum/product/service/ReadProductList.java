@@ -2,11 +2,11 @@ package com.getum.product.service;
 
 
 //==================================================================================================
-// ReadProductList : 상품목록에서 보여줄 데이터만 담는 객체
+// ReadProductList : 상품목록에서 필요한 데이터만 담는 객체
 //==================================================================================================
 public class ReadProductList {
 	
-	//field
+	//field 6개
 	private String p_uuid;
 	private String p_imgName;
 	private String p_name;

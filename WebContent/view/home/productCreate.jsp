@@ -4,12 +4,10 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-
-    <!--  font awesome icons  -->
-    <link rel="stylesheet" href="../css/all.min.css">
-
+    
     <!-- animate css -->
     <link rel="stylesheet" href="../css/animate.css">
+    
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -69,10 +67,7 @@ Suspendisse eget dictum ex, et gravida ipsum. Fusce dolor augue, mollis eu eros 
 <!--  ======================= END footer Area ================================ -->
 
 
-<!--  Jquery js file  -->
-<script src="../js/jquery.3.4.1.js"></script>
+<%@ include file="./jspf/_essentialFoot.jspf" %>
 
-<!--  Bootstrap js file  -->
-<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

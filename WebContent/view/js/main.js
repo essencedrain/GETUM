@@ -28,8 +28,3 @@ $(document).ready(function(){
 window.onload = function () {
     $('.product-area .button-group #btn1').trigger('click');
    }
-
-//가격표시
-function numberFormat(inputNumber) {
-    return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
- }

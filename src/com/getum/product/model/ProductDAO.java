@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.getum.product.service.CreateProductRequest;
+import com.getum.product.service.ReadProductDetailRequest;
 import com.getum.product.service.ReadProductList;
 
 //======================================================================================================
@@ -37,9 +38,9 @@ public class ProductDAO {
 	    
 	    
 	    //==================================================================================================
-	    // selectByUuid(Connection, String) : 상품정보 정보 가져오기
+	    // selectAllByUuid(Connection, String) : 상품정보 *모든* 정보 가져오기
 	    //==================================================================================================
-	    public ProductDTO selectByUuid(Connection conn, String uuid) throws SQLException{
+	    public ProductDTO selectAllByUuid(Connection conn, String uuid) throws SQLException{
 	    	
 	    	PreparedStatement pstmt = null;
 	    	ResultSet rs = null;
@@ -79,6 +80,59 @@ public class ProductDAO {
 	    	
 	    	
 	    	return dto;
+	    }
+	    //==================================================================================================
+	    
+	    
+	    //==================================================================================================
+	    // selectByUuid(Connection, String) : *상품상세 정보보기용* 가져오기 productdetail.jsp
+	    //==================================================================================================
+	    public ReadProductDetailRequest selectByUuid(Connection conn, String uuid) throws SQLException{
+	    	
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
+	    	ReadProductDetailRequest rPDReq = new ReadProductDetailRequest();
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("select p_name, p_code, p_price, p_release_date, p_manufacture, p_detail from product where p_uuid = ?");
+	    		pstmt.setString(1, uuid);
+	    		rs = pstmt.executeQuery();
+	    		
+	    		
+	    		if(rs.next()) {
+	    			
+	    			rPDReq.setP_name(rs.getString("p_name"));
+	    			rPDReq.setP_code(rs.getString("p_code"));
+	    			rPDReq.setP_price(rs.getLong("p_price"));
+    				rPDReq.setP_release_date(""+rs.getDate("p_release_date"));
+	    			rPDReq.setP_manufacture(rs.getString("p_manufacture"));
+	    			rPDReq.setP_detail(rs.getString("p_detail"));
+	    			
+	    			//imgName
+    				String imgChar = uuid.substring(0,1);
+    				//uuid첫글자에따라 확장자 설정 
+	    		    	if(imgChar.equals("j")){
+	    		    		rPDReq.setImgName(uuid+".jpg");
+	    		    	}else if(imgChar.equals("p")){
+	    		    		rPDReq.setImgName(uuid+".png");
+	    		    	}else if(imgChar.equals("g")){
+	    		    		rPDReq.setImgName(uuid+".gif");
+	    		    	}//if
+	    			
+	    		}//if
+	    		
+			} catch (Exception e) {
+				System.out.println("ProductDAO.selectByUuid() 예외 :"+e);
+				return null;
+			} finally {
+				try{
+					if(rs!=null){rs.close();}
+					if(pstmt!=null){pstmt.close();}
+				}catch(Exception ex2){}
+			}//try
+	    	
+	    	
+	    	return rPDReq;
 	    }
 	    //==================================================================================================
 	    

@@ -37,31 +37,12 @@ h4,h5,h6{
     border-radius: 0;
     position: relative;
 }
-/* .btn-outline-secondary:before{
-    content:'';
-    position: absolute;
-    background-color: #007041b7;
-    top:0;
-    left:0;
-    height: 100%;
-    width: 0%;
-    z-index: -1;
-    transition: 0.5s;
-} */
-
-/* .btn-outline-secondary:hover:before{
-    width: 100%;
-} */
 
 .btn-secondary{
     background: #604c4c !important;
     border-radius: 0;
     border-color: #604c4c !important;
 }
-
-/* .btn-secondary:hover{
-    color: #00bd6e !important;
-} */
 
 .btn-primary{
     background-color: #007042 !important;
@@ -70,10 +51,6 @@ h4,h5,h6{
     color: #f6f5ef !important;
 }
 
-/* .btn-primary:hover{
-    background: #604c4c !important;
-    color: #00bd6e !important;
-} */
 /* ==========================버튼============================== */
 
 /* ==========================header============================== */
@@ -87,8 +64,12 @@ Navbar
 }
 
 .nav-link{
+
     color: #333333;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
+
 .navbar-brand{
     
     color: #007042;

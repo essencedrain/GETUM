@@ -7,7 +7,7 @@ import com.getum.product.model.ProductDAO;
 import com.getum.util.DBConnection;
 
 //==================================================================================================
-//ReadProductListService : 상품목록 조회 기능
+//ReadProductListService : 상품목록 조회 기능 DAO호출, 핸들러에 List<ReadProductList> 리턴
 //==================================================================================================
 public class ReadProductListService {
 
@@ -24,7 +24,7 @@ public class ReadProductListService {
 			return list;
 			
 		} catch (Exception e1) {
-			System.out.println("ReadProductListService.process() 에러"+e1);
+			System.out.println("ReadProductListService 에러"+e1);
 			return null;
 		} finally {
 			try{

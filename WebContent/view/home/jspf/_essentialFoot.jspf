@@ -1,0 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!--  Jquery js file  -->
+<script src="../js/jquery.3.4.1.js"></script>
+
+<!--  Bootstrap js file  -->
+<script src="../js/bootstrap.min.js"></script>
+
+
+<!--  scroll_to_top js file  -->
+<script src="../js/scroll_to_top.js"></script>

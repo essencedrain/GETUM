@@ -5,9 +5,6 @@
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
 
-    <!--  font awesome icons  -->
-    <link rel="stylesheet" href="../css/all.min.css">
-
     <!-- animate css -->
     <link rel="stylesheet" href="../css/animate.css">
     
@@ -43,7 +40,7 @@
 <section class="new container overflow-hidden my-5 py-5">
     <div class="row mt-5">
         <div class="col-md-6 my-5">
-            <img class="wow animated fadeInLeft img-fluid" alt="" src="../img/main/1.png">
+            <img class="wow animated fadeInLeft img-fluid" alt="" src="../img/main/p1.png">
         </div>
         <div class="col-md-6 my-auto">
             <div class="row">
@@ -117,7 +114,7 @@
             </div>
         </div>
         <div class="col-md-6 mt-5">
-            <img class="wow animated fadeInRight img-fluid" alt="" src="../img/main/3.png">
+            <img class="wow animated fadeInRight img-fluid" alt="" src="../img/main/p2.png">
         </div>
     </div>
 </section>
@@ -178,14 +175,14 @@
             <div class="mx-auto heading-line"></div>
         </div>
         <div class="row">
-            <div class="wow animated bounceInLeft col-lg-6">
+            <div class="wow animated slow bounceInLeft col-lg-6">
                 <!-- google map -->
                 <div id="map-container-google-1" class="z-depth-1-half map-container mb-4">
                     <iframe width="100%" height="424" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=%EA%B2%BD%EC%98%81%EA%B8%B0%EC%88%A0%EA%B0%9C%EB%B0%9C%EC%9B%90&key=AIzaSyBdWvmrcFJ1Z0A5n3zyl3d64q42sv60b2U"></iframe>
                 </div>
                 <!-- google map -->
             </div>
-            <form class="wow animated bounceInRight col-lg-6">
+            <form class="wow animated slow bounceInRight col-lg-6">
                 <div class="form-group">
                     <label for="email">이메일</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHint" placeholder="이메일을 입력해주세요">
@@ -209,19 +206,14 @@
 </main>
 <!--  ======================= END Main Area ================================ -->
 
-
 <!--  ======================= Start footer Area ================================ -->
 
 <%@ include file="./jspf/_footer.jspf" %>
 
 <!--  ======================= END footer Area ================================ -->
 
+<%@ include file="./jspf/_essentialFoot.jspf" %>
 
-<!--  Jquery js file  -->
-<script src="../js/jquery.3.4.1.js"></script>
-
-<!--  Bootstrap js file  -->
-<script src="../js/bootstrap.min.js"></script>
 
 <!--  wow js file  -->
 <script src="../js/wow.js"></script>
@@ -229,10 +221,6 @@
     new WOW().init();
 </script>
 
-<!--  custom js file  -->
-<!--
-<script src="../js/main.js"></script>
--->
 
 
 </body>

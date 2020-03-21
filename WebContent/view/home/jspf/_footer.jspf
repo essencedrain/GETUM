@@ -28,3 +28,7 @@
         <p class="mb-0">Made by Goo &copy; 2020</p>
     </div>
 </footer>
+
+<!-- scroll to top -->
+<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
+<!-- scroll to top -->
