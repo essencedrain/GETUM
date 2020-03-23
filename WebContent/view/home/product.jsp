@@ -55,11 +55,11 @@
 	                        	<c:forEach var="category" items="${product.p_category}" varStatus="status">
 	                        	
 	                        		<c:if test="${status.last}">
-	                        		<c:out value="${category}"/>
+	                        			<c:out value="${category}"/>
 	                        		</c:if>
 	                        		
 	                        		<c:if test="${!status.last}">
-	                        		<c:out value="${category}, "/>
+	                        			<c:out value="${category}, "/>
 	                        		</c:if>
 	                        		
 	                        	</c:forEach>

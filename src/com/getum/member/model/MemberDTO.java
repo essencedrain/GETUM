@@ -19,16 +19,10 @@ public class MemberDTO {
 	private short m_grade;
 	private byte m_withdraw_flag;
 	
-	
-	
 	//constructor
 	public MemberDTO(){}
 	
-	
-	
-	//method
-	
-	//아래는 게터세터
+	//G&S
 	public String getM_id() {
 		return m_id;
 	}
