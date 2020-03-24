@@ -1,32 +1,30 @@
-package com.getum.member.service;
+package com.getum.order.service;
 
 import java.sql.Connection;
 
-import com.getum.member.model.MemberDAO;
+import com.getum.order.model.AddrDAO;
+import com.getum.order.model.AddrDTO;
 import com.getum.util.DBConnection;
 
-
 //==================================================================================================
-//JoinMemberService : 회원가입 기능
+//AddrCreateService : 주소지 기능
 //==================================================================================================
-public class JoinMemberService {
+public class AddrCreateService {
 
-	
 	//==================================================================================================
-    // join(JoinMemberRequest) : 회원가입처리
+    // create() : 회원가입처리
     //==================================================================================================
-	public void join(JoinMemberRequest joinReq) {
+	public void create(AddrDTO addrDTO) {
 		
-		MemberDAO dao = MemberDAO.getInstance();
+		AddrDAO dao = AddrDAO.getInstance();
 		Connection conn = null;
 		
 		try {
 			conn = DBConnection.getCon();
-			
-			dao.insert(conn, joinReq);
+			dao.insert(conn, addrDTO);
 			
 		} catch (Exception e1) {
-			System.out.println("JoinMemberService.join() 에러"+e1);
+			System.out.println("AddrCreateService.create() 에러"+e1);
 		} finally {
 			try{
                 if(conn!=null){conn.close();}
@@ -34,6 +32,5 @@ public class JoinMemberService {
 		}//try
 	}
     //==================================================================================================
-	
 	
 }//class

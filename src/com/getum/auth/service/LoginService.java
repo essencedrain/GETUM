@@ -39,6 +39,8 @@ public class LoginService {
 			user.setM_id(dto.getM_id());
 			user.setM_name(dto.getM_name());
 			user.setM_point(dto.getM_point());
+			user.setM_grade(dto.getM_grade());
+			user.setM_email(dto.getM_email());
 			
 		} catch (Exception e1) {
 			System.out.println("LoginService.login() 에러"+e1);

@@ -20,6 +20,8 @@ String uuid=""; //삭제시 보낼 것
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
+    <!--  sweetalert2  -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -64,7 +66,7 @@ String uuid=""; //삭제시 보낼 것
 						%>
 									<tr>
 	                                <td class="text-left align-middle" style="width: 5%"><input type="checkbox" value="<%= uuid %>" name="cartSelect" class="cartSelect"></td>
-	                                <td class="text-center align-middle" style="width: 10%"><img src="../img/thumb/<%= cReq.getImgName() %>" alt="" width="80"></td>
+	                                <td class="text-center align-middle" style="width: 10%"><img src="../img/thumb/<%= cReq.getImgName() %>" alt="<%= cReq.getImgName() %>" width="80"></td>
 	                                <td style="width: 65%">
 	                                    <h5><%= cReq.getManufacture() %>, <%= cReq.getName() %>, 1개</h5>
 	                                    <hr>
@@ -105,7 +107,7 @@ String uuid=""; //삭제시 보낼 것
 
         <div class="row">
             <div class="col-xl-8 offset-xl-2 col-10 offset-1 align-middle">
-                <input type="checkbox" id="selectAll2" class="selectAll" name="selectAll">&nbsp;&nbsp;
+                <input type="checkbox" id="selectAll2" class="selectAll ml-2" name="selectAll">&nbsp;&nbsp;
                 <label for="selectAll2" class="mr-2">전체선택 (<span id="selectedNum">0</span> / <%= hcartSize %>)</label>
                 <button class="btn btn-sm btn-outline-secondary" onclick="deleteAction()">선택삭제</button>
             </div>
@@ -137,7 +139,7 @@ String uuid=""; //삭제시 보낼 것
         <div class="row my-4">
             <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-4 m-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
-                <button class="btn btn-lg btn-primary px-5 m-2">구매하기</button>
+                <button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?m_id=${authUser.m_id}'">구매하기</button>
             </div>
         </div>
     </div>
@@ -156,11 +158,15 @@ String uuid=""; //삭제시 보낼 것
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
+<!--  sweetalert2 js file  -->
+<script src="../js/sweetalert2.min.js"></script>
 
+<!--  cart js file  -->
+<script src="../js/cart.js"></script>
 
 <script>
 //==============================================================================================================
-//온로드 이벤트
+// jsp+온로드 이벤트
 //==============================================================================================================
 window.onload = function () {
 
@@ -175,7 +181,7 @@ window.onload = function () {
 %>
 	$("#priceSum").text( numberFormat($("#priceSum").text()) );
 	$("#priceSum2").text( numberFormat($("#priceSum2").text()) );
-
+	
 // 체크박스 선택 갯수 표시
 	$(".cartSelect").change(function(){
 		console.log($("input:checkbox[name='cartSelect']:checked").length);
@@ -185,73 +191,20 @@ window.onload = function () {
 //수량 수정하기
 	$('.modifyButton').click(function() {
 	   
-	   if($(this).prev().val() > 0){
+	   if($(this).prev().val() > 0 && $(this).prev().val() < 1000){
 			location.href = "cart.get?flag=modify&uuid="+ $(this).next().text() +"&quantity=" + $(this).prev().val();
 		}else{
-			alert("0보다 커야함");
+			Swal.fire({
+		  		  position: 'center',
+		  		  icon: 'error',
+		  		  title: "수량 입력 범위는 1~999개 입니다.",
+		  		  showConfirmButton: false,
+		  		  timer: 1500
+				});
 		}
 	});
 }
 //==============================================================================================================
-	
-	
-	
-//==============================================================================================================
-//가격 변환
-//==============================================================================================================
-function numberFormat(inputNumber) {
-    return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
- }
-//==============================================================================================================
-	
-	
-//==============================================================================================================	
-//전체 선택/해제
-//==============================================================================================================
-var $selectAll = $('.selectAll');
-$selectAll.change(function () {
-    var $this = $(this);
-    var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
-    // console.log(checked);
-    $('input[name="cartSelect"]').prop('checked', checked).trigger('change');
-    $('input[name="selectAll"]').prop('checked', checked);
-});
-
-var boxes = $('input[name="cartSelect"]');
-boxes.change(function () {
-	var boxLength = boxes.length;
-    // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
-    var checkedLength = $('input[name="cartSelect"]:checked').length;
-    var selectAll = (boxLength == checkedLength);
-
-    $selectAll.prop('checked', selectAll);
-
-});
-//==============================================================================================================
-	
-	
-//==============================================================================================================
-//선택 삭제
-//==============================================================================================================
-function deleteAction(){
-  var checkRow = "";
-  $( "input[name='cartSelect']:checked" ).each (function (){
-    checkRow = checkRow + $(this).val()+"," ;
-  });
-  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
- 
-  if(checkRow == ''){
-    alert("삭제할 대상을 선택하세요.");
-    return false;
-    
-  }else{
-	  location.href = "cart.get?flag=delete&uuid=" + checkRow;
-  }//if
- 
-}
-//==============================================================================================================
-	
-	
 </script>
 
 </body>

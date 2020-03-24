@@ -10,6 +10,7 @@ public class User {
 	private String m_name;
 	private Long m_point;
 	private short m_grade;
+	private String m_email;
 	
 	//constructor
 	public User(){}
@@ -47,6 +48,13 @@ public class User {
 
 	public void setM_grade(short m_grade) {
 		this.m_grade = m_grade;
+	}
+	public String getM_email() {
+		return m_email;
+	}
+
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
 	}
 	
 		
