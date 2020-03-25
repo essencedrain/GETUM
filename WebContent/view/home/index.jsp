@@ -49,7 +49,7 @@
                     <h1 class="wow animated fadeInLeft delay-1s pb-3">502 <span>스댕</span> 텀블러</h1>
                     <p class="wow animated fadeInLeft delay-1s pb-3">GETUM에서 새롭게 선보이는 502 스댕 텀블러는 GETUM사의 최신 기술을 대거 적용한 텀블러로써 제품에 녹이 슬지 않고 강력한 보온 보냉 성능을 보장합니다. 지금 바로 구매하세요!</p>
                     <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary">구매하기</button>
-                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.jsp'">상품목록</button>
+                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.get'">상품목록</button>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
                     <h1 class="wow animated fadeInLeft delay-1s pb-3">502 <span>RED</span> 텀블러</h1>
                     <p class="wow animated fadeInLeft delay-1s pb-3">GETUM에서 새롭게 선보이는 502 스댕 텀블러는 GETUM사의 최신 기술을 대거 적용한 텀블러로써 제품에 녹이 슬지 않고 강력한 보온 보냉 성능을 보장합니다. 지금 바로 구매하세요!</p>
                     <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary">구매하기</button>
-                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.jsp'">상품목록</button>
+                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.get'">상품목록</button>
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
                 <p class="lead">뛰어난 보온 성능을 보장합니다</p>
             </div>
             <div class="wow animated fadeIn slow col-md-12 text-center pt-5">
-                <button class="btn btn-lg btn-secondary" onclick="location.href='product.jsp'">상품보러가기</button>
+                <button class="btn btn-lg btn-secondary" onclick="location.href='product.get'">상품보러가기</button>
             </div>
         </div> <!-- End row Dark -->
         <div class="fixed-wrap">

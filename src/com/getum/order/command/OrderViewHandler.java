@@ -1,6 +1,8 @@
 package com.getum.order.command;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,7 @@ import com.getum.util.DBConnection;
 public class OrderViewHandler implements CommandHandler{
 	
 	//field
-		private String form_view = "/view/home/order.jsp";
+		private String form_view = "/view/home/order.jsp?flag=default";
 	
 	//==================================================================================================
     // process() : 핸들러 공통
@@ -32,10 +34,13 @@ public class OrderViewHandler implements CommandHandler{
 	public String process(HttpServletRequest req, HttpServletResponse res){
 		
 		if( req.getMethod().equalsIgnoreCase("GET") ) {
+			System.out.println("get");
 			return processGet(req,res);
 		} else if ( req.getMethod().equalsIgnoreCase("POST") ) {
+			System.out.println("post");
 			return processPost(req,res);
 		} else {
+			System.out.println("SC");
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			return null;
 		}//if
@@ -49,37 +54,54 @@ public class OrderViewHandler implements CommandHandler{
     //==================================================================================================
 	private String processGet(HttpServletRequest req, HttpServletResponse res) {
 		
+		
+		
 		String m_id = req.getParameter("m_id");
+		String flag = req.getParameter("flag");
 		AddrDTO dto = null;
 		List<AddrDTO> list = null;
 		AddrDAO dao = AddrDAO.getInstance();
 		Connection conn = null;
 		
-		try {
-			conn = DBConnection.getCon();
-			dto = dao.selectById(conn, m_id);
-			list = dao.selectAllById(conn, m_id);
+		if(flag.equals("delete")) {
+			try {
+				conn = DBConnection.getCon();
+				dao.delete(conn, req.getParameter("a_no"));
+				res.sendRedirect("/GETUM/view/home/order.get?flag=default&m_id="+m_id);
+			} catch (Exception e) {
+				System.out.println("OrderViewHandler.delete 에러"+e);
+			}
 			
-		} catch (Exception e1) {
-			System.out.println("OrderViewHandler.conn() 에러"+e1);
-		} finally {
-			try{
-                if(conn!=null){conn.close();}
-          }catch(Exception e2){}
-		}//try
-		
-		if(dto==null) {
-			req.getSession().setAttribute("userAddr", null);
+			return null;
 		}else {
-			req.getSession().setAttribute("userAddr", dto);
-		}
-		
-		if(list==null) {
-			req.getSession().setAttribute("userAddrAll", null);
-		}else {
-			req.getSession().setAttribute("userAddrAll", list);
-		}
-		
+			
+			try {
+				
+				conn = DBConnection.getCon();
+				dto = dao.selectById(conn, m_id);
+				list = dao.selectAllById(conn, m_id);
+				
+			} catch (Exception e1) {
+				System.out.println("OrderViewHandler.default 에러"+e1);
+			} finally {
+				try{
+	                if(conn!=null){conn.close();}
+				}catch(Exception e2){}
+			}//try
+			
+			if(dto==null) {
+				req.getSession().setAttribute("userAddr", null);
+			}else {
+				req.getSession().setAttribute("userAddr", dto);
+			}//if
+			
+			if(list==null) {
+				req.getSession().setAttribute("userAddrAll", null);
+			}else {
+				req.getSession().setAttribute("userAddrAll", list);
+			}//if
+			
+		}//if
 		return form_view;
 	}
     //==================================================================================================
@@ -91,6 +113,7 @@ public class OrderViewHandler implements CommandHandler{
     //==================================================================================================
 	private String processPost(HttpServletRequest req, HttpServletResponse res) {
 		String flag = req.getParameter("flag");
+		String m_id = req.getParameter("m_id");
 		AddrDTO dto = new AddrDTO();
 		AddrCreateService acs = new AddrCreateService();
 		
@@ -100,20 +123,60 @@ public class OrderViewHandler implements CommandHandler{
 			dto.setA_addr1(req.getParameter("a_addr1"));
 			dto.setA_addr2(req.getParameter("a_addr2"));
 			dto.setA_post(req.getParameter("a_post"));
-			dto.setA_hp(req.getParameter("a_hp"));
+			
+			String tempHp = req.getParameter("a_hp");
+			String hp = tempHp.substring(0, 3) + tempHp.substring(4, 8) + tempHp.substring(9); 
+			dto.setA_hp(hp);
+			
 			dto.setA_request(req.getParameter("a_request"));
 			
-			if(req.getParameter("a_default_flag").equals("true")) {
-				dto.setA_default_flag(true);
-			}else {
+			if(req.getParameter("a_default_flag")==null) {
 				dto.setA_default_flag(false);
+			}else {
+				dto.setA_default_flag(true);
 			}
-			dto.setM_id(req.getParameter("m_id"));
+			dto.setM_id(m_id);
+			
 			acs.create(dto);
+			
+			try {
+				res.sendRedirect("/GETUM/view/home/order.get?flag=default&m_id="+m_id);
+			} catch (IOException e) {
+				System.out.println("OrderViewHandler.processPost.create 에러 " +e);
+			}
+			
+			
+		}else if(flag.equals("modify")) {
+			
+			dto.setA_name(req.getParameter("a2_name"));
+			dto.setA_addr1(req.getParameter("a2_addr1"));
+			dto.setA_addr2(req.getParameter("a2_addr2"));
+			dto.setA_post(req.getParameter("a2_post"));
+			String tempHp = req.getParameter("a2_hp");
+			String hp = tempHp.substring(0, 3) + tempHp.substring(4, 8) + tempHp.substring(9); 
+			dto.setA_hp(hp);
+			dto.setA_request(req.getParameter("a2_request"));
+			
+			if(req.getParameter("a2_default_flag")==null) {
+				dto.setA_default_flag(false);
+			}else {
+				dto.setA_default_flag(true);
+			}
+			dto.setA_no(Long.parseLong(req.getParameter("a2_no")));
+			dto.setM_id(m_id);
+			
+			acs.update(dto);
+			
+			try {
+				res.sendRedirect("/GETUM/view/home/order.get?flag=default&m_id="+m_id);
+			} catch (IOException e) {
+				System.out.println("OrderViewHandler.processPost.create 에러 " +e);
+			}
 			
 		}//if
 		
-		return form_view;
+		return null;
+		//return form_view;
 	}
     //==================================================================================================
 

@@ -74,7 +74,7 @@
                             <input type="text" class="form-control" placeholder="휴대폰 번호" name="m_hp" id="m_hp" maxlength="13" onKeyup="inputPhoneNumber(this);">
                         </div>
                         
-                        <div class="input-group mb-5">
+                        <div class="input-group mb-4">
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
                             </div>

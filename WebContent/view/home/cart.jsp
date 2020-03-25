@@ -139,7 +139,7 @@ String uuid=""; //삭제시 보낼 것
         <div class="row my-4">
             <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-4 m-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
-                <button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?m_id=${authUser.m_id}'">구매하기</button>
+                <button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?flag=default&m_id=${authUser.m_id}'">구매하기</button>
             </div>
         </div>
     </div>

@@ -7,12 +7,12 @@ import com.getum.order.model.AddrDTO;
 import com.getum.util.DBConnection;
 
 //==================================================================================================
-//AddrCreateService : 주소지 기능
+//AddrCreateService : 배송지 기능
 //==================================================================================================
 public class AddrCreateService {
 
 	//==================================================================================================
-    // create() : 회원가입처리
+    // create() : 배송지 입력 처리
     //==================================================================================================
 	public void create(AddrDTO addrDTO) {
 		
@@ -21,6 +21,12 @@ public class AddrCreateService {
 		
 		try {
 			conn = DBConnection.getCon();
+			
+			if(addrDTO.isA_default_flag()) {
+				//convertFlag(Connection, String) : 기본 배송지 플래그 취소  1->0 으로
+				dao.convertFlag(conn, addrDTO.getM_id());
+			}
+			
 			dao.insert(conn, addrDTO);
 			
 		} catch (Exception e1) {
@@ -32,5 +38,35 @@ public class AddrCreateService {
 		}//try
 	}
     //==================================================================================================
+	
+	
+	
+	//==================================================================================================
+	// update() : 배송지 수정 처리
+	//==================================================================================================
+	public void update(AddrDTO addrDTO) {
+		
+		AddrDAO dao = AddrDAO.getInstance();
+		Connection conn = null;
+		
+		try {
+			conn = DBConnection.getCon();
+			
+			if(addrDTO.isA_default_flag()) {
+				//convertFlag(Connection, String) : 기본 배송지 플래그 취소  1->0 으로
+				dao.convertFlag(conn, addrDTO.getM_id());
+			}
+			
+			dao.update(conn, addrDTO);
+			
+		} catch (Exception e1) {
+			System.out.println("AddrCreateService.update() 에러"+e1);
+		} finally {
+			try{
+				if(conn!=null){conn.close();}
+			}catch(Exception e2){}
+		}//try
+	}
+	//==================================================================================================
 	
 }//class

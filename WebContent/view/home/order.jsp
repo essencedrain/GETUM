@@ -38,33 +38,33 @@ hcartSize = hcart.size();
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <section class="order-area pt-5">
     <div class="container-fluid">
-        <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+        <div class="col-xl-6 offset-xl-3 col-10 offset-1">
             <h1 class="d-inline">주문 / 결제</h1>
             <hr>
         </div>
 
         <div class="row mt-4">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
                 <h5>구매자정보</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
                         <tr>
-                            <td class="table-secondary" style="width: 20%">이름</td>
-                            <td style="width: 80%">${authUser.m_name}</td>
+                            <td class="table-secondary text-right" style="width: 10%">이름</td>
+                            <td style="width: 90%">${authUser.m_name}</td>
                         </tr>
                         <tr>
-                            <td class="table-secondary" style="width: 20%">이메일</td>
-                            <td style="width: 80%">${authUser.m_email}</td>
+                            <td class="table-secondary text-right" style="width: 10%">이메일</td>
+                            <td style="width: 90%">${authUser.m_email}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-<!-- ////////////////////////////////////////////////////////////배송지//////////////////////////////////////////////////////////////////////////////////////// -->   
+<!-- ////////////////////////////////////////////////////////////start 배송지//////////////////////////////////////////////////////////////////////////////////////// -->   
 	<c:choose>
 		<c:when test="${empty userAddr}">
 			<div class="row mt-3">
-	            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+	            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
 	                <div class="mb-2">
 	                    <h5 class="d-inline">받는사람정보</h5>
 	                    <button type="button" class="btn btn-sm btn-outline-secondary mx-1" data-toggle="modal" data-target="#addrModal">배송지추가</button>
@@ -72,20 +72,20 @@ hcartSize = hcart.size();
 	                <div class="table-responsive">
 	                    <table class="table table-bordered text-nowrap">
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">이름</td>
-	                            <td style="width: 80%">-</td>
+	                            <td class="table-secondary text-right" style="width: 10%">이름</td>
+	                            <td style="width: 90%">-</td>
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">배송주소</td>
-	                            <td style="width: 80%">-</td>
+	                            <td class="table-secondary text-right" style="width: 10%">배송주소</td>
+	                            <td style="width: 90%">-</td>
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">연락처</td>
-	                            <td style="width: 80%">-</td>
+	                            <td class="table-secondary text-right" style="width: 10%">연락처</td>
+	                            <td style="width: 90%">-</td>
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">배송 요청사항</td>
-	                            <td style="width: 80%">-</td>
+	                            <td class="table-secondary text-right" style="width: 10%">배송 요청사항</td>
+	                            <td style="width: 90%">-</td>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -98,7 +98,7 @@ hcartSize = hcart.size();
 				dto = (AddrDTO)session.getAttribute("userAddr");
 			%>
 			<div class="row mt-3">
-	            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+	            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
 	                <div class="mb-2">
 	                    <h5 class="d-inline">받는사람정보</h5>
 	                    <button type="button" class="btn btn-sm btn-outline-secondary mx-1" data-toggle="modal" data-target="#addrModal">배송지변경</button>
@@ -106,20 +106,23 @@ hcartSize = hcart.size();
 	                <div class="table-responsive">
 	                    <table class="table table-bordered text-nowrap">
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">이름</td>
-	                            <td style="width: 80%"><%= dto.getA_name() %></td>
+	                            <td class="table-secondary text-right" style="width: 10%">이름</td>
+	                            <td style="width: 90%" id="receiverName"><%= dto.getA_name() %></td>
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">배송주소</td>
-	                            <td style="width: 80%"><%= dto.getA_addr1() %> &nbsp; <%= dto.getA_addr2() %></td>
+	                            <td class="table-secondary text-right" style="width: 10%">배송주소</td>
+	                            <td style="width: 90%" id="receiverAddr"><%= dto.getA_addr1() %>, <%= dto.getA_addr2() %> (<%= dto.getA_post() %>)</td>
+	                            <input type="hidden" name="getA_addr1" id="getA_addr1" value="<%= dto.getA_addr1() %>">
+	                            <input type="hidden" name="getA_addr2" id="getA_addr2" value="<%= dto.getA_addr2() %>">
+	                            <input type="hidden" name="getA_post" id="getA_post" value="<%= dto.getA_post() %>">
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">연락처</td>
-	                            <td style="width: 80%"><%= dto.getA_hp() %></td>
+	                            <td class="table-secondary text-right" style="width: 10%">연락처</td>
+	                            <td style="width: 90%" id="receiverHp"><%= dto.getA_hp() %></td>
 	                        </tr>
 	                        <tr>
-	                            <td class="table-secondary" style="width: 20%">배송 요청사항</td>
-	                            <td style="width: 80%"><%= dto.getA_request() %></td>
+	                            <td class="table-secondary text-right" style="width: 10%">배송 요청사항</td>
+	                            <td style="width: 90%" id="receiverReq"><%= dto.getA_request() %></td>
 	                        </tr>
 	                    </table>
 	                </div>
@@ -128,79 +131,79 @@ hcartSize = hcart.size();
 		</c:otherwise>
 	</c:choose>
         
-<!-- ////////////////////////////////////////////////////////////배송지//////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////end 배송지//////////////////////////////////////////////////////////////////////////////////////// -->
         <div class="row mt-3">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
                 <h5>주문내역</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
-<!-- ////////////////////////////////////////////////////////////상품내역//////////////////////////////////////////////////////////////////////////////////////// -->   
+<!-- ////////////////////////////////////////////////////////////start 상품내역//////////////////////////////////////////////////////////////////////////////////////// -->   
 						<%
 							while(hcartKey.hasMoreElements()){
 								cReq = (CartRequest) hcart.get(hcartKey.nextElement());
 						%>                 	
 		                        <tr>
 		                            <td style="width: 5%" class="text-center align-middle"><img src="../img/thumb/<%= cReq.getImgName() %>" alt="<%= cReq.getImgName() %>" width="80"></td>
-		                            <td style="width: 95%" class="align-middle"><%= cReq.getManufacture() %>, <%= cReq.getName() %>, <%= cReq.getQuantity() %>개</td>
+		                            <td style="width: 95%" class="align-middle"><h5><%= cReq.getManufacture() %>, <%= cReq.getName() %>, <%= cReq.getQuantity() %>개</h5></td>
 		                        </tr>
                         <%
 								priceSum += cReq.getPrice() * cReq.getQuantity();
 							}//while
                         %>
-<!-- ////////////////////////////////////////////////////////////상품내역//////////////////////////////////////////////////////////////////////////////////////// -->                    
+<!-- ////////////////////////////////////////////////////////////end 상품내역//////////////////////////////////////////////////////////////////////////////////////// -->                    
                     </table>
                 </div>
             </div>
         </div>
 
         <div class="row mt-3">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
                 <h5>결제정보</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
                         <tr>
-                            <td class="table-secondary" style="width: 20%">총상품가격</td>
-                            <td style="width: 80%" id="priceSum"><%= priceSum %></td>
+                            <td class="table-secondary text-right" style="width: 10%">총상품가격</td>
+                            <td style="width: 90%" id="priceSum"><%= priceSum %></td>
                         </tr>
                         <tr>
-                            <td class="table-secondary" style="width: 20%">배송비</td>
-                            <td style="width: 80%">3,000원</td>
+                            <td class="table-secondary text-right" style="width: 10%">배송비</td>
+                            <td style="width: 90%">3,000원</td>
                         </tr>
                         <tr>
-                            <td class="table-secondary" style="width: 20%">포인트</td>
-                            <td style="width: 80%">
+                            <td class="table-secondary text-right" style="width: 10%">포인트</td>
+                            <td style="width: 90%">
                                 <span class="mr-5">0원</span>
                                 <span class="mr-2">보유 : ${authUser.m_point}원</span>
                                 <button class="btn btn-sm btn-outline-secondary mx-1">포인트사용</button>
                             </td>
                         </tr>
                         <tr class="d-none">
-                            <td class="table-secondary" style="width: 20%"></td>
-                            <td style="width: 80%">
+                            <td class="table-secondary text-right" style="width: 10%"></td>
+                            <td style="width: 90%">
                                 <input class="ml-2 mr-1" type="text" placeholder="0" name="pointInput" size="3">원
                                 <button class="btn btn-sm btn-primary mx-1">포인트적용</button>
                             </td>
                         </tr>
                         <tr>
-                            <td class="table-secondary" style="width: 20%">총결제금액</td>
-                            <td style="width: 80%" id="priceSum2"><%= priceSum + 3000 %></td>
+                            <td class="table-secondary text-right" style="width: 10%">총결제금액</td>
+                            <td style="width: 90%" id="priceSum2"><%= priceSum + 3000 %></td>
                         </tr>
                         <tr>
-                            <td class="table-secondary" style="width: 20%">결제방법</td>
-                            <td style="width: 80%">
+                            <td class="table-secondary text-right" style="width: 10%">결제방법</td>
+                            <td style="width: 90%">
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="optradio">계좌이체
+                                      <input type="radio" class="form-check-input" name="optradio" value="1">계좌이체
                                     </label>
                                   </div>
                                   <div class="form-check-inline">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="optradio">신용카드
+                                      <input type="radio" class="form-check-input" name="optradio" value="2">신용카드
                                     </label>
                                   </div>
                                   <div class="form-check-inline">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="optradio">무통장입금
+                                      <input type="radio" class="form-check-input" name="optradio" value="3">무통장입금
                                     </label>
                                   </div>
                             </td>
@@ -211,9 +214,23 @@ hcartSize = hcart.size();
         </div>
 
         <div class="row my-2">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
+            <div class="col-xl-6 offset-xl-3 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-5 m-2" onclick="javascript:window.history.back();">이전으로</button>
-                <button class="btn btn-lg btn-primary px-5 m-2">결제하기</button>
+                <form name="payment" method="post" action="payment.jsp" class="d-inline">
+                	<input type="hidden" name="o_totalprice" id="o_totalprice" value="">
+                	<input type="hidden" name="o_use_point" id="o_use_point" value="">
+                	<input type="hidden" name="o_delivery_flag" id="o_delivery_flag" value="">
+                	<input type="hidden" name="o_payment" id="o_payment" value="">
+                	<input type="hidden" name="o_payment_method" id="o_payment_method" value="">
+                	<input type="hidden" name="o_name" id="o_name" value="">
+                	<input type="hidden" name="o_hp" id="o_hp" value="">
+                	<input type="hidden" name="o_addr1" id="o_addr1" value="">
+                	<input type="hidden" name="o_addr2" id="o_addr2" value="">
+                	<input type="hidden" name="o_post" id="o_post" value="">
+                	<input type="hidden" name="o_request" id="o_request" value="">
+                	<input type="hidden" name="m_id" id="m_id" value="${authUser.m_id}">
+                	<button type="button" class="btn btn-lg btn-primary px-5 m-2" onclick="payment1()">결제하기</button>
+                </form>
             </div>
         </div>
 
@@ -232,7 +249,7 @@ hcartSize = hcart.size();
 <!--  ======================= END footer Area ================================ -->
 
 
-<!--  ======================= Start Modal Area ================================ -->
+<!--  ======================= Start 배송지 Modal 1뎁스 Area ================================ -->
 <div class="modal fade" id="addrModal" tabindex="-1" role="dialog" aria-labelledby="addrModalTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -265,15 +282,32 @@ hcartSize = hcart.size();
 			                        <h6>
 			                        	<%= i.getA_name() %>
 										<% if(i.isA_default_flag()){%>
-											<span class="badge badge-primary">기본배송지</span>
+											<span class="badge badge-danger">기본배송지</span>
 										<%}//if %>
 			                        </h6>
 			                        <p><%= i.getA_addr1() %>, <%= i.getA_addr2() %> </p>
 			                        <p><%= i.getA_hp() %></p>
 			                        <p>요청사항 : <%= i.getA_request() %></p>
 			                        <div>
-			                            <button class="btn btn btn-outline-secondary float-left">수정</button>
-			                            <button class="btn btn btn-primary float-right">선택</button>
+			                            <button type="button" class="btn btn btn-outline-secondary float-left selectModiAddr" data-toggle="modal" data-target="#addrModiModal">
+			                            	수정
+			                            	<input type="hidden" name="0" value="<%= i.getA_name() %>">
+		                            		<input type="hidden" name="1" value="<%= i.getA_addr1() %>">
+		                            		<input type="hidden" name="2" value="<%= i.getA_addr2() %>">
+		                            		<input type="hidden" name="3" value="<%= i.getA_hp() %>">
+		                            		<input type="hidden" name="4" value="<%= i.getA_request() %>">
+		                            		<input type="hidden" name="5" value="<%= i.getA_post() %>">
+		                            		<input type="hidden" name="6" value="<%= i.getA_no() %>">
+			                            </button>
+		                            	<button type="button" class="btn btn btn-primary float-right selectAddr" data-dismiss="modal">
+		                            		선택
+		                            		<input type="hidden" name="0" value="<%= i.getA_name() %>">
+		                            		<input type="hidden" name="1" value="<%= i.getA_addr1() %>">
+		                            		<input type="hidden" name="2" value="<%= i.getA_addr2() %>">
+		                            		<input type="hidden" name="3" value="<%= i.getA_hp() %>">
+		                            		<input type="hidden" name="4" value="<%= i.getA_request() %>">
+		                            		<input type="hidden" name="5" value="<%= i.getA_post() %>">
+		                            	</button>
 			                        </div>
 			                    </td>
 			                </tr>
@@ -286,7 +320,6 @@ hcartSize = hcart.size();
 	            </table>
 	        </div>
 	        <div class="row">
-	            <!-- <button class="btn btn-lg btn-outline-secondary w-100">+배송지 추가</button>-->
 	            <button type="button" class="btn btn-lg btn-outline-secondary w-100" data-toggle="modal" data-target="#addrAddModal">+배송지 추가</button>
 	        </div>
     	</div>
@@ -294,13 +327,15 @@ hcartSize = hcart.size();
     </div>
   </div>
 </div>
-<!--  ======================= End Modal Area ================================ -->
-<!-- Modal -->
+<!--  ======================= End 배송지 Modal 1뎁스 Area ================================ -->
+
+
+<!--  ======================= Start 배송지 Modal 2뎁스 (추가) Area ================================ -->
 <div class="modal fade" id="addrAddModal" tabindex="-1" role="dialog" aria-labelledby="addrAddModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addrAddModalTitle">배송지 선택</h5>
+        <h5 class="modal-title" id="addrAddModalTitle">배송지 추가</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -308,7 +343,7 @@ hcartSize = hcart.size();
       <div class="modal-body">
         <div class="container-fluid">
 	        <div class="row">
-	        	<form name="addrAddForm" method="post" action="order.get" onsubmit="return check9(this)" class="w-100">
+	        	<form name="addrAddForm" method="post" action="order.get" class="w-100">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -353,14 +388,22 @@ hcartSize = hcart.size();
                             </div>
                             <input type="text" class="form-control" placeholder="요청사항" name="a_request" id="a_request">
                         </div>
-                        <div class="form-check-inline mb-3">
-						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input" name="a_default_flag" value="true">기본배송지로 저장
-						  </label>
-						</div>
-						<input type="hidden" name="flag" value="create">
+                        <input type="hidden" name="flag" value="create">
 						<input type="hidden" name="m_id" value="${authUser.m_id}">
-                        <button type="submit" class="btn btn-lg btn-primary w-100">저장</button>
+                        <c:choose>
+							<c:when test="${empty userAddrAll}">
+								<input type="hidden" name="a_default_flag" value="true">
+		                        <button type="submit" class="btn btn-lg btn-primary w-100">저장</button>
+							</c:when>
+							<c:otherwise>
+								<div class="form-check-inline mb-3">
+								  <label class="form-check-label">
+								    <input type="checkbox" class="form-check-input" name="a_default_flag" value="true">기본배송지로 저장
+								  </label>
+								</div>
+		                        <button type="submit" class="btn btn-lg btn-primary w-100">저장</button>
+							</c:otherwise>
+						</c:choose>
                     </form>
 	        </div>
 		</div>
@@ -368,28 +411,99 @@ hcartSize = hcart.size();
     </div>
   </div>
 </div>
+<!--  ======================= End 배송지 Modal 2뎁스 (추가) Area ================================ -->
+
+
+
+<!--  ======================= Start 배송지 Modal 2뎁스 (수정,삭제) Area ================================ -->
+<div class="modal fade" id="addrModiModal" tabindex="-1" role="dialog" aria-labelledby="addrModiModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addrModiModalTitle">배송지 수정/삭제</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+	        <div class="row">
+	        	<form name="addrModiForm" method="post" action="order.get" class="w-100">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  placeholder="받는사람" name="a2_name" id="a2_name">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="far fa-map"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="주소" name="a2_addr1" id="a2_addr1" readonly="readonly">
+                        </div>
+						
+						<div class="input-group mb-3" id="addr2">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="상세주소" name="a2_addr2" id="a2_addr2">
+                        </div>
+						
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="우편번호" name="a2_post" id="a2_post" readonly="readonly">
+                            <div class="input-group-append">
+						    	<button type="button" class="btn btn-outline-secondary" onclick="openDaumPostcode2()"><i class="fas fa-search"></i></button>
+						    </div>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="휴대폰 번호" name="a2_hp" id="a2_hp" maxlength="13" onKeyup="inputPhoneNumber(this);">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="far fa-comment-dots"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="요청사항" name="a2_request" id="a2_request">
+                        </div>
+                        
+                        <input type="hidden" name="flag" value="modify">
+                        <input type="hidden" name="a2_no" value="" id="a2_no">
+						<input type="hidden" name="m_id" value="${authUser.m_id}" id="a2_id">
+						
+						<div class="form-check-inline mb-3">
+						  <label class="form-check-label">
+						    <input type="checkbox" class="form-check-input" name="a2_default_flag" value="true">기본배송지로 저장
+						  </label>
+						</div>
+                        <button type="submit" class="btn btn-lg btn-primary w-100 mb-2">저장</button>
+                        <button type="button" class="btn btn-lg btn-outline-danger w-100" onclick="addrDelete()">삭제</button>
+
+                    </form>
+	        </div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  ======================= End 배송지 Modal 2뎁스 (수정,삭제) Area ================================ -->
+
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
+<!-- 다음 주소 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-function openDaumPostcode(){
-
-    new daum.Postcode({
-           oncomplete:function(data){
-                  document.getElementById('a_post').value=data.zonecode;
-                  document.getElementById('a_addr1').value=data.roadAddress;
-				  $("#addr2").removeClass("d-none");
-           }
-    }).open();
-
-}//openDaumPostcode()---
-</script>
 
 
 
 <script>
-var openWin;
 //==============================================================================================================
 // jsp+온로드 이벤트
 //==============================================================================================================
@@ -399,6 +513,28 @@ window.onload = function () {
 	$("#priceSum").text( numberFormat($("#priceSum").text()) );
 	$("#priceSum2").text( numberFormat($("#priceSum2").text()) );
 
+
+//배송지 목록에서 선택시, 주문/결제창에 반영
+$('.selectAddr').click(function(){
+	$("#receiverName").text( $(this).find("input").eq(0).val() );
+	$("#receiverAddr").text( $(this).find("input").eq(1).val() + ", " + $(this).find("input").eq(2).val() + " (" + $(this).find("input").eq(5).val() + ")");
+	$("#getA_addr1").val( $(this).find("input").eq(1).val() );
+	$("#getA_addr2").val( $(this).find("input").eq(2).val() );
+	$("#getA_post").val( $(this).find("input").eq(5).val() );
+	$("#receiverHp").text( $(this).find("input").eq(3).val() );
+	$("#receiverReq").text( $(this).find("input").eq(4).val() );
+});
+
+// 배송지 수정 버튼 클릭시 수정창에 선택내용 적용
+$('.selectModiAddr').on('click',function() {
+	$("#a2_name").val( $(this).find("input").eq(0).val() );
+	$("#a2_addr1").val( $(this).find("input").eq(1).val() );
+	$("#a2_addr2").val( $(this).find("input").eq(2).val() );
+	$("#a2_post").val( $(this).find("input").eq(5).val() );
+	$("#a2_hp").val( $(this).find("input").eq(3).val() );
+	$("#a2_request").val( $(this).find("input").eq(4).val() );
+	$("#a2_no").val( $(this).find("input").eq(6).val() );
+});
 }//window_onload)
 
 
@@ -412,6 +548,100 @@ function numberFormat(inputNumber) {
 }
 //==============================================================================================================
 	
+	
+	
+//==============================================================================================================
+// 다음 주소
+//==============================================================================================================
+function openDaumPostcode(){
+
+    new daum.Postcode({
+           oncomplete:function(data){
+                  document.getElementById('a_post').value=data.zonecode;
+                  document.getElementById('a_addr1').value=data.roadAddress;
+                  $("#addr2").removeClass("d-none");
+           }
+    }).open();
+
+}//openDaumPostcode()---
+
+//배송지 수정창 전용
+function openDaumPostcode2(){
+
+    new daum.Postcode({
+           oncomplete:function(data){
+                  document.getElementById('a2_post').value=data.zonecode;
+                  document.getElementById('a2_addr1').value=data.roadAddress;
+                  document.getElementById('a2_addr2').value="";
+           }
+    }).open();
+
+}//openDaumPostcode()---
+//==============================================================================================================
+	
+	
+	
+//==============================================================================================================
+// 결제하기 버튼
+//==============================================================================================================
+function payment1() {
+	 $("#o_totalprice").val( "<%= priceSum%>" );
+	 $("#o_use_point").val( "0" );
+	 $("#o_delivery_flag").val( "true" );
+	 $("#o_payment").val( "<%= priceSum+3000 %>" );
+	 $("#o_payment_method").val( $("input:radio[name=optradio]:checked").val() );
+	 $("#o_name").val( $("#receiverName").text() );
+	 $("#o_hp").val( $("#receiverHp").text() );
+	 $("#o_addr1").val( $("#getA_addr1").val() );
+	 $("#o_addr2").val( $("#getA_addr2").val() );
+	 $("#o_post").val( $("#getA_post").val() );
+	 $("#o_request").val( $("#receiverReq").text() );
+	 
+	 document.payment.submit();
+}
+//==============================================================================================================
+	
+	
+	
+//==============================================================================================================
+// 배송지 삭제버튼
+//==============================================================================================================
+function addrDelete() {
+	location.href = "order.get?flag=delete&a_no=" + $("#a2_no").val() + "&m_id=" + $("#a2_id").val();
+}
+//==============================================================================================================
+	
+	
+//==============================================================================================================
+// 휴대폰 번호 (-) 삽입
+//==============================================================================================================
+function inputPhoneNumber(obj) {
+
+    var number = obj.value.replace(/[^0-9]/g, "");
+    var phone = "";
+
+    if(number.length < 4) {
+        return number;
+    } else if(number.length < 7) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3);
+    } else if(number.length < 11) {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 3);
+        phone += "-";
+        phone += number.substr(6);
+    } else {
+        phone += number.substr(0, 3);
+        phone += "-";
+        phone += number.substr(3, 4);
+        phone += "-";
+        phone += number.substr(7);
+    }
+    obj.value = phone;
+}
+//==============================================================================================================
 </script>
 
 

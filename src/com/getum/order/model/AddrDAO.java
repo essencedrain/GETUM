@@ -86,7 +86,58 @@ public class AddrDAO {
 				}catch(Exception ex2){}
 			}//try
 	    	
+	    }//selectById()
+	    //==================================================================================================	
+	    
+
+	    
+	    //==================================================================================================
+	    // convertFlag(Connection, String) : 기본 배송지 플래그 취소  1->0 으로
+	    //==================================================================================================
+	    public void convertFlag(Connection conn, String id) throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
 	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("update addr set a_default_flag=0 where m_id=? and a_default_flag=1");
+	    		pstmt.setString(1, id);
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("AddrDAO.convertFlag() 예외 :"+e);
+	    	} finally {
+	    		try{
+	    			if(rs!=null){rs.close();}
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
+	    	
+	    }//selectById()
+	    //==================================================================================================	
+	    
+	    
+	    
+	    
+	    //==================================================================================================
+	    // delete(Connection, String) : a_no 레코드 삭제
+	    //==================================================================================================
+	    public void delete(Connection conn, String a_no) throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("delete from addr where a_no=?");
+	    		pstmt.setString(1, a_no);
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("AddrDAO.delete() 예외 :"+e);
+	    	} finally {
+	    		try{
+	    			if(rs!=null){rs.close();}
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
 	    	
 	    }//selectById()
 	    //==================================================================================================		    
@@ -158,7 +209,7 @@ public class AddrDAO {
 		
 	    
 	    //==================================================================================================
-	    // insert(Connection, CreateProductRequest) : 상품정보 삽입
+	    // insert(Connection, AddrDTO) : 상품정보 삽입
 	    //==================================================================================================
 	    public void insert(Connection conn, AddrDTO addrDTO) throws SQLException{
 	    	PreparedStatement pstmt = null;
@@ -190,6 +241,45 @@ public class AddrDAO {
 					if(pstmt!=null){pstmt.close();}
 				}catch(Exception ex2){}
 			}//try
+	    }
+	    //==================================================================================================
+	    
+	    
+	    
+	    
+	    //==================================================================================================
+	    // update(Connection, AddrDTO) : 상품정보 삽입
+	    //==================================================================================================
+	    public void update(Connection conn, AddrDTO addrDTO) throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("update addr set a_name=?, a_hp=?, a_addr1=?, a_addr2=?, a_post=?, a_request=?, a_default_flag=? where a_no=?");
+	    		
+	    		pstmt.setString(1, addrDTO.getA_name());
+	    		pstmt.setString(2, addrDTO.getA_hp());
+	    		pstmt.setString(3, addrDTO.getA_addr1());
+	    		pstmt.setString(4, addrDTO.getA_addr2());
+	    		pstmt.setString(5, addrDTO.getA_post());
+	    		pstmt.setString(6, addrDTO.getA_request());
+	    		
+	    		if(addrDTO.isA_default_flag()) {
+	    			pstmt.setInt(7, 1);
+	    		}else {
+	    			pstmt.setInt(7, 0);
+	    		}
+	    		
+	    		pstmt.setLong(8, addrDTO.getA_no());
+	    		
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("AddrDAO.update() 예외 :"+e);
+	    	} finally {
+	    		try{
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
 	    }
 	    //==================================================================================================
 }//class
