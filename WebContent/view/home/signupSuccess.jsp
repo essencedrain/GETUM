@@ -42,8 +42,6 @@
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
-<!--  custom js file  -->
-<script src="./js/main.js"></script>
 
 </body>
 </html>

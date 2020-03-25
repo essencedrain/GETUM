@@ -23,8 +23,6 @@ public class DBConnection {
         
         return conn;
         
-		//DataSource ds=(DataSource)ct.lookup("java:comp/env/jdbc/mysql");
-	    //return ds.getConnection();
 	}//getCon()
 	
 }//class
