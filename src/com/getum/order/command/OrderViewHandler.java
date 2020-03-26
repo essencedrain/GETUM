@@ -15,9 +15,12 @@ import com.getum.order.service.AddrCreateService;
 import com.getum.util.DBConnection;
 
 //==================================================================================================
-//OrderViewHandler : 주문/결제창(order.jsp) 보기
-//GET 요청 : order.jsp 리턴
-//POST 요청 : 배송지 선택창에서 배송지 고르고 order.jsp 보냄
+//OrderViewHandler : 주문/결제창(order.get?flag=default&m_id=) 보기
+//GET 요청 :
+//	flag=delete : 배송지 삭제 후 order.get?flag=default&m_id=
+//POST 요청 : 
+//	flag=create : 배송지 생성 후 order.get?flag=default&m_id=
+//	flag=modify : 배송지 수정 후 order.get?flag=default&m_id=
 //기타:
 //	배송지DB에서 기본 배송지를 가져와서 세션에 넣고 order.jsp로 보낸다.
 //		배송지가 없으면 세션에 null 넣고 order.jsp 보낸다
@@ -34,13 +37,10 @@ public class OrderViewHandler implements CommandHandler{
 	public String process(HttpServletRequest req, HttpServletResponse res){
 		
 		if( req.getMethod().equalsIgnoreCase("GET") ) {
-			System.out.println("get");
 			return processGet(req,res);
 		} else if ( req.getMethod().equalsIgnoreCase("POST") ) {
-			System.out.println("post");
 			return processPost(req,res);
 		} else {
-			System.out.println("SC");
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			return null;
 		}//if

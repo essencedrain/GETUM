@@ -51,12 +51,12 @@
 	                <hr>
 	                <h6>수량</h6>
 	                <div class="bsinput w-50 pb-4">
-	                    <input type="number" value="1" min="1" max="1000" step="1" id="input" name="quantity"/>
+	                    <input type="number" value="1" min="1" max="999" step="1" id="input" name="quantity"/>
 	                </div>
 	                <h3 id="price">총 상품금액 : <span id="output"></span></h3>
 	                <div class="button-group my-4 float-right">
-	                    <button class="btn btn-lg btn-outline-secondary mr-1">구매하기</button>
-	                    <button class="btn btn-lg btn-primary">장바구니</button>
+	                    <button type="button" class="btn btn-lg btn-outline-secondary mr-1">구매하기</button>
+	                    <button type="submit" class="btn btn-lg btn-primary">장바구니</button>
 	                </div>
             </div>
         </div>

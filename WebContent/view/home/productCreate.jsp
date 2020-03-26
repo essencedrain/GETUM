@@ -5,61 +5,97 @@
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
     
-    <!-- animate css -->
-    <link rel="stylesheet" href="../css/animate.css">
+    <!--  sweetalert2  -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
     
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
 <%@ include file="./jspf/_header.jspf" %>
 <!--  ======================= End Header Area ============================== -->
-<div class="container pt-5">
-    <form action="productCreate.get" method="post" encType="multipart/form-data">
-    <table>
-        <tr>
-        	<td>상품명 : </td>
-            <td><input type="text" id="1i" class="1c" name="p_name" value=""></td>
-        </tr>
-        <tr>
-            <td>상품코드 : </td>
-            <td><input type="text" id="2i" class="2c" name="p_code" value="ZC20200301"></td>
-        </tr>
-        <tr>
-            <td>상품가격 : </td>
-            <td><input type="text" id="3i" class="3c" name="p_price" value="19800"></td>
-        </tr>
-        <tr>
-            <td>출시일 : </td>
-            <td><input type="text" id="4i" class="4c" name="p_release_date" value="2019-03-19"></td>
-        </tr>
-        <tr>
-            <td>제조사 : </td>
-            <td><input type="text" id="5i" class="5c" name="p_manufacture" value="(주)GETUM"></td>
-        </tr>
-        <tr>
-        	<td>재고수량 : </td>
-            <td><input type="text" id="6i" class="6c" name="p_stock" value="9999"></td>
-        </tr>
-        <tr>
-            <td>카테고리 : </td>
-            <td><input type="text" id="7i" class="7c" name="p_category" value="신제품, 인기상품, 스테인리스, 플라스틱"></td>
-        </tr>
-        <tr>
-            <td>상세설명 : </td>
-            <td><textarea name="p_detail" id="8i" cols="30" rows="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et feugiat ligula, ut interdum sem. Aliquam at iaculis nisl. Donec ultrices neque ultrices dolor mattis, vel faucibus eros vulputate. Praesent congue sapien arcu, vel auctor nulla condimentum sed. Aenean hendrerit magna quis finibus volutpat. Duis consequat dapibus sapien vitae venenatis. Fusce non dapibus eros, eget aliquam arcu. Nam scelerisque lorem ante, eu tincidunt nisi molestie ac. Curabitur blandit libero vitae mi convallis porta. Praesent elementum, magna eu viverra dapibus, ipsum erat vehicula arcu, vel ultricies orci mi quis tortor. Praesent eu massa fringilla, sollicitudin est nec, aliquam mauris. Donec sollicitudin purus in tortor laoreet dictum eu at felis.
+<section class="productCreate pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="productCreateFormWrap mx-auto col-md-6 col-md-offset-3">
+                <div class="heading pb-1 text-center pb-4">
+                    <h1>상품등록</h1>
+                </div>
+                <div class="productCreateForm">
+                    <form name="productCreateForm" action="productCreate.get" method="post" encType="multipart/form-data">
+                        <div class="form-row mb-2">
+                            <div class="form-group col-lg-6">
+                                <label for="p_name">상품명</label>
+                                <input type="text" class="form-control" placeholder="상품명을 입력해주세요" id="p_name" name="p_name">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="p_code">상품코드</label>
+                                <input type="text" class="form-control" placeholder="상품코드를 입력해주세요" id="p_code" name="p_code">
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+                            <div class="form-group col-lg-6">
+                                <label for="p_price">상품가격</label>
+                                <input type="text" class="form-control" placeholder="상품가격을 입력해주세요" id="p_price" name="p_price">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="p_manufacture">제조사</label>
+                                <input type="text" class="form-control" placeholder="제조사를 입력해주세요" id="p_manufacture" name="p_manufacture">
+                            </div>
+                        </div>
 
-Phasellus facilisis tristique magna, euismod semper nibh pulvinar tincidunt. Nunc convallis nisi sapien, nec faucibus turpis pharetra eu. Nam ligula ipsum, tristique ac tincidunt in, pellentesque a felis. Donec nec felis consequat magna tempor vulputate. Etiam rhoncus ut lorem vitae pulvinar. Vestibulum et augue id libero malesuada tincidunt a sed arcu. Sed sapien ante, dapibus sed suscipit ac, finibus in mauris. Pellentesque nec sodales arcu. Donec scelerisque molestie ullamcorper. Vivamus rhoncus quam leo, consequat accumsan quam commodo ut. Vestibulum id lorem at eros placerat tempor. Cras laoreet, odio at maximus hendrerit, mauris dolor tempus nisi, et interdum neque nibh ut purus. Donec volutpat convallis euismod. Ut nec laoreet nulla, et sagittis sem. Mauris vel sodales massa.
 
-Suspendisse eget dictum ex, et gravida ipsum. Fusce dolor augue, mollis eu eros eu, vulputate bibendum libero. Curabitur porttitor, felis iaculis aliquam pretium, lacus ipsum consequat ex, eget tincidunt quam ex non metus. Curabitur eu bibendum nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut purus porta, congue quam vitae, fringilla massa. Praesent pellentesque, augue id egestas condimentum, neque lacus fringilla libero, id commodo lacus elit nec augue. Nullam venenatis magna viverra urna egestas tempus. Morbi commodo cursus dolor semper commodo. Sed tortor nibh, mattis non magna nec, pulvinar egestas dui. In hac habitasse platea dictumst. Cras ligula augue, facilisis vitae nulla quis, tincidunt laoreet ligula. Nullam ipsum metus, fermentum id cursus a, faucibus bibendum risus. Nullam dignissim orci eget pretium faucibus.</textarea></td>
-        </tr>
-        <tr>
-            <td>첨부파일 : </td>
-            <td><input type="file" id="9i" class="9c" name="file"></td>
-        </tr>
-    </table>
-    <input type="submit" value="전송">
-</form>
-</div>
+                        <div class="form-group mb-2">
+                            <label for="p_stock">재고수량</label>
+                            <input type="text" class="form-control" placeholder="재고수량을 입력해주세요" id="p_stock" name="p_stock">
+                        </div>
+
+                        <label>제품 출시일</label>
+                        <div class="input-group mb-2">
+                            <select  class="form-control" name="year" id="select_year" onchange="javascript:lastday();">
+                            </select>
+                            <select class="form-control" name="month" id="select_month" onchange="javascript:lastday();">
+                                <option value="" selected>월</option>
+                              </select>
+                              <select class="form-control" name="day" id="select_day">
+                                <option value="" selected>일</option>
+                              </select>
+                        </div>
+                        <label>카테고리</label>
+                        <div class="form-group mb-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="cateChk" id="inlineCheckbox1" value="신제품">
+                                <label class="form-check-label" for="inlineCheckbox1">신상품</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="cateChk" id="inlineCheckbox2" value="인기상품">
+                                <label class="form-check-label" for="inlineCheckbox2">인기상품</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cateRadio" id="inlineRadio1" value="스테인리스" checked="checked">
+                                <label class="form-check-label" for="inlineRadio1">스테인리스</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="cateRadio" id="inlineRadio2" value="플라스틱">
+                                <label class="form-check-label" for="inlineRadio2">플라스틱</label>
+                              </div>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="p_detail">상세설명</label>
+                            <textarea class="form-control" id="p_detail"  name="p_detail" rows="8"></textarea>
+                        </div>
+
+                        <div class="custom-file mb-2">
+                            <input type="file" class="custom-file-input" name = "file" id="customFile" accept=".gif,.jpg,.png">
+                            <label class="custom-file-label" for="customFile">이미지 파일을 업로드 하세요</label>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary w-100 mb-5">상품등록</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!--  ======================= Start footer Area ================================ -->
 
 <%@ include file="./jspf/_footer.jspf" %>
@@ -68,6 +104,13 @@ Suspendisse eget dictum ex, et gravida ipsum. Fusce dolor augue, mollis eu eros 
 
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
+
+<!--  sweetalert2 js file  -->
+<script src="../js/sweetalert2.min.js"></script>
+
+<!-- productCreate.js -->
+<script src="../js/productCreate.js"></script>
+
 
 </body>
 </html>

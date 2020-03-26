@@ -139,7 +139,11 @@ String uuid=""; //삭제시 보낼 것
         <div class="row my-4">
             <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-4 m-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
-                <button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?flag=default&m_id=${authUser.m_id}'">구매하기</button>
+                <% if(session.getAttribute("cartMap")!=null){ %>
+                	<button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?flag=default&m_id=${authUser.m_id}'">구매하기</button>
+                <% }else{ %>
+                	<button class="btn btn-lg btn-primary px-5 m-2" id="nullCartButton">구매하기</button>
+                <% }//if  %>
             </div>
         </div>
     </div>
@@ -202,6 +206,18 @@ window.onload = function () {
 		  		  timer: 1500
 				});
 		}
+	});
+
+
+//장바구니가 비었을때 장바구니 클릭
+	$('#nullCartButton').click(function() {
+		Swal.fire({
+	  		  position: 'center',
+	  		  icon: 'error',
+	  		  title: "장바구니가 비었습니다.",
+	  		  showConfirmButton: false,
+	  		  timer: 1500
+			});
 	});
 }
 //==============================================================================================================

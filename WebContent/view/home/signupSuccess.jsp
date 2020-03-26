@@ -18,8 +18,9 @@
 
 <!--  ======================= Start Main Area ================================ -->
 <main class="site-main">
-<!--  ======================= Start login Area =======================  -->
-<section class="login-area">
+<!--  ======================= Start signupSuccess Area =======================  -->
+
+<section class="signupSuccess-area">
 <div class="container">
 	<div class="pb-5">
             <h1>회원가입 축하 페이지가 될 것</h1>
@@ -28,7 +29,7 @@
 </section>
 
 
-<!--  ======================= End login Area =======================  -->
+<!--  ======================= End signupSuccess Area =======================  -->
 </main>
 <!--  ======================= END Main Area ================================ -->
 

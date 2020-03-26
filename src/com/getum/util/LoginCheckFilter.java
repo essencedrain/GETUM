@@ -31,7 +31,7 @@ public class LoginCheckFilter implements Filter{
 		boolean login = false;
 		
 		if(session != null) {
-			if(session.getAttribute("MEMBER") != null) {
+			if(session.getAttribute("authUser") != null) {
 				login = true;
 			}//if
 		}//if

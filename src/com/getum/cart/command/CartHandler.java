@@ -47,12 +47,15 @@ public class CartHandler implements CommandHandler{
 				
 				String flag = req.getParameter("flag");
 				
-				if(flag.equals("modify")) {
-					cartService.modifyCart(req);
-				} else if(flag.equals("delete")) {
-					cartService.deleteCart(req);
+				if(flag!=null) {
+					if(flag.equals("modify")) {
+						cartService.modifyCart(req);
+					} else if(flag.equals("delete")) {
+						cartService.deleteCart(req);
+					}
 				}
-			return form_view;
+				
+				return form_view;
 		}
 	    //==================================================================================================
 		

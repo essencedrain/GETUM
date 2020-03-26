@@ -169,7 +169,7 @@ $(function(){
 var today = new Date();
 var today_year= today.getFullYear();
 var start_year= today_year-120;// 시작할 년도
-var target_year = today_year-30;
+var target_year = today_year-30; //처음에 표시할 연도
 var index=0;
 for(var y=start_year; y<=today_year; y++){ //start_year ~ 현재 년도
 	

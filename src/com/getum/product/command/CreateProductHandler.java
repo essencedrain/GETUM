@@ -162,14 +162,29 @@ public class CreateProductHandler implements CommandHandler{
 			proReq.setP_code(multi.getParameter("p_code"));
 			proReq.setP_price(Long.parseLong(multi.getParameter("p_price")));
 			
-			String date = multi.getParameter("p_release_date");
+			String date = multi.getParameter("year") + "-" + multi.getParameter("month") + "-" + multi.getParameter("day");
 			java.sql.Date d = java.sql.Date.valueOf(date);
 			proReq.setP_release_date(d);
 			
 			proReq.setP_manufacture(multi.getParameter("p_manufacture"));
 			proReq.setP_detail(multi.getParameter("p_detail"));
 			proReq.setP_stock(Long.parseLong(multi.getParameter("p_stock")));
-			proReq.setP_category(multi.getParameter("p_category"));
+			
+			String cateResult ="";
+			String tempChk[] = multi.getParameterValues("cateChk");
+			if(tempChk!=null) {
+				cateResult = multi.getParameter("cateRadio") + ",";
+				for(int i=0; i<tempChk.length; i++) {
+					if( (i+1) == tempChk.length) {
+						cateResult += tempChk[i];
+					}else {
+						cateResult += tempChk[i] + ",";
+					}//if
+				}//for
+			}else {
+				cateResult = multi.getParameter("cateRadio");
+			}
+			proReq.setP_category(cateResult);
 		
 			
 		//DB 삽입 후 리턴

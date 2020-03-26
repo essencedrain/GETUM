@@ -125,7 +125,7 @@ public class MemberDAO {
 	            }
 	    		
 			} catch (Exception e) {
-				System.out.println("confirmId() 예외 :"+e);
+				System.out.println("MemberDAO.confirmId() 예외 :"+e);
 			}finally {
 				try{
 					if(pstmt!=null){pstmt.close();}
@@ -139,8 +139,27 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // 
+	    // addPoint(Connection, String, int)
 	    //==================================================================================================
+	    public void addPoint(Connection conn, String id, long point)  throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+    		try {
+	    		
+    			pstmt = conn.prepareStatement("update member set m_point=m_point+? where m_id=?");
+	    		pstmt.setLong(1, point);
+	    		pstmt.setString(2, id);
+	            
+	    		pstmt.executeUpdate();
+	    		
+			} catch (Exception e) {
+				System.out.println("MemberDAO.addPoint() 예외 :"+e);
+			}finally {
+				try{
+					if(pstmt!=null){pstmt.close();}
+				}catch(Exception ex2){}
+			}//try
+	    }
 	    //==================================================================================================
 	    
 	    

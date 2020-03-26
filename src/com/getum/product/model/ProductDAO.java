@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.getum.order.model.OrderDetailDTO;
 import com.getum.product.service.CreateProductRequest;
 import com.getum.product.service.ReadProductDetailRequest;
 import com.getum.product.service.ReadProductList;
@@ -166,6 +167,32 @@ public class ProductDAO {
 					if(pstmt!=null){pstmt.close();}
 				}catch(Exception ex2){}
 			}//try
+	    }
+	    //==================================================================================================
+	    
+	    
+	    
+	    //==================================================================================================
+	    // stockProcess(Connection, OrderDetailDTO) : 주문수량만큼 재고 깎는 메서드
+	    //==================================================================================================
+	    public void stockProcess(Connection conn, OrderDetailDTO dto) throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("update product set p_stock=p_stock-? where p_uuid=?");
+	    		
+	    		pstmt.setInt(1, dto.getOd_quantity());
+	    		pstmt.setString(2, dto.getP_uuid());
+	    		
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("ProductDAO.stockProcess() 예외 :"+e);
+	    	} finally {
+	    		try{
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
 	    }
 	    //==================================================================================================
 	    

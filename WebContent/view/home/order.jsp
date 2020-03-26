@@ -193,7 +193,7 @@ hcartSize = hcart.size();
                             <td style="width: 90%">
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="optradio" value="1">계좌이체
+                                      <input type="radio" class="form-check-input" name="optradio" value="1" checked="checked">계좌이체
                                     </label>
                                   </div>
                                   <div class="form-check-inline">
@@ -216,8 +216,8 @@ hcartSize = hcart.size();
         <div class="row my-2">
             <div class="col-xl-6 offset-xl-3 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-5 m-2" onclick="javascript:window.history.back();">이전으로</button>
-                <form name="payment" method="post" action="payment.jsp" class="d-inline">
-                	<input type="hidden" name="o_totalprice" id="o_totalprice" value="">
+                <form name="payment" method="post" action="pay.get" class="d-inline">
+                	<input type="hidden" name="o_total_price" id="o_total_price" value="">
                 	<input type="hidden" name="o_use_point" id="o_use_point" value="">
                 	<input type="hidden" name="o_delivery_flag" id="o_delivery_flag" value="">
                 	<input type="hidden" name="o_payment" id="o_payment" value="">
@@ -501,91 +501,16 @@ hcartSize = hcart.size();
 <!-- 다음 주소 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!-- order.js  -->
+<script src="../js/order.js"></script>
 
-
+<!-- 스크립트릿 때문에 js에 못담은 function -->
 <script>
 //==============================================================================================================
-// jsp+온로드 이벤트
-//==============================================================================================================
-window.onload = function () {
-
-//가격표시
-	$("#priceSum").text( numberFormat($("#priceSum").text()) );
-	$("#priceSum2").text( numberFormat($("#priceSum2").text()) );
-
-
-//배송지 목록에서 선택시, 주문/결제창에 반영
-$('.selectAddr').click(function(){
-	$("#receiverName").text( $(this).find("input").eq(0).val() );
-	$("#receiverAddr").text( $(this).find("input").eq(1).val() + ", " + $(this).find("input").eq(2).val() + " (" + $(this).find("input").eq(5).val() + ")");
-	$("#getA_addr1").val( $(this).find("input").eq(1).val() );
-	$("#getA_addr2").val( $(this).find("input").eq(2).val() );
-	$("#getA_post").val( $(this).find("input").eq(5).val() );
-	$("#receiverHp").text( $(this).find("input").eq(3).val() );
-	$("#receiverReq").text( $(this).find("input").eq(4).val() );
-});
-
-// 배송지 수정 버튼 클릭시 수정창에 선택내용 적용
-$('.selectModiAddr').on('click',function() {
-	$("#a2_name").val( $(this).find("input").eq(0).val() );
-	$("#a2_addr1").val( $(this).find("input").eq(1).val() );
-	$("#a2_addr2").val( $(this).find("input").eq(2).val() );
-	$("#a2_post").val( $(this).find("input").eq(5).val() );
-	$("#a2_hp").val( $(this).find("input").eq(3).val() );
-	$("#a2_request").val( $(this).find("input").eq(4).val() );
-	$("#a2_no").val( $(this).find("input").eq(6).val() );
-});
-}//window_onload)
-
-
-
-
-//==============================================================================================================
-//가격 변환
-//==============================================================================================================
-function numberFormat(inputNumber) {
-  return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
-}
-//==============================================================================================================
-	
-	
-	
-//==============================================================================================================
-// 다음 주소
-//==============================================================================================================
-function openDaumPostcode(){
-
-    new daum.Postcode({
-           oncomplete:function(data){
-                  document.getElementById('a_post').value=data.zonecode;
-                  document.getElementById('a_addr1').value=data.roadAddress;
-                  $("#addr2").removeClass("d-none");
-           }
-    }).open();
-
-}//openDaumPostcode()---
-
-//배송지 수정창 전용
-function openDaumPostcode2(){
-
-    new daum.Postcode({
-           oncomplete:function(data){
-                  document.getElementById('a2_post').value=data.zonecode;
-                  document.getElementById('a2_addr1').value=data.roadAddress;
-                  document.getElementById('a2_addr2').value="";
-           }
-    }).open();
-
-}//openDaumPostcode()---
-//==============================================================================================================
-	
-	
-	
-//==============================================================================================================
-// 결제하기 버튼
+//결제하기 버튼
 //==============================================================================================================
 function payment1() {
-	 $("#o_totalprice").val( "<%= priceSum%>" );
+	 $("#o_total_price").val( "<%= priceSum%>" );
 	 $("#o_use_point").val( "0" );
 	 $("#o_delivery_flag").val( "true" );
 	 $("#o_payment").val( "<%= priceSum+3000 %>" );
@@ -600,51 +525,6 @@ function payment1() {
 	 document.payment.submit();
 }
 //==============================================================================================================
-	
-	
-	
-//==============================================================================================================
-// 배송지 삭제버튼
-//==============================================================================================================
-function addrDelete() {
-	location.href = "order.get?flag=delete&a_no=" + $("#a2_no").val() + "&m_id=" + $("#a2_id").val();
-}
-//==============================================================================================================
-	
-	
-//==============================================================================================================
-// 휴대폰 번호 (-) 삽입
-//==============================================================================================================
-function inputPhoneNumber(obj) {
-
-    var number = obj.value.replace(/[^0-9]/g, "");
-    var phone = "";
-
-    if(number.length < 4) {
-        return number;
-    } else if(number.length < 7) {
-        phone += number.substr(0, 3);
-        phone += "-";
-        phone += number.substr(3);
-    } else if(number.length < 11) {
-        phone += number.substr(0, 3);
-        phone += "-";
-        phone += number.substr(3, 3);
-        phone += "-";
-        phone += number.substr(6);
-    } else {
-        phone += number.substr(0, 3);
-        phone += "-";
-        phone += number.substr(3, 4);
-        phone += "-";
-        phone += number.substr(7);
-    }
-    obj.value = phone;
-}
-//==============================================================================================================
 </script>
-
-
-
 </body>
 </html>
