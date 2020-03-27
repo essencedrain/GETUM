@@ -102,6 +102,7 @@ public class OrderHandler implements CommandHandler{
 		try {
 			OrderSuccessRequest osr = os.insert(dto, hcart);
 			req.setAttribute("orderResult", osr);
+			req.getSession().setAttribute("cartMap", null);
 			return "/view/home/orderSuccess.jsp";			
 		} catch (Exception e) {
 			System.out.println("OrderHandler.processPost() 에러 : " + e);

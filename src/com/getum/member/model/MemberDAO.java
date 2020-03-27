@@ -82,7 +82,7 @@ public class MemberDAO {
 	    public void insert(Connection conn, JoinMemberRequest mem) throws SQLException{
 	    	PreparedStatement pstmt = null;
 	    	try {
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,0,NOW(),?,0,0)");
+				pstmt = conn.prepareStatement("insert into member values(?,sha2(concat('ypl',?),256),?,?,?,0,NOW(),?,0,0)");
 				
 				pstmt.setString(1, mem.getM_id());
 				pstmt.setString(2, mem.getM_pwd());

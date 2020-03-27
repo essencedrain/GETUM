@@ -172,15 +172,15 @@ hcartSize = hcart.size();
                         <tr>
                             <td class="table-secondary text-right" style="width: 10%">포인트</td>
                             <td style="width: 90%">
-                                <span class="mr-5">0원</span>
-                                <span class="mr-2">보유 : ${authUser.m_point}원</span>
-                                <button class="btn btn-sm btn-outline-secondary mx-1">포인트사용</button>
+                                <span class="mr-5">0P</span>
+                                <span class="mr-2">보유 : </span><span id="pointBalance">${authUser.m_point}</span>
+                                <button class="btn btn-sm btn-outline-secondary mx-1">포인트사용(구현중)</button>
                             </td>
                         </tr>
                         <tr class="d-none">
                             <td class="table-secondary text-right" style="width: 10%"></td>
                             <td style="width: 90%">
-                                <input class="ml-2 mr-1" type="text" placeholder="0" name="pointInput" size="3">원
+                                <input class="ml-2 mr-1" type="text" placeholder="0" name="pointInput" size="3">P
                                 <button class="btn btn-sm btn-primary mx-1">포인트적용</button>
                             </td>
                         </tr>

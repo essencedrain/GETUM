@@ -68,7 +68,6 @@ public class CartHandler implements CommandHandler{
 			
 				
 				cartService.insertCart(req);
-				
 				return form_view;
 			
 		}

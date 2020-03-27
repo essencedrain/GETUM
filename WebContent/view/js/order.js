@@ -6,6 +6,7 @@ window.onload = function () {
 //가격표시
 	$("#priceSum").text( numberFormat($("#priceSum").text()) );
 	$("#priceSum2").text( numberFormat($("#priceSum2").text()) );
+	$("#pointBalance").text( numberFormat2($("#pointBalance").text()) );
 
 
 //배송지 목록에서 선택시, 주문/결제창에 반영
@@ -30,15 +31,18 @@ $('.selectModiAddr').on('click',function() {
 	$("#a2_no").val( $(this).find("input").eq(6).val() );
 });
 }//window_onload)
-
+//==============================================================================================================
 
 
 
 //==============================================================================================================
-//가격 변환
+// 통화&포인트 표시
 //==============================================================================================================
 function numberFormat(inputNumber) {
   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+}
+function numberFormat2(inputNumber) {
+	return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"P";
 }
 //==============================================================================================================
 	

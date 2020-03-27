@@ -21,7 +21,7 @@
 <!--  ======================= Start signupSuccess Area =======================  -->
 
 <section class="signupSuccess-area">
-<div class="container">
+<div class="container pt-5">
 	<div class="pb-5">
             <h1>회원가입 축하 페이지가 될 것</h1>
         </div>

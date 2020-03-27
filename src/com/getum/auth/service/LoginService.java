@@ -1,5 +1,6 @@
 package com.getum.auth.service;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 
 import com.getum.member.model.MemberDAO;
@@ -13,13 +14,15 @@ public class LoginService {
 	
 	
 	//==================================================================================================
-    // login() : 로그인 method
+    // login() : 로그인 method  SHA256, slated
     //==================================================================================================
 	public User login(String id, String password) {
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		User user = null;
 		Connection conn = null;
+		String saltedPass = "ypl"+password;
+		String resultPass = null;
 		
 		try {
 			conn = DBConnection.getCon();
@@ -30,7 +33,25 @@ public class LoginService {
 				return null;
 			}//if
 			
-			if(!dto.getM_pwd().equals(password)) {
+			try {
+	            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	            byte[] hash = digest.digest(saltedPass.getBytes("UTF-8"));
+
+	            StringBuilder hexString = new StringBuilder();
+	            for (int i: hash) {
+	            	if(Integer.toHexString(0xFF & i).length() == 2) {
+	                    hexString.append(Integer.toHexString(0xFF & i));
+	            	}else {
+	                    hexString.append ( 0x00 + Integer.toHexString(0xFF & i));
+	            	}
+	            }
+	            resultPass = hexString+"";
+	        } catch (Exception e) {
+	            System.out.println("비밀번호 해시처리 에러: "+e);
+	        }
+			
+			
+			if(!dto.getM_pwd().equals(resultPass)) {
 				//비번 틀림
 				return null;
 			}//if

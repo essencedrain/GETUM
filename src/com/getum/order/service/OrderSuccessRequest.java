@@ -22,15 +22,24 @@ public class OrderSuccessRequest {
 	private long r_use_point;
 	private byte r_delivery_flag;
 	private long r_payment;
-	private short r_payment_method;
+	private String r_payment_method;
 	private long r_add_point;
 	
 	//constructor
 	public OrderSuccessRequest(){}
 	
 	//G&S
+	
 	public long getR_no() {
 		return r_no;
+	}
+
+	public String getR_payment_method() {
+		return r_payment_method;
+	}
+
+	public void setR_payment_method(String r_payment_method) {
+		this.r_payment_method = r_payment_method;
 	}
 
 	public void setR_no(long r_no) {
@@ -125,13 +134,6 @@ public class OrderSuccessRequest {
 		this.r_payment = r_payment;
 	}
 
-	public short getR_payment_method() {
-		return r_payment_method;
-	}
-
-	public void setR_payment_method(short r_payment_method) {
-		this.r_payment_method = r_payment_method;
-	}
 
 	public long getR_add_point() {
 		return r_add_point;

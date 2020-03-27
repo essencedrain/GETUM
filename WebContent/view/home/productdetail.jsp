@@ -8,6 +8,9 @@
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
     
+    <!-- animate css -->
+    <link rel="stylesheet" href="../css/animate.css">
+    
     <style>
      	.site-main a:link {text-decoration:none; color:#001627;}
 		.site-main a:visited {text-decoration:none; color:#001627;}
@@ -33,11 +36,11 @@
         </div>
 		<form method="post" action="cart.get">
         <div class="row mt-5">
-            <div class="img col-lg-6 mb-5">
+            <div class="img col-lg-6 mb-5 animated bounceInLeft">
                 <img class="img-fluid" src="../img/product/${productDetail.imgName}" alt="${productDetail.imgName}">
             </div>
 
-            <div class="content col-lg-6 my-auto">
+            <div class="content col-lg-6 my-auto animated bounceInRight">
 	                <h1>${productDetail.p_name}</h1>
 	                <hr>
 	                <h3 id="showPrice"></h3>
@@ -89,27 +92,10 @@
 <!--  Bootstrap input js file  -->
 <script src="../js/bootstrap-input-spinner.js"></script>
 
-<!--  ======================= 제품 가격 js ================================ -->
-<script>
-var $changedInput = $("#input");
-var $valueOnChange = $("#output");
+<!--  wow js file  -->
+<script src="../js/wow.js"></script>
 
-window.onload = function () {
-	$("#showPrice").text(numberFormat($("#rawPrice").val()));
-	$valueOnChange.html( numberFormat( $("#rawPrice").val()*$changedInput.val() ) );
-}
-
-$("input[type='number']").inputSpinner();
-
-$changedInput.on("change", function (event) {
-    $valueOnChange.html( numberFormat( $("#rawPrice").val()*$changedInput.val() ) );
-});
-
-//가격표시
-function numberFormat(inputNumber) {
-    return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
- }
-</script>
-<!--  ======================= 제품 가격 js ================================ -->
+<!-- productdetail.js -->
+<script src="../js/productdetail.js"></script>
 </body>
 </html>

@@ -20,7 +20,6 @@ public class CartService {
 		String uuid = req.getParameter("imgName").substring(0,33);
 		
 		CartRequest cartRequest = new CartRequest();
-		
 		cartRequest.setImgName(req.getParameter("imgName"));
 		cartRequest.setName(req.getParameter("name"));
 		cartRequest.setManufacture(req.getParameter("manufacture"));
@@ -28,9 +27,7 @@ public class CartService {
 		cartRequest.setQuantity(Integer.parseInt(req.getParameter("quantity")));
 		
 		if(req.getSession().getAttribute("cartMap")!=null) {
-						
 			hcart = (Hashtable) req.getSession().getAttribute("cartMap");
-			
 			if(hcart.containsKey(uuid)) {
 				int tempQuantity = hcart.get(uuid).getQuantity() + cartRequest.getQuantity();
 				cartRequest.setQuantity(tempQuantity);
@@ -40,7 +37,7 @@ public class CartService {
 			}//if
 			req.getSession().setAttribute("cartMap", hcart);
 		} else {
-			
+			hcart.clear();
 			hcart.put(uuid, cartRequest);
 			req.getSession().setAttribute("cartMap", hcart);
 		}

@@ -8,8 +8,9 @@
 <%
 Hashtable hcart = null;
 CartRequest cReq = null;
-int priceClass = 0; // int값을 ###,### 원으로 바꾸기 위한 태깅
 int hcartSize = 0;
+
+int priceClass = 0; // int값을 ###,### 원으로 바꾸기 위한 태깅
 int priceSum = 0; //상품가격 합계
 String uuid=""; //삭제시 보낼 것
 %>
@@ -139,8 +140,19 @@ String uuid=""; //삭제시 보낼 것
         <div class="row my-4">
             <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-4 m-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
-                <% if(session.getAttribute("cartMap")!=null){ %>
-                	<button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?flag=default&m_id=${authUser.m_id}'">구매하기</button>
+                <%
+                	if(session.getAttribute("cartMap")!=null){
+                		hcart = (Hashtable)session.getAttribute("cartMap");
+                		if(hcart.size()>0){
+                %>
+                			<button class="btn btn-lg btn-primary px-5 m-2" onclick="location.href='order.get?flag=default&m_id=${authUser.m_id}'">구매하기</button>
+				<%
+						}else{
+				%>
+							<button class="btn btn-lg btn-primary px-5 m-2" id="nullCartButton">구매하기</button>
+				<%
+						}
+				%>                			
                 <% }else{ %>
                 	<button class="btn btn-lg btn-primary px-5 m-2" id="nullCartButton">구매하기</button>
                 <% }//if  %>

@@ -86,8 +86,20 @@ public class OrderService {
 		result.setR_use_point(dto.getO_use_point());
 		result.setR_delivery_flag(dto.getO_delivery_flag());
 		result.setR_payment(dto.getO_payment());
-		result.setR_payment_method(dto.getO_payment_method());
 		result.setR_add_point(dto.getO_add_point());
+		
+		//결제수단처리
+		switch (dto.getO_payment_method()) {
+			
+			case 1:	result.setR_payment_method("계좌이체");
+					break;
+			case 2:	result.setR_payment_method("신용카드");
+					break;
+			case 3:	result.setR_payment_method("무통장입금");
+					break;
+
+		}//switch
+		
 		
 		return result;
 	}
