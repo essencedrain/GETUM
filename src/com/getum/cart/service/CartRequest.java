@@ -10,6 +10,7 @@ public class CartRequest {
 	private String imgName;
 	private int price;
 	private int quantity;
+	private int stock;
 	
 	
 	//G&S
@@ -43,6 +44,13 @@ public class CartRequest {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
 	
 	
 }

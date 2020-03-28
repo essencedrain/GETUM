@@ -5,7 +5,9 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<%
+int count=0;
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -52,6 +54,7 @@
 	        		        Hashtable<String, CartRequest> hcart = temp.getHcart();
 	        		        Enumeration hcartKey = hcart.keys();
 	        		        CartRequest cReq = null;
+	        		        count = 0;
 	        		        	while(hcartKey.hasMoreElements()){
 	        		        		cReq = (CartRequest) hcart.get(hcartKey.nextElement());
                        	%>
@@ -59,10 +62,11 @@
 		                                <td class="align-middle" style="width: 5%"><img src="../img/thumb/<%= cReq.getImgName() %>" alt="<%= cReq.getImgName() %>" width="80"></td>
 		                                <td class="align-middle" style="width: 70%">[<%= cReq.getManufacture() %>] <%= cReq.getName() %></td>
 		                                <td class="align-middle" style="width: 10%"><%= cReq.getQuantity() %></td>
-		                                <td class="align-middle" style="width: 15%" id="productPrice"><%= cReq.getPrice() * cReq.getQuantity() %></td>
+		                                <td class="align-middle" style="width: 15%" id="productPrice<%=count%>"><%= cReq.getPrice() * cReq.getQuantity() %></td>
 		                            </tr>
 						<%
-		        				}//while
+		        				count += 1;
+	        		        	}//while
 		        		%>
                         </tbody>
                     </table>
@@ -74,24 +78,24 @@
                         <table class="table table-borderless table-sm small">
                             <tbody>
                                 <tr>
-                                    <td style="width: 23%">이름</td>
+                                    <td style="width: 20%">이름</td>
                                     <td style="width: 75%">${orderResult.r_name}</td>
-                                    <td style="width: 2%"></td>
+                                    <td style="width: 5%"></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 23%">주소</td>
+                                    <td style="width: 20%">주소</td>
                                     <td style="width: 75%">(${orderResult.r_post}) ${orderResult.r_addr1}, ${orderResult.r_addr2}</td>
-                                    <td style="width: 2%"></td>
+                                    <td style="width: 5%"></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 23%">연락처</td>
+                                    <td style="width: 20%">연락처</td>
                                     <td style="width: 75%">${orderResult.r_hp}</td>
-                                    <td style="width: 2%"></td>
+                                    <td style="width: 5%"></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 23%">요구사항</td>
+                                    <td style="width: 20%">요구사항</td>
                                     <td style="width: 75%">${orderResult.r_request}</td>
-                                    <td style="width: 2%"></td>
+                                    <td style="width: 5%"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -108,7 +112,14 @@
                                     </tr>
                                     <tr>
                                         <td style="width: 70%">배송비</td>
-                                        <td style="width: 30%">3,000원</td>
+                                        <c:choose>
+                                        	<c:when test="${orderResult.r_delivery_flag == 1}">
+                                        		<td style="width: 30%">3,000원</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<td style="width: 30%">무료배송</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
                                     <tr>
                                         <td style="width: 70%">포인트사용</td>
@@ -150,8 +161,44 @@
 <!--  wow js file  -->
 <script src="../js/wow.js"></script>
 
-<!--  oderSuccess.js -->
-<script src="../js/orderSuccess.js"></script>
+<script>
+new WOW().init();
+
+//==============================================================================================================
+//jsp+온로드 이벤트
+//==============================================================================================================
+window.onload = function () {
+
+//가격표시
+<%
+	for(int i = 0; i <= count; i++){
+%>
+	$("#productPrice<%=i%>").text( numberFormat($("#productPrice<%=i%>").text()) );
+<%
+	}//for
+%>
+	$("#totalPrice").text( numberFormat($("#totalPrice").text()) );
+	$("#paymentPrice").text( numberFormat($("#paymentPrice").text()) );
+	$("#usePoint").text( numberFormat2($("#usePoint").text()) );
+	$("#addPoint").text( numberFormat2($("#addPoint").text()) );
+
+
+}//window_onload)
+//==============================================================================================================
+
+
+//==============================================================================================================
+//통화표시 & 포인트표시
+//==============================================================================================================
+function numberFormat(inputNumber) {
+return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+}
+
+function numberFormat2(inputNumber) {
+return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"P";
+}
+//==============================================================================================================
+</script>
 
 </body>
 </html>

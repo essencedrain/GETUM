@@ -233,8 +233,6 @@ public class CreateProductHandler implements CommandHandler{
 		
 		int param_w = (int)temp2;
 
-		byte[] buffer = null;
-
 		BufferedImage img = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_ARGB);
 
 		Image scaledImage = sourceImage.getScaledInstance(param_w,param_h, Image.SCALE_SMOOTH);

@@ -48,7 +48,7 @@
                     <h1 class="wow animated fadeInLeft delay-1s pb-1">신상품 출시</h1>
                     <h1 class="wow animated fadeInLeft delay-1s pb-3">502 <span>스댕</span> 텀블러</h1>
                     <p class="wow animated fadeInLeft delay-1s pb-3">GETUM에서 새롭게 선보이는 502 스댕 텀블러는 GETUM사의 최신 기술을 대거 적용한 텀블러로써 제품에 녹이 슬지 않고 강력한 보온 보냉 성능을 보장합니다. 지금 바로 구매하세요!</p>
-                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary">구매하기</button>
+                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary" onclick="location.href='productDetail.get?p_uuid=p0754d61847e748d7bb62f1264a9af2f8'">구매하기</button>
                     <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.get'">상품목록</button>
                 </div>
             </div>
@@ -72,11 +72,11 @@
             </div>
             <div class="wow animated bounceInDown col-md-4 text-center py-2">
                 <i class="fas fa-birthday-cake mt-5"></i>
-                <h4 class="py-3">생일축하쿠폰 지급</h4>
+                <h4 class="py-3">생일축하 적립금 지급</h4>
             </div>
             <div class="wow animated bounceInDown col-md-4 text-center py-2">
                 <i class="fas fa-coins mt-5"></i>
-                <h4 class="py-3">구매 시 5% 포인트 적립</h4>
+                <h4 class="py-3">구매 시 1% 포인트 적립</h4>
             </div>
             <div class="wow animated bounceInDown slow col-md-4 text-center py-2">
                 <i class="fas fa-medal mt-5"></i>
@@ -107,8 +107,8 @@
                 <div class="home-content ml-n2">
                     <h1 class="wow animated fadeInLeft delay-1s pb-1">베스트셀러</h1>
                     <h1 class="wow animated fadeInLeft delay-1s pb-3">502 <span>RED</span> 텀블러</h1>
-                    <p class="wow animated fadeInLeft delay-1s pb-3">GETUM에서 새롭게 선보이는 502 스댕 텀블러는 GETUM사의 최신 기술을 대거 적용한 텀블러로써 제품에 녹이 슬지 않고 강력한 보온 보냉 성능을 보장합니다. 지금 바로 구매하세요!</p>
-                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary">구매하기</button>
+                    <p class="wow animated fadeInLeft delay-1s pb-3">GETUM의 베스트셀러 502 RED 텀블러는 GETUM사를 대표하는 텀블러로써 깔끔한 마감과 높은 상품성을 자랑합니다. 지금 바로 구매하세요!</p>
+                    <button class="wow animated fadeIn delay-1s btn btn-lg btn-outline-secondary" onclick="location.href='productDetail.get?p_uuid=pf30eb9c4ce1e4ac59501ef3811048131'">구매하기</button>
                     <button class="wow animated fadeIn delay-1s btn btn-lg btn-secondary" onclick="location.href='product.get'">상품목록</button>
                 </div>
             </div>

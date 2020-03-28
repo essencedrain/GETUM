@@ -21,6 +21,7 @@ String uuid=""; //삭제시 보낼 것
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
+    
     <!--  sweetalert2  -->
     <link rel="stylesheet" href="../css/sweetalert2.min.css">
 </head>
@@ -35,13 +36,13 @@ String uuid=""; //삭제시 보낼 것
 <!--  ======================= Start cart Area =======================  -->
 
 <section class="cart-area pt-5">
-    <div class="container-fluid">
-        <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+    <div class="container-fluid p-0">
+        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
             <h1>장바구니 <i class="fas fa-shopping-cart fa-sm"></i></h1>
         </div>
 
         <div class="row mt-5">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
                         <thead>
@@ -107,7 +108,7 @@ String uuid=""; //삭제시 보낼 것
         </div><!--<div class="row mt-5">-->
 
         <div class="row">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1 align-middle">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12 align-middle">
                 <input type="checkbox" id="selectAll2" class="selectAll ml-2" name="selectAll">&nbsp;&nbsp;
                 <label for="selectAll2" class="mr-2">전체선택 (<span id="selectedNum">0</span> / <%= hcartSize %>)</label>
                 <button class="btn btn-sm btn-outline-secondary" onclick="deleteAction()">선택삭제</button>
@@ -115,15 +116,22 @@ String uuid=""; //삭제시 보낼 것
         </div>
 
         <div class="row mt-4">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
             <span class="d-block border border-dark pt-3 pb-2 text-center align-middle">
             	<%
             		if(session.getAttribute("cartMap")!=null){
             			hcart = (Hashtable) session.getAttribute("cartMap");
             			if(hcart.size()>0){
+            				if(priceSum < 20000){
             	%>
                 			<h5>상품가격 <span id="priceSum"><%= priceSum%></span> + 배송비 3,000원 = 주문금액 <span id="priceSum2"><%= priceSum+3000%></span></h5>
+                			<small>(2만원 이상 구매 시 무료배송)</small>
                 <%
+            				}else{
+				%>
+							<h5>상품가격 <span id="priceSum"><%= priceSum%></span> + 무료배송 = 주문금액 <span id="priceSum2"><%= priceSum%></span></h5>
+				<%            					
+            				}//if
             			}else{
             	%>
             				<h5>-</h5>
@@ -138,7 +146,7 @@ String uuid=""; //삭제시 보낼 것
         </div>
 
         <div class="row my-4">
-            <div class="col-xl-8 offset-xl-2 col-10 offset-1 text-center">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-4 m-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
                 <%
                 	if(session.getAttribute("cartMap")!=null){
@@ -186,7 +194,8 @@ String uuid=""; //삭제시 보낼 것
 //==============================================================================================================
 window.onload = function () {
 
-//가격변환	
+
+//통화표시	
 <%
 	for(int i = 0; i <= priceClass; i++){
 %>
@@ -234,6 +243,17 @@ window.onload = function () {
 }
 //==============================================================================================================
 </script>
+
+<c:if test="${!empty param.flag}">
+<script>
+Swal.fire({
+	  position: 'center',
+	  icon: 'error',
+	  title: "먼저 들어온 주문으로 인해 재고가 변경되었습니다. 처음부터 다시 주문해주세요",
+	  showConfirmButton: true
+	});
+</script>
+</c:if>
 
 </body>
 </html>

@@ -1,9 +1,13 @@
 package com.getum.cart.service;
 
 
+import java.sql.Connection;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.getum.product.model.ProductDAO;
+import com.getum.util.DBConnection;
 
 //==================================================================================================
 //CartService : 장바구니 삽입/수정/삭제 처리
@@ -25,6 +29,7 @@ public class CartService {
 		cartRequest.setManufacture(req.getParameter("manufacture"));
 		cartRequest.setPrice(Integer.parseInt(req.getParameter("rawPrice")));
 		cartRequest.setQuantity(Integer.parseInt(req.getParameter("quantity")));
+		cartRequest.setStock(Integer.parseInt(req.getParameter("stock")));
 		
 		if(req.getSession().getAttribute("cartMap")!=null) {
 			hcart = (Hashtable) req.getSession().getAttribute("cartMap");
@@ -87,4 +92,6 @@ public class CartService {
 		req.getSession().setAttribute("cartMap", hcart);
 	}
 	//==================================================================================================
+	
+	
 }//class

@@ -2,7 +2,10 @@
 // jsp+온로드 이벤트
 //==============================================================================================================
 window.onload = function () {
-
+//버튼에 자동으로 포커스 잡히는걸 막음
+$('button').focus(function() {
+    this.blur();
+});
 //가격표시
 	$("#priceSum").text( numberFormat($("#priceSum").text()) );
 	$("#priceSum2").text( numberFormat($("#priceSum2").text()) );
@@ -30,6 +33,14 @@ $('.selectModiAddr').on('click',function() {
 	$("#a2_request").val( $(this).find("input").eq(4).val() );
 	$("#a2_no").val( $(this).find("input").eq(6).val() );
 });
+
+// 포인트사용 버튼
+$('#pointButton').on('click',function() {
+	$("#pointUseBox").toggleClass("d-none");
+	$("#pointInput").focus();
+});
+
+
 }//window_onload)
 //==============================================================================================================
 
@@ -43,6 +54,9 @@ function numberFormat(inputNumber) {
 }
 function numberFormat2(inputNumber) {
 	return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"P";
+}
+function numberFormat3(inputNumber) {
+	return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 //==============================================================================================================
 	

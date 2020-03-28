@@ -30,16 +30,17 @@ public class PointDAO {
 			
 			
 			//==================================================================================================
-		    // insertFromOrder(Connection, OrderDTO) : 주문에서 포인트적립
+		    // insertFromOrder(Connection, OrderDTO, String) : 주문에서 포인트적립
 		    //==================================================================================================
-		    public void insertFromOrder(Connection conn, OrderDTO dto) throws SQLException{
+		    public void insertFromOrder(Connection conn, OrderDTO dto, String msg, int useOrSave, long point) throws SQLException{
 		    	PreparedStatement pstmt = null;
 		    	try {
-					pstmt = conn.prepareStatement("insert into point values(null,1,?,?,now(),?)");
+					pstmt = conn.prepareStatement("insert into point values(null,?,?,?,now(),?)");
 					
-					pstmt.setLong(1, dto.getO_add_point());
-					pstmt.setString(2, "구매 적립");
-					pstmt.setString(3, dto.getM_id());
+					pstmt.setInt(1, useOrSave);
+					pstmt.setLong(2, point);
+					pstmt.setString(3, msg);
+					pstmt.setString(4, dto.getM_id());
 					
 					pstmt.executeUpdate();
 					

@@ -28,9 +28,15 @@ int hcartSize2 = 0;
                 	}else{
                 		hcart2 = (Hashtable) session.getAttribute("cartMap");
 						hcartSize2 = hcart2.size();
+						if(hcartSize2>0){
                 %>
                 		<a class="nav-link" href="cart.get">장바구니 <span class="badge badge-danger"><%= hcartSize2 %></span></a>
                 <%
+						}else{
+				%>
+						<a class="nav-link" href="cart.get">장바구니</a>
+				<%							
+						}//if
                 	}//if
                 %>
                 </li>

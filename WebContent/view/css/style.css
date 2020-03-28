@@ -342,3 +342,8 @@ Navbar
         font-size: .9rem;
     }
 }
+@media only screen and (max-width: 476px){
+    .home-content h1 {
+        font-size:2.5rem;
+    }
+}

@@ -52,6 +52,9 @@ public class CartHandler implements CommandHandler{
 						cartService.modifyCart(req);
 					} else if(flag.equals("delete")) {
 						cartService.deleteCart(req);
+					} else if(flag.equals("error")) {
+						req.getSession().setAttribute("cartMap", null); //세션 장바구니 null
+						return "/view/home/cart.jsp?flag=error";
 					}
 				}
 				

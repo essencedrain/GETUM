@@ -13,6 +13,7 @@ public class ReadProductDetailRequest {
 		private String p_release_date;
 		private String p_manufacture;
 		private String p_detail;
+		private long p_stock;
 		
 		//g&s
 		public String getImgName() {
@@ -56,6 +57,12 @@ public class ReadProductDetailRequest {
 		}
 		public void setP_detail(String p_detail) {
 			this.p_detail = p_detail;
+		}
+		public long getP_stock() {
+			return p_stock;
+		}
+		public void setP_stock(long p_stock) {
+			this.p_stock = p_stock;
 		}
 		
 		

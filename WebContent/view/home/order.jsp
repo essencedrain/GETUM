@@ -25,6 +25,9 @@ hcartSize = hcart.size();
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
+    
+    <!--  sweetalert2  -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -37,14 +40,14 @@ hcartSize = hcart.size();
 <!--  ======================= Start order Area =======================  -->
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <section class="order-area pt-5">
-    <div class="container-fluid">
-        <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+    <div class="container-fluid p-0">
+        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
             <h1 class="d-inline">주문 / 결제</h1>
             <hr>
         </div>
 
         <div class="row mt-4">
-            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
                 <h5>구매자정보</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
@@ -64,7 +67,7 @@ hcartSize = hcart.size();
 	<c:choose>
 		<c:when test="${empty userAddr}">
 			<div class="row mt-3">
-	            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+	            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
 	                <div class="mb-2">
 	                    <h5 class="d-inline">받는사람정보</h5>
 	                    <button type="button" class="btn btn-sm btn-outline-secondary mx-1" data-toggle="modal" data-target="#addrModal">배송지추가</button>
@@ -89,6 +92,7 @@ hcartSize = hcart.size();
 	                        </tr>
 	                    </table>
 	                </div>
+	                <input type="hidden" name="addrFlag" id="addrFlag" value="0">
 	            </div>
 	        </div>
 		</c:when>
@@ -98,13 +102,13 @@ hcartSize = hcart.size();
 				dto = (AddrDTO)session.getAttribute("userAddr");
 			%>
 			<div class="row mt-3">
-	            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+	            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
 	                <div class="mb-2">
 	                    <h5 class="d-inline">받는사람정보</h5>
 	                    <button type="button" class="btn btn-sm btn-outline-secondary mx-1" data-toggle="modal" data-target="#addrModal">배송지변경</button>
 	                </div>
 	                <div class="table-responsive">
-	                    <table class="table table-bordered text-nowrap">
+	                    <table class="table table-bordered  text-nowrap">
 	                        <tr>
 	                            <td class="table-secondary text-right" style="width: 10%">이름</td>
 	                            <td style="width: 90%" id="receiverName"><%= dto.getA_name() %></td>
@@ -126,6 +130,7 @@ hcartSize = hcart.size();
 	                        </tr>
 	                    </table>
 	                </div>
+	                <input type="hidden" name="addrFlag" id="addrFlag" value="1">
 	            </div>
 	        </div>
 		</c:otherwise>
@@ -133,7 +138,7 @@ hcartSize = hcart.size();
         
 <!-- ////////////////////////////////////////////////////////////end 배송지//////////////////////////////////////////////////////////////////////////////////////// -->
         <div class="row mt-3">
-            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
                 <h5>주문내역</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
@@ -157,36 +162,56 @@ hcartSize = hcart.size();
         </div>
 
         <div class="row mt-3">
-            <div class="col-xl-6 offset-xl-3 col-10 offset-1">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
                 <h5>결제정보</h5>
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap">
                         <tr>
                             <td class="table-secondary text-right" style="width: 10%">총상품가격</td>
                             <td style="width: 90%" id="priceSum"><%= priceSum %></td>
+                            <input type="hidden" name="priceSum3" id="priceSum3" value="<%= priceSum %>">
                         </tr>
                         <tr>
                             <td class="table-secondary text-right" style="width: 10%">배송비</td>
-                            <td style="width: 90%">3,000원</td>
+                            <c:choose>
+                            	<c:when test="<%= priceSum < 20000 %>">
+		                            <td style="width: 90%">3,000원 (2만원 이상 구매 시 무료배송)</td>
+		                            <input type="hidden" name="deliveryFee" id="deliveryFee" value="3000">
+                            	</c:when>
+                            	<c:otherwise>
+                            		<td style="width: 90%">무료배송</td>
+                            		<input type="hidden" name="deliveryFee" id="deliveryFee" value="0">
+                            	</c:otherwise>
+                            </c:choose>
                         </tr>
                         <tr>
-                            <td class="table-secondary text-right" style="width: 10%">포인트</td>
+                            <td class="table-secondary text-right" style="width: 10%">포인트사용</td>
                             <td style="width: 90%">
-                                <span class="mr-5">0P</span>
+                                <span id="UsingPoint">0</span><span class="mr-4">P</span>
+                                <input type="hidden" name="UsingPoint2" id="UsingPoint2" value="0">
                                 <span class="mr-2">보유 : </span><span id="pointBalance">${authUser.m_point}</span>
-                                <button class="btn btn-sm btn-outline-secondary mx-1">포인트사용(구현중)</button>
+                                <input type="hidden" name="pointBalance2" id="pointBalance2" value="${authUser.m_point}">
+                                <button class="btn btn-sm btn-outline-secondary mx-1" id="pointButton">포인트사용</button>
                             </td>
                         </tr>
-                        <tr class="d-none">
+                        <tr class="d-none" id="pointUseBox">
                             <td class="table-secondary text-right" style="width: 10%"></td>
                             <td style="width: 90%">
-                                <input class="ml-2 mr-1" type="text" placeholder="0" name="pointInput" size="3">P
-                                <button class="btn btn-sm btn-primary mx-1">포인트적용</button>
+                                <input class="ml-2 mr-1" type="text" name="pointInput" id="pointInput" size="3" value="0">P
+                                <button class="btn btn-sm btn-primary mx-1" type="button" onclick="return pointUse();">포인트적용</button>
                             </td>
                         </tr>
                         <tr>
                             <td class="table-secondary text-right" style="width: 10%">총결제금액</td>
-                            <td style="width: 90%" id="priceSum2"><%= priceSum + 3000 %></td>
+                            <c:choose>
+                            	<c:when test="<%= priceSum < 20000 %>">
+		                            <td style="width: 90%" id="priceSum2"><%= priceSum + 3000 %></td>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<td style="width: 90%" id="priceSum2"><%= priceSum %></td>
+                            	</c:otherwise>
+                            </c:choose>
+                            
                         </tr>
                         <tr>
                             <td class="table-secondary text-right" style="width: 10%">결제방법</td>
@@ -214,12 +239,19 @@ hcartSize = hcart.size();
         </div>
 
         <div class="row my-2">
-            <div class="col-xl-6 offset-xl-3 col-10 offset-1 text-center">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12 text-center">
                 <button class="btn btn-lg btn-outline-secondary px-5 m-2" onclick="javascript:window.history.back();">이전으로</button>
                 <form name="payment" method="post" action="pay.get" class="d-inline">
                 	<input type="hidden" name="o_total_price" id="o_total_price" value="">
                 	<input type="hidden" name="o_use_point" id="o_use_point" value="">
-                	<input type="hidden" name="o_delivery_flag" id="o_delivery_flag" value="">
+                	<c:choose>
+	                   	<c:when test="<%= priceSum < 20000 %>">
+	                    	<input type="hidden" name="o_delivery_flag" id="o_delivery_flag" value="true">
+	                   	</c:when>
+	                   	<c:otherwise>
+	                   		<input type="hidden" name="o_delivery_flag" id="o_delivery_flag" value="false">
+	                   	</c:otherwise>
+                    </c:choose>
                 	<input type="hidden" name="o_payment" id="o_payment" value="">
                 	<input type="hidden" name="o_payment_method" id="o_payment_method" value="">
                 	<input type="hidden" name="o_name" id="o_name" value="">
@@ -229,7 +261,8 @@ hcartSize = hcart.size();
                 	<input type="hidden" name="o_post" id="o_post" value="">
                 	<input type="hidden" name="o_request" id="o_request" value="">
                 	<input type="hidden" name="m_id" id="m_id" value="${authUser.m_id}">
-                	<button type="button" class="btn btn-lg btn-primary px-5 m-2" onclick="payment1()">결제하기</button>
+                	<input type="hidden" name="m_point" value="${authUser.m_point}">
+                	<button type="button" class="btn btn-lg btn-primary px-5 m-2" onclick="return payment1();">결제하기</button>
                 </form>
             </div>
         </div>
@@ -501,6 +534,9 @@ hcartSize = hcart.size();
 <!-- 다음 주소 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!--  sweetalert2 js file  -->
+<script src="../js/sweetalert2.min.js"></script>
+
 <!-- order.js  -->
 <script src="../js/order.js"></script>
 
@@ -510,19 +546,77 @@ hcartSize = hcart.size();
 //결제하기 버튼
 //==============================================================================================================
 function payment1() {
-	 $("#o_total_price").val( "<%= priceSum%>" );
-	 $("#o_use_point").val( "0" );
-	 $("#o_delivery_flag").val( "true" );
-	 $("#o_payment").val( "<%= priceSum+3000 %>" );
-	 $("#o_payment_method").val( $("input:radio[name=optradio]:checked").val() );
-	 $("#o_name").val( $("#receiverName").text() );
-	 $("#o_hp").val( $("#receiverHp").text() );
-	 $("#o_addr1").val( $("#getA_addr1").val() );
-	 $("#o_addr2").val( $("#getA_addr2").val() );
-	 $("#o_post").val( $("#getA_post").val() );
-	 $("#o_request").val( $("#receiverReq").text() );
+	
+	$("#o_total_price").val( "<%= priceSum%>" );
+	$("#o_use_point").val( $("#UsingPoint2").val() );
+	
+	<% if(priceSum<20000){ %>
+		$("#o_payment").val( "<%= priceSum+3000 %>" );
+	<% }else{ %>
+		$("#o_payment").val( "<%= priceSum %>" );
+	<% }//if %>
+	
+	$("#o_payment_method").val( $("input:radio[name=optradio]:checked").val() );
+	$("#o_name").val( $("#receiverName").text() );
+	$("#o_hp").val( $("#receiverHp").text() );
+	$("#o_addr1").val( $("#getA_addr1").val() );
+	$("#o_addr2").val( $("#getA_addr2").val() );
+	$("#o_post").val( $("#getA_post").val() );
+	$("#o_request").val( $("#receiverReq").text() );
 	 
-	 document.payment.submit();
+	//배송지 없이 결제 시도시 리턴
+	if($("#addrFlag").val()=="0"){		
+		Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: "배송지 정보가 올바르지 않습니다.",
+			showConfirmButton: false,
+			timer: 1500
+		});
+		return false;
+	 }
+	
+	document.payment.submit();
+}
+//==============================================================================================================
+	
+	
+//==============================================================================================================
+//포인트적용 버튼
+//==============================================================================================================
+function pointUse() {
+	
+	if( Number( $("#pointInput").val() ) > Number( $("#pointBalance2").val() ) ){
+		Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: "입력한 값이 보유한 포인트보다 큽니다.",
+			showConfirmButton: false,
+			timer: 1500
+		});
+		$("#pointInput").focus();
+		return false;
+	}else{
+		if( Number( $("#pointInput").val() ) <= ( Number( $("#deliveryFee").val() ) + Number( $("#priceSum3").val() ) ) ){
+			//정상사용
+			$("#UsingPoint2").val( $("#pointInput").val() );
+			$("#UsingPoint").text( numberFormat3($("#pointInput").val()) );
+			$("#pointUseBox").addClass("d-none");
+			
+		}else{
+			Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: "입력한 값이 총결제금액보다 큽니다.",
+				showConfirmButton: false,
+				timer: 1500
+			});
+			$("#pointInput").focus();
+			return false;
+		}//if
+	}//if
+	$("#priceSum2").text( numberFormat( Number( $("#deliveryFee").val() ) + Number( $("#priceSum3").val() ) - Number( $("#UsingPoint2").val() ) ) );
+	$("#pointUseBox").addClass("d-none");
 }
 //==============================================================================================================
 </script>

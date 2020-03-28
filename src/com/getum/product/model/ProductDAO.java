@@ -95,7 +95,7 @@ public class ProductDAO {
 	    	ReadProductDetailRequest rPDReq = new ReadProductDetailRequest();
 	    	
 	    	try {
-	    		pstmt = conn.prepareStatement("select p_name, p_code, p_price, p_release_date, p_manufacture, p_detail from product where p_uuid = ?");
+	    		pstmt = conn.prepareStatement("select p_name, p_code, p_price, p_release_date, p_manufacture, p_detail, p_stock from product where p_uuid = ?");
 	    		pstmt.setString(1, uuid);
 	    		rs = pstmt.executeQuery();
 	    		
@@ -108,6 +108,7 @@ public class ProductDAO {
     				rPDReq.setP_release_date(""+rs.getDate("p_release_date"));
 	    			rPDReq.setP_manufacture(rs.getString("p_manufacture"));
 	    			rPDReq.setP_detail(rs.getString("p_detail"));
+	    			rPDReq.setP_stock(rs.getLong("p_stock"));
 	    			
 	    			//imgName
     				String imgChar = uuid.substring(0,1);
@@ -134,6 +135,42 @@ public class ProductDAO {
 	    	
 	    	
 	    	return rPDReq;
+	    }
+	    //==================================================================================================
+	    
+	    
+	    
+	    //==================================================================================================
+	    // checkStock(Connection, String) : 재고량 확인
+	    //==================================================================================================
+	    public long checkStock(Connection conn, String uuid) throws SQLException{
+	    	
+	    	PreparedStatement pstmt = null;
+	    	ResultSet rs = null;
+	    	long stock = 0;
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("select p_stock from product where p_uuid = ?");
+	    		pstmt.setString(1, uuid);
+	    		rs = pstmt.executeQuery();
+	    		
+	    		
+	    		if(rs.next()) {
+	    			stock = rs.getLong("p_stock");
+	    		}//if
+	    		
+	    		return stock;
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("ProductDAO.checkStock() 예외 :"+e);
+	    		return -1;
+	    	} finally {
+	    		try{
+	    			if(rs!=null){rs.close();}
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
+	    	
 	    }
 	    //==================================================================================================
 	    
