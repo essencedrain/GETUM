@@ -14,7 +14,7 @@ import com.getum.order.service.AddrCreateService;
 import com.getum.util.DBConnection;
 
 //==================================================================================================
-//OrderViewHandler : 주문/결제창(order.get?flag=default&m_id=) 보기
+//OrderViewHandler : 1. 주문/결제창(order.get?flag=default&m_id=) 보기
 //GET 요청 :
 //	flag=delete : 배송지 삭제 후 order.get?flag=default&m_id=
 //POST 요청 : 

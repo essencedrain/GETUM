@@ -77,7 +77,7 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // insert(Connection, JoinMemberRequest) : 회원정보 삽입
+	    // insert(Connection, JoinMemberRequest) : 회원가입
 	    //==================================================================================================
 	    public void insert(Connection conn, JoinMemberRequest mem) throws SQLException{
 	    	PreparedStatement pstmt = null;
@@ -139,7 +139,7 @@ public class MemberDAO {
 	    
 	    
 	    //==================================================================================================
-	    // addPoint(Connection, String, int)
+	    // addPoint(Connection, String, int) 포인트 적립
 	    //==================================================================================================
 	    public void addPoint(Connection conn, String id, long point)  throws SQLException{
 	    	PreparedStatement pstmt = null;
@@ -163,7 +163,7 @@ public class MemberDAO {
 	    //==================================================================================================
 	    
 	    //==================================================================================================
-	    // use(Connection, String, int)
+	    // usePoint(Connection, String, int) 포인트 사용
 	    //==================================================================================================
 	    public void usePoint(Connection conn, String id, long point)  throws SQLException{
 	    	PreparedStatement pstmt = null;

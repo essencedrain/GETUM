@@ -41,7 +41,7 @@ int hcartSize2 = 0;
                 %>
                 </li>
                 <li class="nav-item mx-1">
-                    <a class="nav-link" href="#">주문내역</a>
+                    <a class="nav-link" href="orderList.get?currentPage=1">주문내역</a>
                 </li>
                 <li class="nav-item mx-1">
                     <a class="nav-link" href="#">고객센터</a>

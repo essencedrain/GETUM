@@ -13,12 +13,12 @@ import com.getum.order.service.OrderService;
 import com.getum.order.service.OrderSuccessRequest;
 
 //==================================================================================================
-//OrderHandler : 결제 핸들러
+//OrderHandler : 2. 결제 핸들러
 //GET 요청 : 없음
 //POST 요청 : oderlist / order_detail - 주문 등록
 //			: member - 포인트추가
 //			: product - 재고감소
-//			: point - 적립내역 추가
+//			: point - 적립내역 추가, 사용내역 추가
 //==================================================================================================
 public class OrderHandler implements CommandHandler{
 	

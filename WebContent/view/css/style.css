@@ -53,6 +53,69 @@ h4,h5,h6{
 
 /* ==========================버튼============================== */
 
+/* ==========================table 테이블============================== */
+
+.tb-head {
+	background : #f9f9f9 !important;
+	height: 40px;
+  
+}
+
+.tb-heading{
+	font-weight: 700;
+	line-height: 40px;
+    vertical-align: middle;
+}
+
+.tb-button{
+	height: 40px;
+}
+
+.tb-button2{
+	width: 100px;
+}
+
+.tb-content{
+	font-size: 0.9rem;
+}
+/* ==========================table 테이블============================== */
+
+
+
+/* ==========================pageNation ============================== */
+.pagination > li > a
+{
+    background-color: white;
+    color: #007042;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #007042;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #007042 !Important;
+    border: solid 1px #007042 !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: #007042 !Important;
+    border: solid 1px #007042;
+}
+/* ==========================pageNation ============================== */
+
+
+
+
 /* ==========================header============================== */
 /* 
 Navbar
