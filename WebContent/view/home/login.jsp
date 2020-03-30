@@ -25,6 +25,7 @@
             <div class="loginFormWrap mx-auto col-md-6 col-md-offset-3">
                 <div class="heading pb-1 text-center pb-4">
                     <h1>로그인</h1>
+                    테스트 계정 : test/1234
                 </div>
                 <div class="loginForm">
                     <form name="loginForm" method="post" action="login.get">
