@@ -25,9 +25,6 @@ hcartSize = hcart.size();
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-    
-    <!--  sweetalert2  -->
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -40,9 +37,9 @@ hcartSize = hcart.size();
 <!--  ======================= Start order Area =======================  -->
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <section class="order-area pt-5">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 animated fadeIn faster">
         <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
-            <h1 class="d-inline">주문 / 결제</h1>
+            <h1 class="d-inline"><i class="far fa-credit-card fa-sm"></i> 주문 / 결제</h1>
             <hr>
         </div>
 
@@ -533,9 +530,6 @@ hcartSize = hcart.size();
 
 <!-- 다음 주소 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<!--  sweetalert2 js file  -->
-<script src="../js/sweetalert2.min.js"></script>
 
 <!-- order.js  -->
 <script src="../js/order.js"></script>

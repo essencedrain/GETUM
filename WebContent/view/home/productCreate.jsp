@@ -4,10 +4,6 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-    
-    <!--  sweetalert2  -->
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
-    
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -104,9 +100,6 @@
 
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
-
-<!--  sweetalert2 js file  -->
-<script src="../js/sweetalert2.min.js"></script>
 
 <!-- productCreate.js -->
 <script src="../js/productCreate.js"></script>

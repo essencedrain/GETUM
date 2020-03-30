@@ -1,35 +1,36 @@
 package com.getum.order.service;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.Hashtable;
 
 import com.getum.order.model.OrderListDAO;
 import com.getum.util.DBConnection;
 
 	//==================================================================================================
-	//OrderListService : 주문내역 조회
+	//OrderDetailService : 주문내역 조회
 	//==================================================================================================
-	public class OrderListService {
+	public class OrderDetailService {
 	
 		
 		//==================================================================================================
-		//getList : 해당 페이지 주문 3건 가져오기
+		//getDetail(int) : 주문번호로부터 상세내역 가져오기
 		//==================================================================================================
-		public List getList(String m_id, int max, int min) {
+		public Hashtable<String, OrderListRequest> getDetail(int o_no) {
 			
 			OrderListDAO dao = OrderListDAO.getInstance();
 			Connection conn = null;
-			List result = null;
+			Hashtable<String, OrderListRequest> result = null;
 			
 			try {
 				
 				conn = DBConnection.getCon();
 				
-				result = dao.selectById(conn, m_id, max, min);
+				result = dao.selectByOrderNumber(conn, o_no);
 				
 				
 			} catch (Exception e1) {
 				System.out.println("OrderListService.getList() 에러 : "+e1);
+				return null;
 			} finally {
 				try {
 					if(conn!=null){conn.close();}
@@ -42,27 +43,25 @@ import com.getum.util.DBConnection;
 		//==================================================================================================
 		
 		
-		
-		
 		//==================================================================================================
-		//getTotalArticleNum : 주문내역 조회
+		//getOrder(int) : 주문번호로부터 상세내역 가져오기
 		//==================================================================================================
-		public int getTotalArticleNum(String m_id) {
+		public OrderDetailRequest getOrder(int o_no) {
 			
 			OrderListDAO dao = OrderListDAO.getInstance();
 			Connection conn = null;
-			int result = -1;
+			OrderDetailRequest result = null;
 			
 			try {
 				
 				conn = DBConnection.getCon();
 				
-				result = dao.getTotalArticleNum(conn, m_id);
+				result = dao.selectByOrderNumber2(conn, o_no);
 				
 				
 			} catch (Exception e1) {
-				System.out.println("OrderListService.getTotalArticleNum() 에러 : "+e1);
-				return result;
+				System.out.println("OrderListService.getList() 에러 : "+e1);
+				return null;
 			} finally {
 				try {
 					if(conn!=null){conn.close();}
@@ -71,7 +70,8 @@ import com.getum.util.DBConnection;
 			
 			return result;
 			
-		}//getTotalArticleNum()
+		}//getList()
 		//==================================================================================================
+		
 	
 }//class

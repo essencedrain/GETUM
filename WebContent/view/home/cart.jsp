@@ -13,6 +13,7 @@ int hcartSize = 0;
 int priceClass = 0; // int값을 ###,### 원으로 바꾸기 위한 태깅
 int priceSum = 0; //상품가격 합계
 String uuid=""; //삭제시 보낼 것
+
 %>
 
 
@@ -21,9 +22,6 @@ String uuid=""; //삭제시 보낼 것
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-    
-    <!--  sweetalert2  -->
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -36,9 +34,9 @@ String uuid=""; //삭제시 보낼 것
 <!--  ======================= Start cart Area =======================  -->
 
 <section class="cart-area pt-5">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 animated fadeIn faster">
         <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-sm-12">
-            <h1>장바구니 <i class="fas fa-shopping-cart fa-sm"></i></h1>
+            <h1><i class="fas fa-shopping-cart fa-sm"></i> 장바구니</h1>
         </div>
 
         <div class="row mt-5">
@@ -167,6 +165,12 @@ String uuid=""; //삭제시 보낼 것
             </div>
         </div>
     </div>
+    <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+    <!--  에러확인 -->
+    <c:if test="${!empty errorStock}">
+    	<input type="hidden" name="errorStock" id="errorStock" value="${errorStock}">
+    </c:if>
+    <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 </section>
 
 <!--  ======================= End cart Area =======================  -->
@@ -182,9 +186,6 @@ String uuid=""; //삭제시 보낼 것
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
-<!--  sweetalert2 js file  -->
-<script src="../js/sweetalert2.min.js"></script>
-
 <!--  cart js file  -->
 <script src="../js/cart.js"></script>
 
@@ -194,6 +195,23 @@ String uuid=""; //삭제시 보낼 것
 //==============================================================================================================
 window.onload = function () {
 
+if($("#errorStock").val()!=null){
+	if($("#errorStock").val() == 2){
+		Swal.fire({
+			  position: 'center',
+			  icon: 'error',
+			  title: "재고수량보다 많이 입력했습니다. 다시 수정해주세요.",
+			  showConfirmButton: true
+		});
+	}else if($("#errorStock").val() == 1){
+		Swal.fire({
+			  position: 'center',
+			  icon: 'error',
+			  title: "먼저 들어온 주문으로 인해 재고가 부족하게 되었습니다. 수량을 변경하여 다시 시도해주세요.",
+			  showConfirmButton: true
+		});
+	}
+}
 
 //통화표시	
 <%
@@ -242,18 +260,10 @@ window.onload = function () {
 	});
 }
 //==============================================================================================================
+
 </script>
 
-<c:if test="${!empty param.flag}">
-<script>
-Swal.fire({
-	  position: 'center',
-	  icon: 'error',
-	  title: "먼저 들어온 주문으로 인해 재고가 변경되었습니다. 처음부터 다시 주문해주세요",
-	  showConfirmButton: true
-	});
-</script>
-</c:if>
+
 
 </body>
 </html>

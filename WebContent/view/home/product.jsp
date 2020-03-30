@@ -19,7 +19,7 @@
 <!--  ======================= Start Product Area =======================  -->
 
 <section class="product-area">
-    <div class="container">
+    <div class="container animated fadeIn faster">
         <div class="pb-5">
 	        <c:if test="${empty productList}">
             <h1>등록된 상품 없음</h1>

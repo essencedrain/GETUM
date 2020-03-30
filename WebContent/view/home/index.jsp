@@ -4,9 +4,6 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-
-    <!-- animate css -->
-    <link rel="stylesheet" href="../css/animate.css">
     
 </head>
 <body>
@@ -213,13 +210,6 @@
 <!--  ======================= END footer Area ================================ -->
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
-
-
-<!--  wow js file  -->
-<script src="../js/wow.js"></script>
-<script>
-    new WOW().init();
-</script>
 
 
 

@@ -16,6 +16,8 @@ public class CartService {
 	
 	private Hashtable<String, CartRequest> hcart = new Hashtable<>();
 	
+	
+	
 	//==================================================================================================
     // insertCart(HttpServletRequest) : 장바구니 등록 처리
     //==================================================================================================
@@ -81,15 +83,37 @@ public class CartService {
 	//==================================================================================================
     // modifyCart(HttpServletRequest) : 장바구니 수정 처리
     //==================================================================================================
-	public void modifyCart(HttpServletRequest req) {
+	public boolean modifyCart(HttpServletRequest req) {
 		
 		String uuid = req.getParameter("uuid");
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
+		long stock = 0;
 		
-		hcart = (Hashtable) req.getSession().getAttribute("cartMap");
-		hcart.get(uuid).setQuantity(quantity);
+		ProductDAO dao = ProductDAO.getInstance();
+		Connection conn = null;
 		
-		req.getSession().setAttribute("cartMap", hcart);
+		try {
+			conn = DBConnection.getCon();
+			stock = dao.checkStock(conn, uuid);
+		} catch (Exception e) {
+			System.out.println("CartService.modifyCart() 에러"+e);
+		} finally {
+			try{
+                if(conn!=null){conn.close();}
+          }catch(Exception e2){}
+		}//try
+		
+		if(quantity > stock) {
+			return false;
+		}else {
+			
+			hcart = (Hashtable) req.getSession().getAttribute("cartMap");
+			hcart.get(uuid).setQuantity(quantity);
+			
+			req.getSession().setAttribute("cartMap", hcart);
+		}
+		
+		return true;
 	}
 	//==================================================================================================
 	

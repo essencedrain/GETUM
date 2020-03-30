@@ -74,6 +74,12 @@
 		<url-pattern>/view/home/cart.get</url-pattern>
 		<url-pattern>/view/home/order.get</url-pattern>
 		<url-pattern>/view/home/orderList.get</url-pattern>
+		<url-pattern>/view/home/orderDetail.get</url-pattern>
+		<url-pattern>/view/home/order.jsp</url-pattern>
+		<url-pattern>/view/home/orderDetail.jsp</url-pattern>
+		<url-pattern>/view/home/orderList.jsp</url-pattern>
+		<url-pattern>/view/home/orderSuccess.jsp</url-pattern>
+		<url-pattern>/view/home/signupSuccess.jsp</url-pattern>
 	</filter-mapping>
 	<!-- ============================================================ -->
 	 

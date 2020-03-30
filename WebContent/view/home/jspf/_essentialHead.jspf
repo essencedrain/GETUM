@@ -13,6 +13,12 @@
     
     <!--  font awesome icons  -->
     <link rel="stylesheet" href="../css/all.min.css">
+    
+    <!-- animate css -->
+    <link rel="stylesheet" href="../css/animate.css">
+    
+    <!--  sweetalert2  -->
+    <link rel="stylesheet" href="../css/sweetalert2.min.css">
 
 	<!--  custom CSS  -->
     <link rel="stylesheet" href="../css/style.css">

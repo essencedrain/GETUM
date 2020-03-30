@@ -5,6 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <%
 int count=0;
 %>
@@ -12,10 +13,6 @@ int count=0;
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-    
-    <!-- animate css -->
-    <link rel="stylesheet" href="../css/animate.css">
-    
 </head>
 <body>
 <!--  ======================= Start Header Area ============================== -->
@@ -28,8 +25,8 @@ int count=0;
 <!--  ======================= Start orderSuccess Area =======================  -->
 <section class="orderSuccess-area">
     <div class="container pt-5">
-        <div class="pb-1 animated fadeInDown">
-            <h1><i class="fas fa-check"></i> 주문완료</h1>
+        <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-12 pb-1 animated fadeInDownBig">
+            <h1><i class="fas fa-check fa-sm"></i> 주문완료</h1>
         </div>
 
         <div class="row mt-3 animated fadeInDown">
@@ -135,8 +132,8 @@ int count=0;
                     </div>
                 <hr>
                 <div class="button-group my-3 text-center">
-                    <button class="btn btn-lg btn-outline-secondary mx-2">계속 쇼핑하기</button>
-                    <button class="btn btn-lg btn-primary mx-2">주문내역 보기</button>
+                    <button class="btn btn-lg btn-outline-secondary mx-2" onclick="location.href='product.get'">계속 쇼핑하기</button>
+                    <button class="btn btn-lg btn-primary mx-2" onclick="location.href='orderList.get?currentPage=1'">주문내역 보기</button>
                 </div>
             </div>
         </div>
@@ -158,12 +155,7 @@ int count=0;
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
-<!--  wow js file  -->
-<script src="../js/wow.js"></script>
-
 <script>
-new WOW().init();
-
 //==============================================================================================================
 //jsp+온로드 이벤트
 //==============================================================================================================

@@ -35,12 +35,7 @@ public class MainController extends HttpServlet{
         String pros = path+config.getInitParameter("propertyConfig");
         Properties pr = new Properties();
         FileInputStream f = null;
-        
-        
-        //경로확인
-        System.out.println("realpath:"+path);
-        System.out.println("pros:"+pros);
-        
+
         
         // 2.WEB-INF/CommandPro.properties 읽기
         try{
@@ -61,7 +56,6 @@ public class MainController extends HttpServlet{
 
            String key = (String) keyItor.next();// key string : /join.get
            String className=pr.getProperty(key);// class instance : com.getum.member.command.JoinMemberHandler
-           System.out.println("클라스네임 : "+className);
 
            	try{
                  Class<?> handlerClass = Class.forName(className);

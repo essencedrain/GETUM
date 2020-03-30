@@ -1,8 +1,9 @@
 package com.getum.order.service;
 
+import java.sql.Timestamp;
 
 //==================================================================================================
-//OrderListRequest : 주문 내역 창을 보여주기 위한 객체
+//OrderListRequest : 주문내역 창과 주문상세내역을 보여주기 위한 객체
 //==================================================================================================
 public class OrderListRequest {
 
@@ -10,6 +11,7 @@ public class OrderListRequest {
 	private String name;
 	private String imgName;
 	private long price;
+	private int quantity;
 	private String status;
 	
 	//constructor
@@ -48,6 +50,17 @@ public class OrderListRequest {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 
 
 	

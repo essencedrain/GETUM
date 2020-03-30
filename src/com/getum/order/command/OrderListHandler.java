@@ -10,8 +10,8 @@ import com.getum.command.CommandHandler;
 import com.getum.order.service.OrderListService;
 
 //==================================================================================================
-//OrderListHandler : 3. 주문내역 보기 핸들러
-//GET 요청 : 'orderList.jsp'
+//OrderListHandler : 3. 주문내역 보기 핸들러 
+//GET 요청 : 'orderList.jsp?currentPage=1'  커런트페이지 필수
 //POST 요청 : 일단 없음
 //==================================================================================================
 public class OrderListHandler implements CommandHandler{

@@ -7,13 +7,6 @@
 <html lang="ko">
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
-    
-    <!-- animate css -->
-    <link rel="stylesheet" href="../css/animate.css">
-    
-    <!--  sweetalert2  -->
-    <link rel="stylesheet" href="../css/sweetalert2.min.css">
-    
     <style>
      	.site-main a:link {text-decoration:none; color:#001627;}
 		.site-main a:visited {text-decoration:none; color:#001627;}
@@ -33,17 +26,17 @@
 <!--  ======================= Start Product Detail Area =======================  -->
 
 <section class="productDetail-area">
-    <div class="container">
+    <div class="container animated fadeIn faster">
         <div class="pb-1">
             <a id="goback" href="product.get"><h4><i class="far fa-arrow-alt-circle-left"></i> 상품 목록</h4></a>
         </div>
 		<form name="pdForm" method="post" action="cart.get">
         <div class="row mt-5">
-            <div class="img col-lg-6 mb-5 animated bounceInLeft">
+            <div class="img col-lg-6 mb-5">
                 <img class="img-fluid" src="../img/product/${productDetail.imgName}" alt="${productDetail.imgName}">
             </div>
 
-            <div class="content col-lg-6 my-auto animated bounceInRight">
+            <div class="content col-lg-6 my-auto">
 	                <h1>${productDetail.p_name}</h1>
 	                <hr>
 	                <h3 id="showPrice"></h3>
@@ -56,11 +49,11 @@
 	                <h6>제조사 : ${productDetail.p_manufacture}</h6>
 	                <hr>
 	                <h6>수량</h6>
-	                <div class="bsinput w-50 pb-4">
+	                <div class="bsinput w-50 pb-4 ">
 	                    <input type="number" value="1" min="1" max="999" step="1" id="input" name="quantity"/>
 	                </div>
 	                <h3 id="price">총 상품금액 : <span id="output"></span></h3>
-	                <div class="button-group my-4 float-right">
+	                <div class="button-group my-4 float-right ">
 	                    <button type="button" class="btn btn-lg btn-outline-secondary mr-1">구매하기</button>
 	                    <button type="button" class="btn btn-lg btn-primary" onclick="return checkStock();">장바구니</button>
 	                </div>
@@ -95,12 +88,6 @@
 
 <!--  Bootstrap input js file  -->
 <script src="../js/bootstrap-input-spinner.js"></script>
-
-<!--  wow js file  -->
-<script src="../js/wow.js"></script>
-
-<!--  sweetalert2 js file  -->
-<script src="../js/sweetalert2.min.js"></script>
 
 <!-- productdetail.js -->
 <script src="../js/productdetail.js"></script>

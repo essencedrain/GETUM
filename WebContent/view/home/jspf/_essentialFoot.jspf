@@ -7,6 +7,14 @@
 <!--  Bootstrap js file  -->
 <script src="../js/bootstrap.min.js"></script>
 
+<!--  wow js file  -->
+<script src="../js/wow.js"></script>
+<script>
+    new WOW().init();
+</script>
+
+<!--  sweetalert2 js file  -->
+<script src="../js/sweetalert2.min.js"></script>
 
 <!--  scroll_to_top js file  -->
 <script src="../js/scroll_to_top.js"></script>
