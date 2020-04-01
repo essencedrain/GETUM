@@ -107,7 +107,7 @@ public class BoardDAO {
 			    			result.setBefore_subject(rs.getString("b1_subject"));
 		    			}
 		    		}else {
-		    			result.setAfter_idx(-1);
+		    			result.setBefore_idx(-1);
 		    		}
 		    		
 		    		rs.close();
@@ -127,8 +127,6 @@ public class BoardDAO {
 		    			result.setAfter_idx(-1);
 		    		}
 		    		
-		    		rs.close();
-		    		pstmt.close();
 		    		
 		    	} catch (Exception e) {
 		    		System.out.println("BoardDAO.getTotalArticleNum() 예외 :"+e);
