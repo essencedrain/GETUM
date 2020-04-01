@@ -27,9 +27,11 @@ public static String toNumFormat(int num) {
 	
 	//총 블럭 수
 	int totalBlock = (int) Math.ceil((totalPages / blockPerPage))-1;
-	
+	if(totalBlock<0){
+		totalBlock =0;
+	}
 	//현재 블럭
-	int currentBlock = (int) Math.floor( (currentPage - 1) / 5 );
+	int currentBlock = (int) Math.floor( (currentPage - 1) / blockPerPage );
 	
 	//시작페이지
 	int startPage = (currentBlock*blockPerPage) + 1;
