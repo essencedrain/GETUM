@@ -34,7 +34,7 @@ public class NoticeService {
 			System.out.println("NoticeService.getList() 오류 : " + e);
 		} finally {
 			try {
-				
+				if(conn!=null){conn.close();}
 			} catch (Exception e2) {}
 		}//try
 			
@@ -82,7 +82,7 @@ public class NoticeService {
 			System.out.println("NoticeService.getList() 오류 : " + e);
 		} finally {
 			try {
-				
+				if(conn!=null){conn.close();}
 			} catch (Exception e2) {}
 		}//try
 		
