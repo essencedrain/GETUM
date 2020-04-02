@@ -40,9 +40,9 @@ public class CreateProductHandler implements CommandHandler{
 	public String process(HttpServletRequest req, HttpServletResponse res){
 		
 		if( req.getMethod().equalsIgnoreCase("GET") ) {
-			return processForm(req,res);
+			return processGet(req,res);
 		} else if ( req.getMethod().equalsIgnoreCase("POST") ) {
-			return processSubmit(req,res);
+			return processPost(req,res);
 		} else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			return null;
@@ -53,9 +53,9 @@ public class CreateProductHandler implements CommandHandler{
 	
 	
 	//==================================================================================================
-    // processForm() : GET 처리
+    // processGet() : GET 처리
     //==================================================================================================
-	private String processForm(HttpServletRequest req, HttpServletResponse res) {
+	private String processGet(HttpServletRequest req, HttpServletResponse res) {
 		return form_view;
 	}
     //==================================================================================================
@@ -63,9 +63,9 @@ public class CreateProductHandler implements CommandHandler{
 	
 	
 	//==================================================================================================
-    // processSubmit() : POST 처리
+    // processPost() : POST 처리
     //==================================================================================================
-	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
+	private String processPost(HttpServletRequest req, HttpServletResponse res) {
 		
 		CreateProductRequest proReq = new CreateProductRequest();
 		
@@ -101,7 +101,7 @@ public class CreateProductHandler implements CommandHandler{
 	                    , new DefaultFileRenamePolicy());
 	 
 	         }catch (Exception e) {
-	        	 System.out.println("CreateProductHandler.processSubmit.이미지처리 : "+e);
+	        	 System.out.println("CreateProductHandler.processPost.이미지처리 : "+e);
 	         }//try
 	        
 	        
@@ -196,7 +196,7 @@ public class CreateProductHandler implements CommandHandler{
 				createProductService.create(proReq);
 				return "/view/home/productCreate.jsp";
 			} catch (Exception e) {
-				System.out.println("CreateProductHandler.processSubmit() 에러 : " + e);
+				System.out.println("CreateProductHandler.processPost() 에러 : " + e);
 				return form_view;
 			}//try
 		

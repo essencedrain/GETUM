@@ -9,7 +9,6 @@
 //현재페이지
 int currentPage = (int) request.getAttribute("currentPage");
 NoticeReadContentRequest contentData = (NoticeReadContentRequest) request.getAttribute("contentData");
-
 %>
 
 <!DOCTYPE html>
@@ -65,9 +64,7 @@ NoticeReadContentRequest contentData = (NoticeReadContentRequest) request.getAtt
                 <% }else{ %>
 	                <button type="button" class="btn btn-outline-secondary btn-block text-left">다음글 ▽ 다음글이 없습니다</button>
                 <% }//if %>
-                
-                
-                <button type="button" class="btn btn-primary text-center float-right mt-4" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">목록으로</button>
+					<button type="button" class="btn btn-primary text-center float-right mt-4" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">목록으로</button>
             </div>
         </div>
     </div>

@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="java.util.*" %>    
+<%@ page import="java.util.*" %>  
+<%@ page import="com.getum.auth.service.User" %>  
 <%@ page import="com.getum.board.service.NoticeReadRequest" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 
 <%
+
+User user = null;
+
+if(session.getAttribute("authUser")!=null){
+user = (User) session.getAttribute("authUser");
+}
+
 //현재페이지
 int currentPage = (int) request.getAttribute("currentPage");
 
@@ -116,6 +124,15 @@ if(totalPages < endPage ){
 				    	<li class="page-item"><a class="page-link" href="notice.get?currentPage=<%= endPage+1 %>">다음</a></li>
 				    <% }//if %>
 		  		</ul>
+		  		<%
+		  			if(user!=null){
+		  				if(user.getM_grade()==255){
+		  		%>
+							<button type="button" class="btn btn-primary text-center float-right mt-n4" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">글쓰기</button>
+				<%
+						}//if
+		  			}//if
+				%>
             </div>
         </div>
     </div>

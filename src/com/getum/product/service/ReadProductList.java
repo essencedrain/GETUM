@@ -14,6 +14,8 @@ public class ReadProductList {
 	private String[] p_category;
 	private String[] p_category_en;
 	
+	//생성자
+	public ReadProductList() {}
 	
 	//g&s
 	
