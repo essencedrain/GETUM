@@ -121,13 +121,17 @@ public class CreateProductHandler implements CommandHandler{
 	    	String ext = fileName.substring(find); // .jpg
 	    	
 	    	//확장자 첫글자 + UUID 
-	    	if(ext.equals(".jpg")){
-	    		uuid = "j" + uuid;
-	    	}else if(ext.equals(".png")){
-	    		uuid = "p" + uuid;
-	    	}else if(ext.equals(".gif")){
-	    		uuid = "g" + uuid;
-	    	}//if
+	    		int typeImg = 0; //리사이즈에서 png/ jpg,gif와 구분하기 위해서 쓰는 변수
+		    	if(ext.equals(".jpg")){
+		    		uuid = "j" + uuid;
+		    		typeImg = 1;
+		    	}else if(ext.equals(".png")){
+		    		uuid = "p" + uuid;
+		    		typeImg = 2;
+		    	}else if(ext.equals(".gif")){
+		    		uuid = "g" + uuid;
+		    		typeImg = 1;
+		    	}//if
 			
 	    	//uuid로 rename하여 저장 + 이미지 리사이즈
 	    	if(!fileName.equals("")) {
@@ -137,9 +141,9 @@ public class CreateProductHandler implements CommandHandler{
 	    	     //리사이즈
 		    	    try {
 		    	    	//원본 이미지 세로 600 리사이즈후 원래 위치에 덮어쓰기
-						imgOnload(fullFileName, 600, fullFileName);
+						imgOnload(fullFileName, 600, fullFileName, typeImg);
 						//썸네일 이미지 세로 300 리사이즈 후 썸네일 폴더에 저장
-						imgOnload(fullFileName, 300, saveThumb+"/"+uuid+ext);
+						imgOnload(fullFileName, 300, saveThumb+"/"+uuid+ext, typeImg);
 					} catch (Exception e) {
 						System.out.println("CreateProductHandler.원본이미지리사이즈 에러 : " + e);
 					}
@@ -214,7 +218,7 @@ public class CreateProductHandler implements CommandHandler{
 
 	 */
 
-	public void imgOnload(String imgUrl, int h, String outPath) throws Exception{
+	public void imgOnload(String imgUrl, int h, String outPath, int typeImg) throws Exception{
 
 		int extIndex = imgUrl.lastIndexOf(".");
 
@@ -232,14 +236,30 @@ public class CreateProductHandler implements CommandHandler{
 		double temp2 = temp*h;
 		
 		int param_w = (int)temp2;
-
-		BufferedImage img = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_ARGB);
+		
+		
+		BufferedImage img = null;
+		if(typeImg==1) {
+			//jpg, gif
+			img = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_RGB);
+		}else if(typeImg==2) {
+			//png
+			img = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_ARGB);
+		}//if
 
 		Image scaledImage = sourceImage.getScaledInstance(param_w,param_h, Image.SCALE_SMOOTH);
 
 		img.createGraphics().drawImage(scaledImage, 0, 0, null);
+		
+		BufferedImage img2 = null;
+		if(typeImg==1) {
+			//jpg, gif
+			img2 = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_RGB);
+		}else if(typeImg==2) {
+			//png
+			img2 = new BufferedImage(param_w, param_h, BufferedImage.TYPE_INT_ARGB);
+		}//if
 
-		BufferedImage img2 = new BufferedImage(param_w, param_h ,BufferedImage.TYPE_INT_ARGB);
 
 		img2 = img.getSubimage(0, 0, param_w, param_h);
 

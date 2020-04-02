@@ -21,10 +21,10 @@ NoticeReadContentRequest contentData = (NoticeReadContentRequest) request.getAtt
 <!--  ======================= Start Header Area ============================== -->
 <%@ include file="./jspf/_header.jspf" %>
 <style>
-     	a:link {text-decoration:none; color:#001627;}
-		a:visited {text-decoration:none; color:#001627;}
-		a:active {text-decoration:none; color:#001627;}
-		a:hover {text-decoration:none; color:#001627;}
+     	.noticeContent-area a:link {text-decoration:none; color:#001627;}
+		.noticeContent-area a:visited {text-decoration:none; color:#001627;}
+		.noticeContent-area a:active {text-decoration:none; color:#001627;}
+		.noticeContent-area a:hover {text-decoration:none; color:#001627;}
 </style>
 <!--  ======================= End Header Area ============================== -->
 
