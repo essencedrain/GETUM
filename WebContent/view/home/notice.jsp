@@ -50,10 +50,10 @@ if(totalPages < endPage ){
 <head>
     <%@ include file="./jspf/_essentialHead.jspf" %>
     <style>
-     	a:link {text-decoration:none; color:#001627;}
-		a:visited {text-decoration:none; color:#001627;}
-		a:active {text-decoration:none; color:#001627;}
-		a:hover {text-decoration:none; color:#001627;}
+     	.notice-area a:link {text-decoration:none; color:#001627;}
+		.notice-area a:visited {text-decoration:none; color:#001627;}
+		.notice-area a:active {text-decoration:none; color:#001627;}
+		.notice-area a:hover {text-decoration:none; color:#001627;}
 	</style>
 </head>
 <body>
