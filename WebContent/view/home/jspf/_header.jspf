@@ -43,17 +43,9 @@ int hcartSize2 = 0;
                 <li class="nav-item mx-1">
                     <a class="nav-link" href="orderList.get?currentPage=1">주문내역</a>
                 </li>
-                <li class="nav-item dropdown mx-1">
-		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          고객센터
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="notice.get?currentPage=1">공지사항</a>
-						<a class="dropdown-item" href="#">테스트</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">테스트2</a>
-			        </div>
-		      	</li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link" href="notice.get?currentPage=1">공지사항</a>
+                </li>
                 
                 <% if(session.getAttribute("authUser")==null){ %>
 	                <li class="nav-item mx-2">

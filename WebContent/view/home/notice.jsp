@@ -128,7 +128,7 @@ if(totalPages < endPage ){
 		  			if(user!=null){
 		  				if(user.getM_grade()==255){
 		  		%>
-							<button type="button" class="btn btn-primary text-center float-right mt-n4" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">글쓰기</button>
+							<button type="button" class="btn btn-primary text-center float-right mt-n4" onclick="location.href='noticeCUD.get?flag=write'">글쓰기</button>
 				<%
 						}//if
 		  			}//if

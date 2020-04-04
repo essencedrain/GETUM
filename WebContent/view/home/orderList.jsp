@@ -62,6 +62,7 @@ public static String toNumFormat(int num) {
 	    <div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-sm-12 animated fadeIn faster">
             <h1><i class="far fa-list-alt fa-sm"></i> 주문내역</h1>
         </div>
+        <% if(orderList!=null){ %>
         <%
         	for(int i=0; i<orderList.size(); i++){
         		List smallList = (List)orderList.get(i);
@@ -136,9 +137,15 @@ public static String toNumFormat(int num) {
 				    <% }else{ %>
 				    	<li class="page-item"><a class="page-link" href="orderList.get?currentPage=<%= endPage+1 %>">다음</a></li>
 				    <% }//if %>
+				    
 		  		</ul>
 	  		</div>
   		</div>
+  		<% }else{ %>
+  		<div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-sm-12 animated fadeIn faster py-5 text-center">
+	    	<h3>주문내역이 없습니다</h3>
+	    </div>
+  		<% }//if(orderList!=null){ %>
 	</div>
 </section>
 

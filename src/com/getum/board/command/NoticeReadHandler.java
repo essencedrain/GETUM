@@ -28,7 +28,7 @@ public class NoticeReadHandler implements CommandHandler{
 			
 			int currentPage = Integer.parseInt(req.getParameter("currentPage"));
 			
-			Hashtable result = noticeService.getList(currentPage);
+			Hashtable result = noticeService.getNoticeList(currentPage);
 			
 			
 			

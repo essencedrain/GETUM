@@ -5,6 +5,7 @@ package com.getum.board.service;
 //==================================================================================================
 public class NoticeReadContentRequest {
 
+	private long b1_idx;
 	private String b1_subject;
 	private String b1_content;
 	private String b1_reg_date;
@@ -108,6 +109,16 @@ public class NoticeReadContentRequest {
 
 	public void setAfter_idx(long after_idx) {
 		this.after_idx = after_idx;
+	}
+
+
+	public long getB1_idx() {
+		return b1_idx;
+	}
+
+
+	public void setB1_idx(long b1_idx) {
+		this.b1_idx = b1_idx;
 	}
 	
 	

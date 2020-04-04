@@ -15,9 +15,9 @@ public class NoticeService {
 	
 	
 	//==================================================================================================
-    // getContent(int idx) : 상품목록 보기 method
+    // getContent(int idx, boolean isUpdate) : 조회수 증가 + 내용보기 // 수정일떈 조회수 증가 안함
     //==================================================================================================
-	public NoticeReadContentRequest getContent(long idx) {
+	public NoticeReadContentRequest getContent(long idx, boolean isUpdate) {
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		Connection conn = null;
@@ -27,11 +27,15 @@ public class NoticeService {
 			
 			conn = DBConnection.getCon();
 			
+			if(!isUpdate) {
+				dao.addCount(conn, idx);
+			}
+			
 			result = dao.selectByPage(conn, idx);
 			
 			
 		} catch (Exception e) {
-			System.out.println("NoticeService.getList() 오류 : " + e);
+			System.out.println("NoticeService.getContent() 오류 : " + e);
 		} finally {
 			try {
 				if(conn!=null){conn.close();}
@@ -41,12 +45,98 @@ public class NoticeService {
 		return result;
 	}
 	//==================================================================================================
+
 	
 	
 	//==================================================================================================
-    // getList(int currentPage) : 상품목록 보기 method
+	// doNoticeWrite(String[] 글) : (공지사항) 글 작성
+	//==================================================================================================
+	public void doNoticeWrite(String[] article) {
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		Connection conn = null;
+		
+		try {
+			
+			conn = DBConnection.getCon();
+			
+			dao.addNoticeArticle(conn, article);
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("NoticeService.doNoticeWrite() 오류 : " + e);
+		} finally {
+			try {
+				if(conn!=null){conn.close();}
+			} catch (Exception e2) {}
+		}//try
+		
+	}
+	//==================================================================================================
+	
+	
+	//==================================================================================================
+	// doNoticeDelete(String[] 글) : (공지사항) 글 삭제
+	//==================================================================================================
+	public void doNoticeDelete(long idx) {
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		Connection conn = null;
+		
+		try {
+			
+			conn = DBConnection.getCon();
+			
+			dao.deleteArticle(conn, idx);
+			
+		} catch (Exception e) {
+			System.out.println("NoticeService.doNoticeDelete() 오류 : " + e);
+		} finally {
+			try {
+				if(conn!=null){conn.close();}
+			} catch (Exception e2) {}
+		}//try
+		
+	}
+	//==================================================================================================
+	
+	
+	
+	//==================================================================================================
+	// doNoticeUpdate(String[] 글) : (공지사항) 글 수정
+	//==================================================================================================
+	public void doNoticeUpdate(String[] article) {
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		Connection conn = null;
+		
+		try {
+			
+			conn = DBConnection.getCon();
+			
+			dao.updateNoticeArticle(conn, article);
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("NoticeService.doNoticeUpdate() 오류 : " + e);
+		} finally {
+			try {
+				if(conn!=null){conn.close();}
+			} catch (Exception e2) {}
+		}//try
+		
+	}
+	//==================================================================================================
+	
+	
+	
+	
+	//==================================================================================================
+    // getNoticeList(int currentPage) : 공지사항 목록 보기
     //==================================================================================================
-	public Hashtable getList(int currentPage){
+	public Hashtable getNoticeList(int currentPage){
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		Connection conn = null;

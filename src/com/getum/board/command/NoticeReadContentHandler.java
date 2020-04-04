@@ -31,7 +31,9 @@ public class NoticeReadContentHandler implements CommandHandler{
 			long idx = Integer.parseInt(req.getParameter("idx"));
 			
 			
-			NoticeReadContentRequest result = noticeService.getContent(idx);
+			NoticeReadContentRequest result = noticeService.getContent(idx, false);
+			
+			result.setB1_idx(idx);
 			
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("contentData", result);

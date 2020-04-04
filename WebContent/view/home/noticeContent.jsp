@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ page import="com.getum.board.service.NoticeReadContentRequest" %>
+<%@ page import="com.getum.auth.service.User" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%
+
+User user = null;
+
+if(session.getAttribute("authUser")!=null){
+user = (User) session.getAttribute("authUser");
+}
 
 //현재페이지
 int currentPage = (int) request.getAttribute("currentPage");
@@ -64,7 +71,20 @@ NoticeReadContentRequest contentData = (NoticeReadContentRequest) request.getAtt
                 <% }else{ %>
 	                <button type="button" class="btn btn-outline-secondary btn-block text-left">다음글 ▽ 다음글이 없습니다</button>
                 <% }//if %>
-					<button type="button" class="btn btn-primary text-center float-right mt-4" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">목록으로</button>
+                
+                	<div class="float-right mt-3">
+                <%
+		  				if(user!=null){
+		  					if(user.getM_grade()==255){
+		  		%>
+								<button type="button" class="btn btn-outline-secondary text-center" onclick="deleteBtn()">삭제하기</button>
+								<button type="button" class="btn btn-outline-secondary text-center" onclick="location.href='noticeCUD.get?flag=update&idx=<%= contentData.getB1_idx()%>&currentPage=<%=currentPage %>'">수정하기</button>
+				<%
+							}//if
+		  				}//if
+				%>
+						<button type="button" class="btn btn-primary text-center" onclick="location.href='notice.get?currentPage=<%=currentPage%>'">목록으로</button>
+					</div>
             </div>
         </div>
     </div>
@@ -83,6 +103,28 @@ NoticeReadContentRequest contentData = (NoticeReadContentRequest) request.getAtt
 
 
 <%@ include file="./jspf/_essentialFoot.jspf" %>
+
+<script>
+
+function deleteBtn(){
+	
+	Swal.fire({
+		  title: '정말 삭제하시겠습니까?',
+		  text: "삭제된 글을 복구가 불가합니다.",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#007042',
+		  cancelButtonColor: '#d33',
+		  cancelButtonText: '아니오',
+		  confirmButtonText: '예 삭제합니다'
+		}).then((result) => {
+		  if (result.value) {
+		    location.href="noticeCUD.get?flag=delete&idx=<%= contentData.getB1_idx()%>&currentPage=<%=currentPage %>"
+		  }
+		});
+}
+
+</script>
 
 </body>
 </html>

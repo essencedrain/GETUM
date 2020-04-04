@@ -36,6 +36,111 @@ public class BoardDAO {
 	
 		    
 		    //==================================================================================================
+		    // addCount(Connection, long) : (공지사항) 조회수 추가
+		    //==================================================================================================
+		    public void addCount(Connection conn, long idx) throws SQLException{
+		    	PreparedStatement pstmt = null;
+		    	
+		    	try {
+		    		pstmt = conn.prepareStatement("update board1_notice set b1_count=b1_count+1 where b1_idx=?");
+		    		pstmt.setLong(1, idx);
+		    		pstmt.executeUpdate();
+		    		
+		    	} catch (Exception e) {
+		    		System.out.println("BoardDAO.addCount() 예외 :"+e);
+		    	} finally {
+		    		try{
+		    			if(pstmt!=null){pstmt.close();}
+		    		}catch(Exception ex2){}
+		    	}
+		    }
+		    //==================================================================================================
+		    
+		    
+		    
+		    //==================================================================================================
+		    // deleteArticle(Connection, long) : (공지사항) 삭제
+		    //==================================================================================================
+		    public void deleteArticle(Connection conn, long idx) throws SQLException{
+		    	PreparedStatement pstmt = null;
+		    	
+		    	try {
+		    		pstmt = conn.prepareStatement("delete from board1_notice where b1_idx=?");
+		    		pstmt.setLong(1, idx);
+		    		pstmt.executeUpdate();
+		    		
+		    	} catch (Exception e) {
+		    		System.out.println("BoardDAO.addCount() 예외 :"+e);
+		    	} finally {
+		    		try{
+		    			if(pstmt!=null){pstmt.close();}
+		    		}catch(Exception ex2){}
+		    	}
+		    }
+		    //==================================================================================================
+		    
+		    
+		    
+		    //==================================================================================================
+		    // addNoticeArticle(Connection, long) : (공지사항) 글 삽입
+		    //==================================================================================================
+		    public void addNoticeArticle(Connection conn, String[] article) throws SQLException{
+		    	PreparedStatement pstmt = null;
+		    	
+		    	try {
+		    		pstmt = conn.prepareStatement("insert into board1_notice values(null,?,?,now(),now(),0,?)");
+		    		pstmt.setString(1, article[0]);
+		    		pstmt.setString(2, article[1]);
+		    		pstmt.setString(3, article[2]);
+		    		pstmt.executeUpdate();
+		    		
+		    	} catch (Exception e) {
+		    		System.out.println("BoardDAO.addCount() 예외 :"+e);
+		    	} finally {
+		    		try{
+		    			if(pstmt!=null){pstmt.close();}
+		    		}catch(Exception ex2){}
+		    	}
+		    	
+		    	
+		    	
+		    }
+		    //==================================================================================================
+		    
+		    
+		    
+		    //==================================================================================================
+		    // updateNoticeArticle(Connection, long) : (공지사항) 글 수정
+		    //==================================================================================================
+		    public void updateNoticeArticle(Connection conn, String[] article) throws SQLException{
+		    	PreparedStatement pstmt = null;
+		    	
+		    	try {
+		    		pstmt = conn.prepareStatement("update board1_notice set b1_subject=?, b1_content=?, m_id=?, b1_modify_date=now() where b1_idx=?");
+		    		pstmt.setString(1, article[0]);
+		    		pstmt.setString(2, article[1]);
+		    		pstmt.setString(3, article[2]);
+		    		pstmt.setLong(4, Long.parseLong(article[3]));
+		    		pstmt.executeUpdate();
+		    		
+		    	} catch (Exception e) {
+		    		System.out.println("BoardDAO.addCount() 예외 :"+e);
+		    	} finally {
+		    		try{
+		    			if(pstmt!=null){pstmt.close();}
+		    		}catch(Exception ex2){}
+		    	}
+		    	
+		    	
+		    	
+		    }
+		    //==================================================================================================
+		    
+		    
+		    
+		    
+		    
+		    //==================================================================================================
 		    // getTotalAriticleNum(Connection) : (공지사항) 전체 글 갯수 가져오기
 		    //==================================================================================================
 		    public int getTotalArticleNum(Connection conn) throws SQLException{
@@ -148,7 +253,7 @@ public class BoardDAO {
 		    
 		    
 		    //==================================================================================================
-		    // selectByCurrentPage(Connection, int) : DB에서 글 10개 가져오기
+		    // selectByCurrentPage(Connection, int) : (공지사항) DB에서 글 10개 가져오기
 		    //==================================================================================================
 		    public List<NoticeReadRequest> selectByCurrentPage(Connection conn, int limitParam, int articlePerPage) throws SQLException{
 		    	
