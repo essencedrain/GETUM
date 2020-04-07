@@ -12,6 +12,7 @@ import com.getum.command.CommandHandler;
 
 //==================================================================================================
 //FreeBoardHandler : 자유게시판 리스트 보기 / 내용 보기 핸들러 (freeBoard.get)
+//굳이 핸들러를 여러개로 쪼갤 필요가 없다.
 //공지사항과 다르게 CRUD 전부를 핸들러 하나로 합치고 플래그 받음
 //GET 요청 : notice.jsp?currentPage=? 로 리턴 // currentPage필요
 //	list : freeboard.jsp?currentPage=? 로 리턴
@@ -101,8 +102,9 @@ public class FreeBoardHandler implements CommandHandler{
 			long idx = Long.parseLong(req.getParameter("idx"));
 			int currentPage = Integer.parseInt(req.getParameter("currentPage"));
 			int origin = Integer.parseInt(req.getParameter("origin"));
+			int origin_step = Integer.parseInt(req.getParameter("origin_step"));
 			
-			freeboardService.doFreeboardDelete(idx, origin);
+			freeboardService.doFreeboardDelete(idx, origin, origin_step);
 			
 			Hashtable result = freeboardService.getFreeboardList(1);
 			
@@ -112,6 +114,19 @@ public class FreeBoardHandler implements CommandHandler{
 			
 			
 			return view_list+1;
+			
+		}else if(flag.equals("update")) {
+			long idx = Long.parseLong(req.getParameter("idx"));
+			int currentPage = Integer.parseInt(req.getParameter("currentPage"));
+			
+			FreeboardReadRequest result = freeboardService.getContent(idx, true);
+			
+			result.setB2_idx(idx);
+			
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("contentData", result);
+			
+			return "freeboardUpdate.jsp";
 			
 		}//if
 		
@@ -169,6 +184,29 @@ public class FreeBoardHandler implements CommandHandler{
 			
 			
 			return view_list+1;
+			
+		}else if(flag.equals("update")) {
+			String[] article = new String[3];
+			article[0] = req.getParameter("subject");
+			article[1] = req.getParameter("content");
+			article[2] = req.getParameter("idx");
+
+			
+			freeboardService.doFreeboardUpdate(article);
+			
+			int currentPage = Integer.parseInt(req.getParameter("curentPage"));
+			long idx = Long.parseLong(req.getParameter("idx"));
+			
+			
+			FreeboardReadRequest result = freeboardService.getContent(idx, false);
+			
+			result.setB2_idx(idx);
+			
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("contentData", result);
+			
+			
+			return view_content+currentPage+"&idx="+idx;
 			
 		}//if
 		

@@ -13,6 +13,37 @@ import com.getum.util.DBConnection;
 public class FreeboardService {
 	
 	
+	
+	//==================================================================================================
+	// doFreeboardUpdate(String[] 글) : (자유게시판) 글 수정
+	//==================================================================================================
+	public void doFreeboardUpdate(String[] article) {
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		Connection conn = null;
+		
+		try {
+			
+			conn = DBConnection.getCon();
+			
+			dao.updateFreeboardArticle(conn, article);;
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("NoticeService.doNoticeUpdate() 오류 : " + e);
+		} finally {
+			try {
+				if(conn!=null){conn.close();}
+			} catch (Exception e2) {}
+		}//try
+		
+	}
+	//==================================================================================================
+		
+	
+	
+	
 	//==================================================================================================
     // getContent(int idx, boolean isUpdate) : 조회수 증가 + 내용보기 // 수정일떈 조회수 증가 안함
     //==================================================================================================
@@ -153,7 +184,7 @@ public class FreeboardService {
 	//==================================================================================================
 	// doFreeboardDelete(String[] 글) : (자유게시판) 글 삭제
 	//==================================================================================================
-	public void doFreeboardDelete(long idx, int origin) {
+	public void doFreeboardDelete(long idx, int origin, int origin_step) {
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		Connection conn = null;
@@ -162,7 +193,7 @@ public class FreeboardService {
 		try {
 			
 			conn = DBConnection.getCon();
-			check = dao.checkArticle(conn, origin);
+			check = dao.checkArticle(conn, origin, origin_step);
 			
 			if(check) { //자식딸린글 = 1
 				dao.deleteArticle2(conn, idx,1);

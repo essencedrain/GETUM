@@ -83,6 +83,7 @@
                                 <option value="" selected>일</option>
                               </select>
                         </div>
+                        <input type="hidden" name="flag" id="flag" value="join">
                         <button type="submit" class="btn btn-lg btn-primary w-100">가입하기</button>
                     </form>
                 </div>

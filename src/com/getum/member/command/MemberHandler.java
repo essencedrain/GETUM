@@ -1,24 +1,28 @@
 package com.getum.member.command;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.getum.command.CommandHandler;
+import com.getum.member.model.MemberDTO;
 import com.getum.member.service.JoinMemberRequest;
-import com.getum.member.service.JoinMemberService;
+import com.getum.member.service.MemberService;
+import com.getum.point.model.PointDTO;
 
 //==================================================================================================
-// JoinMemberHandler : 회원가입 핸들러
+// MemberHandler : 회원가입 핸들러
 // GET 요청 : signup.jsp 리턴
 // POST 요청 : 회원가입처리
 // 	-> 성공시 : signupSuccess.jsp 리턴 
 // 	-> 실패시 : signup.jsp 리턴
 //==================================================================================================
-public class JoinMemberHandler implements CommandHandler{
+public class MemberHandler implements CommandHandler{
 	
 	//field
 		private String form_view = "/view/home/signup.jsp";
-		private JoinMemberService joinService = new JoinMemberService();
+		private MemberService memberService = new MemberService();
 
 	
 	//==================================================================================================
@@ -45,7 +49,20 @@ public class JoinMemberHandler implements CommandHandler{
     // processForm() : GET 처리
     //==================================================================================================
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		return form_view;
+		String flag = req.getParameter("flag");
+		
+		if(flag.equals("mypage")) {
+			String m_id = req.getParameter("m_id");
+			MemberDTO dto= memberService.getMember(m_id);
+			List<PointDTO> pointList = memberService.getPoint(m_id);
+			
+			req.setAttribute("dto", dto);
+			req.setAttribute("list", pointList);
+			
+			return "/view/home/mypage.jsp";
+		}
+		
+		return null;
 	}
     //==================================================================================================
 	
@@ -56,36 +73,55 @@ public class JoinMemberHandler implements CommandHandler{
     //==================================================================================================
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) {
 		
-		//form에서 넘어온 자료 처리
-		JoinMemberRequest joinReq = new JoinMemberRequest();
-		joinReq.setM_id(req.getParameter("m_id"));
-		joinReq.setM_pwd(req.getParameter("m_pwd"));
-		joinReq.setM_name(req.getParameter("m_name"));
-		joinReq.setM_email(req.getParameter("m_email"));
+		String flag = req.getParameter("flag");
 		
-		String temp = req.getParameter("m_hp");
-		String hp = temp.substring(0, 3) + temp.substring(4, 8) + temp.substring(9); 
-		joinReq.setM_hp(hp);
-		
-		String now = req.getParameter("year") + "-" + req.getParameter("month") + "-" + req.getParameter("day");
-		java.sql.Date d = java.sql.Date.valueOf(now);
-		joinReq.setM_birthday(d);
-		
-		try {
-			joinService.join(joinReq);
+		if(flag.equals("join")) {
+			//form에서 넘어온 자료 처리
+			JoinMemberRequest joinReq = new JoinMemberRequest();
+			joinReq.setM_id(req.getParameter("m_id"));
+			joinReq.setM_pwd(req.getParameter("m_pwd"));
+			joinReq.setM_name(req.getParameter("m_name"));
+			joinReq.setM_email(req.getParameter("m_email"));
+			
+			String temp = req.getParameter("m_hp");
+			String hp = temp.substring(0, 3) + temp.substring(4, 8) + temp.substring(9); 
+			joinReq.setM_hp(hp);
+			
+			String now = req.getParameter("year") + "-" + req.getParameter("month") + "-" + req.getParameter("day");
+			java.sql.Date d = java.sql.Date.valueOf(now);
+			joinReq.setM_birthday(d);
+			
+			memberService.join(joinReq);
 			return "/view/home/signupSuccess.jsp";			
-		} catch (Exception e) {
-			System.out.println("JoinMemberHandler.processSubmit() 에러 : " + e);
-			return form_view;
-		}//try
+			
+		}else if(flag.equals("update")) {
+			
+			String m_id = req.getParameter("m_id");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setM_name(req.getParameter("name"));
+			dto.setM_email(req.getParameter("email"));
+			String temp = req.getParameter("hp");
+			String hp = temp.substring(0, 3) + temp.substring(4, 8) + temp.substring(9); 
+			dto.setM_hp(hp);
+			dto.setM_id(m_id);
+			
+			memberService.updateMypage(dto);
+			
+			
+			dto= memberService.getMember(m_id);
+			
+			
+			req.setAttribute("dto", dto);
+			
+			return "/view/home/mypage.jsp";
+		
+		}//if
+		
+		return null;
 	}
     //==================================================================================================
     
     
-    
-    //==================================================================================================
-    // 
-    //==================================================================================================
-    //==================================================================================================
 	
 }//class

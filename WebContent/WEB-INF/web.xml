@@ -69,11 +69,29 @@
 		<url-pattern>/view/home/order.get</url-pattern>
 		<url-pattern>/view/home/orderList.get</url-pattern>
 		<url-pattern>/view/home/orderDetail.get</url-pattern>
+		<url-pattern>/view/home/mypage.get</url-pattern>
 		<url-pattern>/view/home/order.jsp</url-pattern>
 		<url-pattern>/view/home/orderDetail.jsp</url-pattern>
 		<url-pattern>/view/home/orderList.jsp</url-pattern>
 		<url-pattern>/view/home/orderSuccess.jsp</url-pattern>
 		<url-pattern>/view/home/signupSuccess.jsp</url-pattern>
+	</filter-mapping>
+	<!-- ============================================================ -->
+	
+	
+	
+	<!-- ============================================================ -->
+	<!-- filter 필터 : AdminCheckFilter -->
+	<!-- ============================================================ -->
+	<filter>
+		<filter-name>AdminCheck</filter-name>
+		<filter-class>com.getum.util.AdminCheckFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>AdminCheck</filter-name>
+		<url-pattern>/view/home/noticeCUD.get</url-pattern>
+		<url-pattern>/view/home/productCreate.jsp</url-pattern>
 	</filter-mapping>
 	<!-- ============================================================ -->
 	 

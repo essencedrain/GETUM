@@ -83,20 +83,20 @@ if(totalPages < endPage ){
             <div class="table-responsive mt-4">
                 <table class="table table-bordered">
                     <thead class="text-center">
-                        <td style="width: 10%">번호</td>
-                        <td style="width: 70%">제목</td>
-                        <td style="width: 10%; overflow:hidden;text-overflow;ellipsis;">등록일</td>
-                        <td style="width: 10%; overflow:hidden;text-overflow;ellipsis;">조회수</td>
+                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;">번호</td>
+                        <td style="width: 70%; overflow:hidden;text-overflow:ellipsis;">제목</td>
+                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;">등록일</td>
+                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;">조회수</td>
                     </thead>
                     <tbody class="text-center">
                     <%
                     	for(NoticeReadRequest i : list){
                    	%>
 						<tr>
-	                        <td style="width: 10%"><%= i.getNum() %></td>
-	                        <td style="width: 70%"><a href="noticeContent.get?currentPage=<%= currentPage%>&idx=<%= i.getB1_idx()%>"><%= i.getB1_subject() %></a></td>
+	                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;"><%= i.getNum() %></td>
+	                        <td style="width: 70%; overflow:hidden;text-overflow:ellipsis;"><a href="noticeContent.get?currentPage=<%= currentPage%>&idx=<%= i.getB1_idx()%>"><%= i.getB1_subject() %></a></td>
 	                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;"><nobr><%= i.getB1_reg_date().substring(0, 10) %></nobr></td>
-	                        <td style="width: 10%"><%= i.getB1_count() %></td>
+	                        <td style="width: 10%; overflow:hidden;text-overflow:ellipsis;"><%= i.getB1_count() %></td>
 						</tr>
                     <%	}//for %>
                     </tbody>

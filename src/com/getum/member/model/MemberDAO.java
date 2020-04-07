@@ -1,5 +1,6 @@
 package com.getum.member.model;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +58,8 @@ public class MemberDAO {
 					memberDTO.setM_birthday(rs.getDate("m_birthday"));
 					memberDTO.setM_grade(rs.getShort("m_grade"));
 					memberDTO.setM_withdraw_flag(rs.getByte("m_withdraw_flag"));
+					
+					memberDTO.setM_hp(rs.getString("m_hp").substring(0,3)+"-"+rs.getString("m_hp").substring(3,7)+"-"+rs.getString("m_hp").substring(7));
 					
 				}//if
 				
@@ -135,6 +138,95 @@ public class MemberDAO {
 	    	return result;
 	    }
 	    //==================================================================================================
+	    
+	    
+	    
+	    //==================================================================================================
+	    // updateMypage(Connection, MemberDTO) 회원정보수정
+	    //==================================================================================================
+	    public void updateMypage(Connection conn, MemberDTO dto)  throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+	    	try {
+	    		
+	    		pstmt = conn.prepareStatement("update member set m_name=?, m_email=?, m_hp=? where m_id=?");
+	    		pstmt.setString(1, dto.getM_name());
+	    		pstmt.setString(2, dto.getM_email());
+	    		pstmt.setString(3, dto.getM_hp());
+	    		pstmt.setString(4, dto.getM_id());
+	    		
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("MemberDAO.updateMypage() 예외 :"+e);
+	    	}finally {
+	    		try{
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
+	    }
+	    //==================================================================================================
+	    
+	    
+	    
+	    
+	    //==================================================================================================
+	    // withdraw(Connection, m_id) 회원탈퇴
+	    //==================================================================================================
+	    public void withdraw(Connection conn, String m_id)  throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+	    	try {
+	    		
+	    		pstmt = conn.prepareStatement("update member set m_withdraw_flag=1 where m_id=?");
+	    		pstmt.setString(1, m_id);
+	    		
+	    		
+	    		pstmt.executeUpdate();
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("MemberDAO.withdraw() 예외 :"+e);
+	    	}finally {
+	    		try{
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
+	    }
+	    //==================================================================================================
+	    
+	    
+	    
+	    
+	    
+	    //==================================================================================================
+	    // changePwd(Connection, String[]) 비밀번호 변경 ajax
+	    //==================================================================================================
+	    public int changePwd(Connection conn, String newPwd, String m_id)  throws SQLException{
+	    	PreparedStatement pstmt = null;
+	    	
+	    	
+	    	try {
+	    		pstmt = conn.prepareStatement("update member set m_pwd = sha2(concat('ypl',?),256) where m_id=?");
+	    		pstmt.setString(1, newPwd);
+	    		pstmt.setString(2, m_id);
+	    		
+	    		pstmt.executeUpdate();
+	    		
+	    		return 1;//성공
+	    		
+	    	} catch (Exception e) {
+	    		System.out.println("MemberDAO.changePwd() 예외 :"+e);
+	    		return 0;//실패
+	    	}finally {
+	    		try{
+	    			if(pstmt!=null){pstmt.close();}
+	    		}catch(Exception ex2){}
+	    	}//try
+	    	
+	    }
+	    //==================================================================================================
+	    
+	    
 	    
 	    
 	    

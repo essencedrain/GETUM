@@ -108,20 +108,20 @@ public class BoardDAO {
 		    //==================================================================================================
 		    // checkArticle(Connection, long) : (자유게시판) 게시물 삭제전 딸린 글이 있는지 확인
 		    //==================================================================================================
-		    public boolean checkArticle(Connection conn, int origin) throws SQLException{
+		    public boolean checkArticle(Connection conn, int origin, int origin_step) throws SQLException{
 		    	PreparedStatement pstmt = null;
 		    	ResultSet rs = null;
 		    	try {
-		    		pstmt = conn.prepareStatement("select count(*) from board2_free where b2_origin=?");
+		    		pstmt = conn.prepareStatement("select count(*) from board2_free where b2_origin=? and b2_origin_step>?");
 		    		pstmt.setLong(1, origin);
+		    		pstmt.setLong(2, origin_step);
 		    		rs = pstmt.executeQuery();
 		    		
 		    		if(rs.next()) {
-		    			if(rs.getInt(1)>1) {
+		    			if(rs.getInt(1)>0) {
 		    				return true;
 		    			}else {
 		    				return false;
-		    				
 		    			}
 		    		}
 		    		
@@ -295,7 +295,7 @@ public class BoardDAO {
 		    		pstmt.executeUpdate();
 		    		
 		    	} catch (Exception e) {
-		    		System.out.println("BoardDAO.addCount() 예외 :"+e);
+		    		System.out.println("BoardDAO.updateNoticeArticle() 예외 :"+e);
 		    	} finally {
 		    		try{
 		    			if(pstmt!=null){pstmt.close();}
@@ -307,6 +307,35 @@ public class BoardDAO {
 		    }
 		    //==================================================================================================
 		    
+		    
+		    
+		    
+		    
+		    //==================================================================================================
+		    // updateFreeboardArticle(Connection, long) : (자유게시판) 글 수정
+		    //==================================================================================================
+		    public void updateFreeboardArticle(Connection conn, String[] article) throws SQLException{
+		    	PreparedStatement pstmt = null;
+		    	
+		    	try {
+		    		pstmt = conn.prepareStatement("update board2_free set b2_subject=?, b2_content=?,  b2_modify_date=now() where b2_idx=?");
+		    		pstmt.setString(1, article[0]);
+		    		pstmt.setString(2, article[1]);
+		    		pstmt.setLong(3, Long.parseLong(article[2]));
+		    		pstmt.executeUpdate();
+		    		
+		    	} catch (Exception e) {
+		    		System.out.println("BoardDAO.updateFreeboardArticle() 예외 :"+e);
+		    	} finally {
+		    		try{
+		    			if(pstmt!=null){pstmt.close();}
+		    		}catch(Exception ex2){}
+		    	}
+		    	
+		    	
+		    	
+		    }
+		    //==================================================================================================
 		    
 		    
 		    
@@ -480,6 +509,7 @@ public class BoardDAO {
 		    			result.setB2_origin_step(rs.getLong("b2_origin_step"));
 		    			result.setB2_origin_depth(rs.getLong("b2_origin_depth"));
 		    			result.setM_id(rs.getString("m_id"));
+		    			result.setB2_delete_flag(rs.getInt("b2_delete_flag"));
 		    			
 		    		}//if
 		    		

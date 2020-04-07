@@ -16,6 +16,8 @@ user = (User) session.getAttribute("authUser");
 //현재페이지
 int currentPage = (int) request.getAttribute("currentPage");
 FreeboardReadRequest contentData = (FreeboardReadRequest) request.getAttribute("contentData");
+
+
 %>
 
 <!DOCTYPE html>
@@ -44,6 +46,7 @@ FreeboardReadRequest contentData = (FreeboardReadRequest) request.getAttribute("
         <div class="col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 col-12 pb-1 pb-1">
             <a id="goback" href="freeboard.get?flag=list&currentPage=<%=currentPage%>"><h4><i class="far fa-arrow-alt-circle-left"></i> 목록으로</h4></a>
         </div>
+        <% if(contentData.getB2_delete_flag()==0){ %>
         <div class="col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 col-12 pb-1">
             <div class="table-responsive mt-4">
                 <table class="table table-bordered">
@@ -78,6 +81,23 @@ FreeboardReadRequest contentData = (FreeboardReadRequest) request.getAttribute("
 				</div>
             </div>
         </div>
+        <% }else{ %>
+        <div class="col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 col-12 pb-1">
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>삭제된 게시글입니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+				<div class="float-right mt-3">
+					<button type="button" class="btn btn-primary text-center" onclick="location.href='freeboard.get?flag=list&currentPage=<%=currentPage%>'">목록으로</button>
+				</div>
+            </div>
+        </div>
+        <% }//if %>
     </div>
 </section>
 
@@ -110,7 +130,7 @@ function deleteBtn(){
 		  confirmButtonText: '예 삭제합니다'
 		}).then((result) => {
 		  if (result.value) {
-		    location.href="freeboard.get?flag=delete&idx=<%= contentData.getB2_idx()%>&currentPage=<%=currentPage %>&origin=<%= contentData.getB2_origin()%>"
+		    location.href="freeboard.get?flag=delete&idx=<%= contentData.getB2_idx()%>&currentPage=<%=currentPage %>&origin=<%= contentData.getB2_origin()%>&origin_step=<%= contentData.getB2_origin_step()%>"
 		  }
 		});
 }

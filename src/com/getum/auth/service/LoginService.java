@@ -31,6 +31,9 @@ public class LoginService {
 			if(dto == null) {
 				//id 없음
 				return null;
+			}else if(dto.getM_withdraw_flag()==1) {
+				//탈퇴한 아이디
+				return null;
 			}//if
 			
 			try {

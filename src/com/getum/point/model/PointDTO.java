@@ -1,6 +1,5 @@
 package com.getum.point.model;
 
-import java.sql.Timestamp;
 
 //======================================================================================================
 // 포인트 DTO
@@ -10,9 +9,9 @@ public class PointDTO {
 	//field
 	private long po_no;
 	private byte po_usesave_flag;
-	private long po_point;
+	private String po_point;
 	private String po_detail;
-	private Timestamp po_date;
+	private String po_date;
 	
 	//constructor
 	public PointDTO(){}
@@ -35,11 +34,11 @@ public class PointDTO {
 		this.po_usesave_flag = po_usesave_flag;
 	}
 
-	public long getPo_point() {
+	public String getPo_point() {
 		return po_point;
 	}
 
-	public void setPo_point(long po_point) {
+	public void setPo_point(String po_point) {
 		this.po_point = po_point;
 	}
 
@@ -51,11 +50,11 @@ public class PointDTO {
 		this.po_detail = po_detail;
 	}
 
-	public Timestamp getPo_date() {
+	public String getPo_date() {
 		return po_date;
 	}
 
-	public void setPo_date(Timestamp po_date) {
+	public void setPo_date(String po_date) {
 		this.po_date = po_date;
 	}
 	

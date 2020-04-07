@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="com.getum.auth.service.User" %>  
 <%@ page import="com.getum.cart.service.*" %>
 <%
 Hashtable hcart2 = null;
 CartRequest cReq2 = null;
 int hcartSize2 = 0;
+
+User user2 = null;
+
+if(session.getAttribute("authUser")!=null){
+user2 = (User) session.getAttribute("authUser");
+}
+
 %>
 
 <header class="header-area mb-5">
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-xl fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.jsp"> <i class="fas fa-glass-whiskey"></i> GETUM</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            <button class="navbar-toggler d-xl-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
             </button>
@@ -62,7 +70,7 @@ int hcartSize2 = 0;
 	                    <a class="nav-link btn btn-outline-secondary" href="logout.jsp">로그아웃</a>
 	                </li>
 	                <li class="nav-item mx-2">
-	                    <a class="nav-link btn btn-primary" href="mypage.jsp">마이페이지</a>
+	                    <a class="nav-link btn btn-primary" href="mypage.get?flag=mypage&m_id=<%= user2.getM_id()%>">마이페이지</a>
 	                </li>
                 <%}//if %>
                 
