@@ -54,7 +54,7 @@
 	                </div>
 	                <h3 id="price">총 상품금액 : <span id="output"></span></h3>
 	                <div class="button-group my-4 float-right ">
-	                    <button type="button" class="btn btn-lg btn-outline-secondary mr-1">구매하기</button>
+	                    <button type="button" class="btn btn-lg btn-outline-secondary mr-1" onclick="return checkStock2();">구매하기</button>
 	                    <button type="button" class="btn btn-lg btn-primary" onclick="return checkStock();">장바구니</button>
 	                </div>
             </div>
@@ -64,6 +64,7 @@
         <input type="hidden" name="manufacture" value="${productDetail.p_manufacture}">
         <input type="hidden" name="rawPrice" id="rawPrice" value="${productDetail.p_price}">
         <input type="hidden" name="stock" id="stock" value="${productDetail.p_stock}">
+        <input type="hidden" name="flag" id="flag" value="">
         </form>
         <div class="detail col-12">
             <hr>

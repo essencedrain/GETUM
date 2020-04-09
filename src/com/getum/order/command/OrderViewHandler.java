@@ -88,16 +88,27 @@ public class OrderViewHandler implements CommandHandler{
 				}catch(Exception e2){}
 			}//try
 			
+			
+			
 			if(dto==null) {
 				req.getSession().setAttribute("userAddr", null);
 			}else {
 				req.getSession().setAttribute("userAddr", dto);
 			}//if
 			
+			
+			
+			
 			if(list==null) {
 				req.getSession().setAttribute("userAddrAll", null);
 			}else {
 				req.getSession().setAttribute("userAddrAll", list);
+			}//if
+			
+			
+			
+			if(flag.equals("buy")) {
+				return "/view/home/order.jsp?flag=buy";
 			}//if
 			
 		}//if

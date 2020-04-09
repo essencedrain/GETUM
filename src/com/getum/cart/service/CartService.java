@@ -15,6 +15,7 @@ import com.getum.util.DBConnection;
 public class CartService {
 	
 	private Hashtable<String, CartRequest> hcart = new Hashtable<>();
+	private Hashtable<String, CartRequest> hcart2 = new Hashtable<>();
 	
 	
 	
@@ -48,6 +49,31 @@ public class CartService {
 			hcart.put(uuid, cartRequest);
 			req.getSession().setAttribute("cartMap", hcart);
 		}
+		
+	}
+	//==================================================================================================
+	
+	
+	
+	
+	//==================================================================================================
+	// insertCart2(HttpServletRequest) : (구매하기 버튼을 위한) 장바구니 등록 처리2
+	//==================================================================================================
+	public void insertCart2(HttpServletRequest req) {
+		
+		String uuid = req.getParameter("imgName").substring(0,33);
+		
+		CartRequest cartRequest = new CartRequest();
+		cartRequest.setImgName(req.getParameter("imgName"));
+		cartRequest.setName(req.getParameter("name"));
+		cartRequest.setManufacture(req.getParameter("manufacture"));
+		cartRequest.setPrice(Integer.parseInt(req.getParameter("rawPrice")));
+		cartRequest.setQuantity(Integer.parseInt(req.getParameter("quantity")));
+		cartRequest.setStock(Integer.parseInt(req.getParameter("stock")));
+		
+		hcart2.clear();
+		hcart2.put(uuid, cartRequest);
+		req.getSession().setAttribute("cartMap2", hcart2);
 		
 	}
 	//==================================================================================================

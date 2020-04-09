@@ -22,8 +22,8 @@
 
 <section class="signupSuccess-area">
 <div class="container-fluid pt-5">
-	<div class="pb-5 text-center">
-            <h1>관리자 전용 페이지 입니다.</h1>
+	<div class="py-5 text-center">
+            <h1 class="display-3">관리자 전용 페이지 입니다.</h1>
             <h3>잠시후 메인페이지로 이동합니다.</h3>
         </div>
 </div>
@@ -45,7 +45,7 @@
 <%@ include file="./jspf/_essentialFoot.jspf" %>
 
 <script>
-setTimeout(function(){location.href="index.jsp"},1500);
+setTimeout(function(){location.href="index.jsp"},3000);
 </script>
 </body>
 </html>

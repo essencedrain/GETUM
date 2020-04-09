@@ -74,7 +74,6 @@
 		<url-pattern>/view/home/orderDetail.jsp</url-pattern>
 		<url-pattern>/view/home/orderList.jsp</url-pattern>
 		<url-pattern>/view/home/orderSuccess.jsp</url-pattern>
-		<url-pattern>/view/home/signupSuccess.jsp</url-pattern>
 	</filter-mapping>
 	<!-- ============================================================ -->
 	
@@ -95,6 +94,80 @@
 	</filter-mapping>
 	<!-- ============================================================ -->
 	 
+	
+	<!-- ============================================================ -->
+	<!-- 에러페이지 처리 -->
+	<!-- ============================================================ -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/view/error/e400.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>401</error-code>
+		<location>/view/error/e401.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/view/error/e403.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/view/error/e404.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>405</error-code>
+		<location>/view/error/e405.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>407</error-code>
+		<location>/view/error/e407.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>408</error-code>
+		<location>/view/error/e408.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>413</error-code>
+		<location>/view/error/e413.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>414</error-code>
+		<location>/view/error/e414.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/view/error/e500.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>501</error-code>
+		<location>/view/error/e501.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>502</error-code>
+		<location>/view/error/e502.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/view/error/e503.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>505</error-code>
+		<location>/view/error/e505.jsp</location>
+	</error-page>
+	
+	<!-- ============================================================ -->
+	
+	
 	
 	
 	<!-- ============================================================ -->

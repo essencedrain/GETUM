@@ -58,12 +58,12 @@ public class OrderService {
 			memberDAO.addPoint(conn, dto.getM_id(), dto.getO_add_point());
 			
 			//3. point에 포인트 적립 내역 추가
-			pointDAO.insertFromOrder(conn, dto, "주문번호 :"+ o_no +" / 구매 적립", 1, dto.getO_add_point());
+			pointDAO.insertFromOrder(conn, dto.getM_id(), "주문번호 :"+ o_no +" / 구매 적립", 1, dto.getO_add_point());
 
 			//4. member에 사용포인트 차감, point에 포인트 사용 내역 추가
 			if(dto.getO_use_point() >0) {
 				memberDAO.usePoint(conn, dto.getM_id(), dto.getO_use_point());
-				pointDAO.insertFromOrder(conn, dto, "주문번호 :"+ o_no +" / 포인트 사용", 0, dto.getO_use_point());
+				pointDAO.insertFromOrder(conn, dto.getM_id(), "주문번호 :"+ o_no +" / 포인트 사용", 0, dto.getO_use_point());
 			}//if
 			
 			//5. order_detail주문상세 삽입 + product 재고 감소

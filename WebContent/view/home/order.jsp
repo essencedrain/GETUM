@@ -8,13 +8,19 @@
 
 
 <%
-Hashtable hcart = null;
 CartRequest cReq = null;
 User user = null;
 int hcartSize = 0;
 int priceSum = 0;
 
-hcart = (Hashtable) session.getAttribute("cartMap");
+Hashtable hcart = null;
+if(request.getParameter("flag")!=null){
+	if(request.getParameter("flag").equals("default")){
+		hcart = (Hashtable) session.getAttribute("cartMap");
+	}else{
+		hcart = (Hashtable) session.getAttribute("cartMap2");
+	}
+}//if
 Enumeration hcartKey = hcart.keys();
 hcartSize = hcart.size();
 
@@ -259,6 +265,18 @@ hcartSize = hcart.size();
                 	<input type="hidden" name="o_request" id="o_request" value="">
                 	<input type="hidden" name="m_id" id="m_id" value="${authUser.m_id}">
                 	<input type="hidden" name="m_point" value="${authUser.m_point}">
+                	<%
+                	if(request.getParameter("flag")!=null){
+                		if(request.getParameter("flag").equals("default")){
+                	%>
+                			<input type="hidden" name="flag" value="default">
+                			
+                	<% }else if(request.getParameter("flag").equals("buy")){ %>
+                			<input type="hidden" name="flag" value="buy">
+                	<%
+                		}//if
+                	}//if
+                	%>
                 	<button type="button" class="btn btn-lg btn-primary px-5 m-2" onclick="return payment1();">결제하기</button>
                 </form>
             </div>

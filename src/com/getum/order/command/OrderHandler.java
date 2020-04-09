@@ -63,6 +63,8 @@ public class OrderHandler implements CommandHandler{
     //==================================================================================================
 	private String processPost(HttpServletRequest req, HttpServletResponse res) {
 		
+		String flag = req.getParameter("flag");
+		
 		//form에서 넘어온 자료 처리
 		OrderDTO dto = new OrderDTO();
 		dto.setO_total_price(Long.parseLong(req.getParameter("o_total_price")));
@@ -106,8 +108,12 @@ public class OrderHandler implements CommandHandler{
 		
 		
 		//장바구니 데이터 획득
-		Hashtable<String, CartRequest> hcart = (Hashtable) req.getSession().getAttribute("cartMap");
-		
+		Hashtable<String, CartRequest> hcart = null;
+		if(flag.equals("default")) {
+			hcart = (Hashtable) req.getSession().getAttribute("cartMap");
+		}else if(flag.equals("buy")){ //구매하기 버튼 전용 임시 장바구니
+			hcart = (Hashtable) req.getSession().getAttribute("cartMap2");
+		}//if
 		
 		try {
 			OrderSuccessRequest osr = os.insert(dto, hcart);
@@ -118,6 +124,7 @@ public class OrderHandler implements CommandHandler{
 			req.setAttribute("orderResult", osr);
 			
 			req.getSession().setAttribute("cartMap", null); //세션 장바구니 null
+			req.getSession().setAttribute("cartMap2", null); //세션 구매하기용 임시 장바구니 null
 			
 			//세션에 User 포인트 새로고침
 			User user = (User)req.getSession().getAttribute("authUser");

@@ -2,10 +2,23 @@
     pageEncoding="UTF-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.getum.cart.service.*" %>
+<%@ page import="com.getum.auth.service.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%
+User user = (User) session.getAttribute("authUser");
+String m_id = user.getM_id();
+
+//장바구니 담기후 넘어오는 경우 리프레쉬
+if(request.getParameter("flag")!=null){
+	if(request.getParameter("flag").equals("process")){
+		response.sendRedirect("cart.jsp");
+	}else if(request.getParameter("flag").equals("buy")){
+		response.sendRedirect("order.get?flag=buy&m_id="+m_id);
+	}//if
+}//if
+
 Hashtable hcart = null;
 CartRequest cReq = null;
 int hcartSize = 0;

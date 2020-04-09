@@ -66,7 +66,7 @@
         <div class="row">
             <div class="wow animated bounceInDown col-md-4 text-center py-2">
                 <i class="fas fa-gifts mt-5"></i>
-                <h4 class="py-3">신규 쿠폰 즉시 지급</h4>
+                <h4 class="py-3">신규가입 적립금 지급</h4>
             </div>
             <div class="wow animated bounceInDown col-md-4 text-center py-2">
                 <i class="fas fa-birthday-cake mt-5"></i>

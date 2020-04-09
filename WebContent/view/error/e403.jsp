@@ -20,8 +20,8 @@
 <section class="signUp-area">
     <div class="container-fluid pt-5">
             <div class="py-5 text-center">
-            <h1 class="display-1 text-danger">500</h1>
-            <h3>일시적인 오류가 발생했습니다.</h3>
+            <h1 class="display-1 text-danger">403</h1>
+            <h3>접근이 거부되었습니다.</h3>
             <br>
             <h3>잠시후 메인화면으로 이동합니다.</h3>
         	</div>

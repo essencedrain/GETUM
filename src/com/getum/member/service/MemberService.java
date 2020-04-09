@@ -22,13 +22,14 @@ public class MemberService {
 	public void join(JoinMemberRequest joinReq) {
 		
 		MemberDAO dao = MemberDAO.getInstance();
+		PointDAO pointDAO = PointDAO.getInstance();
 		Connection conn = null;
 		
 		try {
 			conn = DBConnection.getCon();
 			
 			dao.insert(conn, joinReq);
-			
+			pointDAO.insertFromOrder(conn, joinReq.getM_id(), "회원가입 축하 적립금", 1, 1000);
 		} catch (Exception e1) {
 			System.out.println("MemberService.join() 에러"+e1);
 		} finally {

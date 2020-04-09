@@ -63,7 +63,7 @@ public class CartHandler implements CommandHandler{
 					}
 				}
 				
-				return form_view;
+				return form_view+"?flag=process";
 		}
 	    //==================================================================================================
 		
@@ -74,9 +74,19 @@ public class CartHandler implements CommandHandler{
 	    //==================================================================================================
 		private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception{
 			
+				String flag = req.getParameter("flag");
+				if(flag.equals("cart")) {
+					cartService.insertCart(req);
+					return form_view+"?flag=process";
+					
+				}else {
+					
+					cartService.insertCart2(req);
+					
+					return form_view+"?flag=buy";
+				}//if
+
 				
-				cartService.insertCart(req);
-				return form_view;
 			
 		}
 	    //==================================================================================================

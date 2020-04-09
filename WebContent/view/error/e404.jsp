@@ -1,11 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<html>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+    <%@ include file="../home/jspf/_essentialHead.jspf" %>
 </head>
 <body>
-<h1>404에러페이지</h1>
+<!--  ======================= Start Header Area ============================== -->
+<%@ include file="../home/jspf/_header.jspf" %>
+<!--  ======================= End Header Area ============================== -->
+
+
+<!--  ======================= Start Main Area ================================ -->
+<main class="site-main">
+<!--  ======================= Start ---- Area =======================  -->
+
+<section class="signUp-area">
+    <div class="container-fluid pt-5">
+            <div class="py-5 text-center">
+            <h1 class="display-1 text-danger">404</h1>
+            <h3>찾을 수 없는 페이지입니다.</h3>
+            <h3>요청하신 페이지가 사라졌거나, 잘못된 경로를 이용하셨어요</h3>
+            <br>
+            <h3>잠시후 메인화면으로 이동합니다.</h3>
+        	</div>
+    </div>
+</section>n>
+
+<!--  ======================= End ---- Area =======================  -->
+</main>
+<!--  ======================= END Main Area ================================ -->
+
+
+<!--  ======================= Start footer Area ================================ -->
+
+<%@ include file="../home/jspf/_footer.jspf" %>
+
+<!--  ======================= END footer Area ================================ -->
+
+
+<%@ include file="../home/jspf/_essentialFoot.jspf" %>
+<script>
+setTimeout(function(){location.href="../home/index.jsp"},5000);
+</script>
 </body>
 </html>
