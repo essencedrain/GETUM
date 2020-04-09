@@ -121,14 +121,38 @@ public class AddrDAO {
 	    //==================================================================================================
 	    // delete(Connection, String) : a_no 레코드 삭제
 	    //==================================================================================================
-	    public void delete(Connection conn, String a_no) throws SQLException{
+	    public void delete(Connection conn, String a_no, String m_id) throws SQLException{
 	    	PreparedStatement pstmt = null;
 	    	ResultSet rs = null;
-	    	
+	    	boolean isOnlyOne = false;
 	    	try {
+	    		
 	    		pstmt = conn.prepareStatement("delete from addr where a_no=?");
 	    		pstmt.setString(1, a_no);
 	    		pstmt.executeUpdate();
+	    		
+	    		pstmt.close();
+	    		
+	    		pstmt = conn.prepareStatement("select count(*) from addr where m_id=?");
+	    		pstmt.setString(1, m_id);
+	    		rs = pstmt.executeQuery();
+	    		
+	    		if(rs.next()) {
+	    			if(rs.getInt(1)==1) {
+	    				isOnlyOne = true;
+	    			}//if
+	    		}//if
+	    		
+	    		rs.close();
+	    		pstmt.close();
+	    		
+	    		if(isOnlyOne) {
+	    			
+	    			pstmt = conn.prepareStatement("update addr set a_default_flag=1 where m_id=?");
+		    		pstmt.setString(1, m_id);
+		    		pstmt.executeUpdate();
+	    			
+	    		}
 	    		
 	    	} catch (Exception e) {
 	    		System.out.println("AddrDAO.delete() 예외 :"+e);
@@ -145,14 +169,27 @@ public class AddrDAO {
 	    
 	    
 	    //==================================================================================================
-	    // selectAllById(Connection, String) : 기본 배송지 가져오기
+	    // selectAllById(Connection, String) : 모든 배송지 가져오기
 	    //==================================================================================================
 	    public List<AddrDTO> selectAllById(Connection conn, String id) throws SQLException{
 	    	PreparedStatement pstmt = null;
 	    	ResultSet rs = null;
 	    	List<AddrDTO> list = null;
-	    	
+	    	boolean isOnlyOne = false;
 	    	try {
+	    		pstmt = conn.prepareStatement("select count(*) from addr where m_id=?");
+	    		pstmt.setString(1, id);
+	    		rs = pstmt.executeQuery();
+	    		
+	    		if(rs.next()) {
+	    			if(rs.getInt(1)==1) {
+	    				isOnlyOne = true;
+	    			}
+	    		}
+	    		rs.close();
+	    		pstmt.close();
+	    		
+	    		
 	    		pstmt = conn.prepareStatement("select * from addr where m_id=? order by a_default_flag desc, a_no");
 	    		pstmt.setString(1, id);
 	    		rs = pstmt.executeQuery();
@@ -180,6 +217,10 @@ public class AddrDAO {
 	    				addrDTO.setA_default_flag(true);
 	    			}else {
 	    				addrDTO.setA_default_flag(false);
+	    			}
+	    			
+	    			if(isOnlyOne) {
+	    				addrDTO.setA_onlyOne_flag(true);
 	    			}
 	    			
 	    			list.add(addrDTO);
@@ -248,7 +289,7 @@ public class AddrDAO {
 	    
 	    
 	    //==================================================================================================
-	    // update(Connection, AddrDTO) : 상품정보 삽입
+	    // update(Connection, AddrDTO) : 상품정보 수정
 	    //==================================================================================================
 	    public void update(Connection conn, AddrDTO addrDTO) throws SQLException{
 	    	PreparedStatement pstmt = null;

@@ -16,6 +16,7 @@ public class AddrDTO {
 	private String a_request;
 	private boolean a_default_flag;
 	private String m_id;
+	private boolean a_onlyOne_flag;
 	
 	
 	//constructor
@@ -77,6 +78,14 @@ public class AddrDTO {
 
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+
+	public boolean isA_onlyOne_flag() {
+		return a_onlyOne_flag;
+	}
+
+	public void setA_onlyOne_flag(boolean a_onlyOne_flag) {
+		this.a_onlyOne_flag = a_onlyOne_flag;
 	}
 	
 	

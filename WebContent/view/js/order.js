@@ -32,6 +32,10 @@ $('.selectModiAddr').on('click',function() {
 	$("#a2_hp").val( $(this).find("input").eq(3).val() );
 	$("#a2_request").val( $(this).find("input").eq(4).val() );
 	$("#a2_no").val( $(this).find("input").eq(6).val() );
+	
+	if($(this).find("input").eq(7).val()=="true"){
+		$("#checkbox99").attr("disabled", true);
+	}
 });
 
 // 포인트사용 버튼

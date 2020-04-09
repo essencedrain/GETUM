@@ -346,6 +346,7 @@ hcartSize = hcart.size();
 		                            		<input type="hidden" name="4" value="<%= i.getA_request() %>">
 		                            		<input type="hidden" name="5" value="<%= i.getA_post() %>">
 		                            		<input type="hidden" name="6" value="<%= i.getA_no() %>">
+		                            		<input type="hidden" name="7" value="<%= i.isA_onlyOne_flag() %>">
 			                            </button>
 		                            	<button type="button" class="btn btn btn-primary float-right selectAddr" data-dismiss="modal">
 		                            		선택
@@ -528,7 +529,7 @@ hcartSize = hcart.size();
 						
 						<div class="form-check-inline mb-3">
 						  <label class="form-check-label">
-						    <input type="checkbox" class="form-check-input" name="a2_default_flag" value="true">기본배송지로 저장
+						    <input type="checkbox" class="form-check-input" name="a2_default_flag" id="checkbox99" value="true">기본배송지로 저장
 						  </label>
 						</div>
                         <button type="submit" class="btn btn-lg btn-primary w-100 mb-2">저장</button>

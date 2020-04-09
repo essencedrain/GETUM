@@ -65,7 +65,7 @@ public class OrderViewHandler implements CommandHandler{
 		if(flag.equals("delete")) {
 			try {
 				conn = DBConnection.getCon();
-				dao.delete(conn, req.getParameter("a_no"));
+				dao.delete(conn, req.getParameter("a_no"), m_id);
 				res.sendRedirect("/GETUM/view/home/order.get?flag=default&m_id="+m_id);
 			} catch (Exception e) {
 				System.out.println("OrderViewHandler.delete 에러"+e);
