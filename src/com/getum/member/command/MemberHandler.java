@@ -108,13 +108,14 @@ public class MemberHandler implements CommandHandler{
 			
 			memberService.updateMypage(dto);
 			
+			List<PointDTO> pointList = memberService.getPoint(m_id);
+			req.setAttribute("list", pointList);
 			
 			dto= memberService.getMember(m_id);
 			
 			
 			req.setAttribute("dto", dto);
 			
-			req.setAttribute("checkUpdate", 1);
 			
 			return "/view/home/mypage.jsp";
 		

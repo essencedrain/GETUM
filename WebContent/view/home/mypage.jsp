@@ -18,14 +18,6 @@ list = (List<PointDTO>) request.getAttribute("list");
 MemberDTO dto = (MemberDTO) request.getAttribute("dto");
 
 
-if(request.getAttribute("checkUpdate")!=null){
-	if((int) request.getAttribute("checkUpdate")==1){
-		response.sendRedirect("mypage.get?flag=mypage&m_id="+dto.getM_id());
-	}
-}
-
-
-
 String grade = "";
 switch (dto.getM_grade()) {
 case 1:
