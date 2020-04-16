@@ -114,6 +114,8 @@ public class MemberHandler implements CommandHandler{
 			
 			req.setAttribute("dto", dto);
 			
+			req.setAttribute("checkUpdate", 1);
+			
 			return "/view/home/mypage.jsp";
 		
 		}//if
