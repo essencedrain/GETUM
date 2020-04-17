@@ -27,7 +27,7 @@ import com.getum.util.DBConnection;
 public class OrderViewHandler implements CommandHandler{
 	
 	//field
-		private String form_view = "/view/home/order.jsp?flag=default";
+		private String form_view = "/view/home/order.jsp?flag=default&m_id=";
 	
 	//==================================================================================================
     // process() : 핸들러 공통
@@ -112,7 +112,7 @@ public class OrderViewHandler implements CommandHandler{
 			}//if
 			
 		}//if
-		return form_view;
+		return form_view+m_id;
 	}
     //==================================================================================================
 	
@@ -154,7 +154,6 @@ public class OrderViewHandler implements CommandHandler{
 			} catch (IOException e) {
 				System.out.println("OrderViewHandler.processPost.create 에러 " +e);
 			}
-			
 			
 		}else if(flag.equals("modify")) {
 			

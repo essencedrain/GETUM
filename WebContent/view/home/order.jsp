@@ -21,6 +21,7 @@ if(request.getParameter("flag")!=null){
 		hcart = (Hashtable) session.getAttribute("cartMap2");
 	}
 }//if
+
 Enumeration hcartKey = hcart.keys();
 hcartSize = hcart.size();
 
