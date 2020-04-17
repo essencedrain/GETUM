@@ -595,7 +595,7 @@ public class BoardDAO {
 		    	
 		    	
 		    	try {
-		    		pstmt = conn.prepareStatement("select * from board2_free order by b2_origin desc, b2_origin_step asc LIMIT ?,?");
+		    		pstmt = conn.prepareStatement("select * from board2_free where b2_delete_flag < 2 order by b2_origin desc, b2_origin_step asc LIMIT ?,?");
 		    		pstmt.setInt(1, limitParam);
 		    		pstmt.setInt(2, articlePerPage);
 		    		rs = pstmt.executeQuery();
