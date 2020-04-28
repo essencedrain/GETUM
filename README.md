@@ -1,5 +1,6 @@
 # GETUM
 [포트폴리오 페이지 : getum.cco.kr](http://getum.cco.kr)   
+[상단 주소 접속 불가시 : 112.147.60.217](http://112.147.60.217)
 GETUM은 텀블러를 판매하는 가상 쇼핑몰입니다.   
 Spring Framework을 사용하지 않은 웹프로젝트입니다.   
 
